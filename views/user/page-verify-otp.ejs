@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+      
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        form {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #otpMessage {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .expired-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>OTP Verification</h1>
+    <p>Enter the OTP sent to your email to complete the registration:</p>
+    <form action="/page-verify-otp" method="POST">
+        <div class="form-group">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Verify OTP</button>
+            <a href="/resendOTP" id="resendLink" style="color: #007bff; text-decoration: none; font-weight: bold;">Resend OTP</a>
+        </div>
+    </form>
+
+    <div id="otpMessage"></div> <!-- This is where you can display OTP verification status -->
+    <p id="remainingTime"></p>
+    <p class="expired-message" style="display: none;">OTP has expired !!! Please Resend...</p>
+    
+    <script>
+        // Function to start the countdown
+        function startCountdown() {
+            const countdownElement = document.getElementById("remainingTime");
+            const expiredMessage = document.querySelector(".expired-message");
+            const resendLink = document.getElementById("resendLink");
+            let timeleft = 60;
+            const downloadTimer = setInterval(function(){
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    countdownElement.textContent = ""; // Clear countdown text
+                    expiredMessage.style.display = "block"; // Show the "OTP expired" message
+                    resendLink.style.pointerEvents = "auto"; // Enable the "Resend OTP" link
+                } else {
+                    countdownElement.innerHTML = timeleft + " seconds remaining";
+                }
+                timeleft -= 1;
+            }, 1000);
+        }
+
+        startCountdown(); // Start the countdown when the page loads
+    </script>
+</body>
+</html>

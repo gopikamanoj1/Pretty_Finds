@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin: 20px;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(124, 85, 146, 0.1);
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="email"] {
+            width: 30%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #481583;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #481583;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter OTP</h1>
+  
+
+    <form id="otpForm" action="/forgott-password" method="POST" >
+        <div class="form-group">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required>
+        </div>
+        <button type="submit">Verify OTP</button>
+    </form>
+    <% if (locals.message) { %>
+        <p id="errorMessage"><%= message %></p> <!-- Display the error message -->
+    <% } %>
+</body>
+<script>
+    const errorMessageElement = document.getElementById("errorMessage");
+    if (errorMessageElement.innerText) {
+        setTimeout(function () {
+            errorMessageElement.style.display = "none";
+        }, 5000); 
+        setTimeout(function () {
+            window.location.href = "/"; 
+        }, 10000); 
+    }
+</script>
+</html>
