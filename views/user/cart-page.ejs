@@ -201,7 +201,7 @@
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="/addToCart">
+                                    <a class="mini-cart-icon" href="/cart">
                                         <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
                                     </a>
 
@@ -386,7 +386,7 @@
         </div>
     </div>
     <main class="main">
-       
+
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row">
@@ -429,67 +429,61 @@
                                                                 <td class="price" data-title="Price"><span>
                                                                         <%= products[i].productId.price %>
                                                                     </span></td>
-                                                               
 
 
 
-                                                                    <td class="text-center" data-title="Stock">
-						
-                                                                        <button class="cart-item-count mr-4 btn btn-danger" id="decrement_<%= products[i].productId._id %>"
-                                                                            onclick="decrementQuantity('<%= products[i].productId._id %>')">-</button>
-                                                                            <% if (products[i].productId.stock < products[i].quantity) { %>
-                                                                                <h1>Out of Stock</h1>
-                                                                            <% } else { %>
-                                                                                <span id="quantity_<%= products[i].productId._id %>" class="mr-4 font-weight-bold" name="quantity" data-min="0" data-max="10"><%= products[i].quantity %></span>
+
+                                                                <td class="text-center" data-title="Stock">
+
+                                                                    <button
+                                                                        id="decrement_<%= products[i].productId._id %>"
+                                                                        onclick="decrementQuantity('<%= products[i].productId._id %>')">-</button>
+                                                                    <% if (products[i].productId.stock <
+                                                                        products[i].quantity) { %>
+                                                                        <h1>Out of Stock</h1>
+                                                                        <% } else { %>
+                                                                            <span
+                                                                                id="quantity_<%= products[i].productId._id %>"
+                                                                                class="mr-4 font-weight-bold"
+                                                                                name="quantity" data-min="0"
+                                                                                data-max="10">
+                                                                                <%= products[i].quantity %>
+                                                                            </span>
                                                                             <% } %>
-                                                                            
-                                                                            
-                                                                      
-                                                                        
-                                                                            <button class="cart-item-count mr-4 btn btn-danger" id="increment_<%= products[i].productId._id %>"
-                                                                                onclick="incrementQuantity('<%= products[i].productId._id %>')">+</button>
-                                                                    
-                                                
-                                                                      </td>
-
-
-                                                                       
-
-                                                                   
-                                                              
-
-                                                                
-                                                                    <td class="text-right" data-title="Cart">
-                                                                        <% var total = products[i].quantity * products[i].productId.price; %>
-                                                                      <h5> ₹<span id="product-total-price-<%= products[i].productId._id %>" class="item-total">
-                                                                               <%= total %></span></h5>
-                                                                      </td>
-                                                             
-
+                                                                                <button
+                                                                                    id="increment_<%= products[i].productId._id %>"
+                                                                                    onclick="incrementQuantity('<%= products[i].productId._id %>')">+</button>
+                                                                </td>
+                                                                <td class="text-right" data-title="Cart">
+                                                                    <% var total=products[i].quantity *
+                                                                        products[i].productId.price; %>
+                                                                        <h5> ₹<span
+                                                                                id="product-total-price-<%= products[i].productId._id %>"
+                                                                                class="item-total">
+                                                                                <%= total %>
+                                                                            </span></h5>
+                                                                </td>
                                                                 <td class="action" data-title="Remove">
                                                                     <form action="/removeProduct" method="POST">
-                                                                        <input type="hidden" name="productId" value="<%= products[i].productId._id %>">
-                                                                        <button type="submit" class="text-muted" style="border: none; background-color: transparent; cursor: pointer;">
+                                                                        <input type="hidden" name="productId"
+                                                                            value="<%= products[i].productId._id %>">
+                                                                        <button type="submit" class="text-muted"
+                                                                            style="border: none; background-color: transparent; cursor: pointer;">
                                                                             <i class="fi-rs-trash"></i>
                                                                         </button>
                                                                     </form>
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <% } %>
                                 </tbody>
-
-
-
-
-
                             </table>
-
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
-                            <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                            <a href="/allProducts" class="btn"><i class="fi-rs-shopping-bag mr-10"></i>Continue
+                                Shopping</a>
                         </div>
+
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">
                             <div class="col-lg-6 col-md-12">
@@ -526,28 +520,77 @@
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cart_total_label">Cart Subtotal</td>
-                                                    <td class="cart_total_amount"><span
-                                                            class="font-lg fw-900 text-brand totalValue">$</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cart_total_label">Shipping</td>
-                                                    <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free
-                                                        Shipping</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cart_total_label">Total</td>
-                                                    <td class="cart_total_amount"><strong><span
-                                                                class="font-xl fw-900 text-brand totalValue">$240.00</span></strong>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                            <% /* Function to calculate cart total */ %>
+                                                <% function calculateCartTotal(products) { %>
+                                                    <% let total=0; %>
+                                                        <% products.forEach(product=> { %>
+                                                            <% total +=product.quantity * product.productId.price; %>
+                                                                <% }) %>
+                                                                    <% return total; %>
+                                                                        <% } %>
+                                                                            <% if (products && products.length> 0) { %>
+                                                                                <tbody>
+                                                                                    <% products.forEach(product=> { %>
+
+                                                                                        <% }) %>
+                                                                                            <tr>
+                                                                                                <td
+                                                                                                    class="cart_total_label">
+                                                                                                    Cart Subtotal</td>
+                                                                                                <td
+                                                                                                    class="cart_total_amount">
+                                                                                                    <span
+                                                                                                        class="font-lg fw-900 text-brand totalValue">
+                                                                                                        $<%= calculateCartTotal(products).toFixed(2)
+                                                                                                            %>
+                                                                                                    </span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td
+                                                                                                    class="cart_total_label">
+                                                                                                    Shipping</td>
+                                                                                                <td
+                                                                                                    class="cart_total_amount">
+                                                                                                    <i
+                                                                                                        class="ti-gift mr-5"></i>
+                                                                                                    Free Shipping
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td
+                                                                                                    class="cart_total_label">
+                                                                                                    Total</td>
+                                                                                                <td
+                                                                                                    class="cart_total_amount">
+                                                                                                    <strong>
+                                                                                                        <span
+                                                                                                            class="font-xl fw-900 text-brand totalValue">
+                                                                                                            $<%= calculateCartTotal(products).toFixed(2)
+                                                                                                                %>
+                                                                                                        </span>
+                                                                                                    </strong>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                </tbody>
+                                                                                <% } else { %>
+                                                                                    <tr>
+                                                                                        <td colspan="2">Your cart is
+                                                                                            empty</td>
+                                                                                    </tr>
+                                                                                    <% } %>
+
+
+
                                         </table>
                                     </div>
-                                    <a href="/checkout-page" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed
-                                        To CheckOut</a>
+                                    <% if (!isCartEmpty) { %>
+                                        <a href="/checkout-page" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
+                                            Proceed To Checkout</a>
+                                        <% } else { %>
+                                            <p>Your cart is empty.</p>
+                                            <% } %>
+
                                 </div>
                             </div>
                         </div>
@@ -705,103 +748,103 @@
     <script src="/js/plugins/isotope.js"></script>
     <script src="/js/plugins/scrollup.js"></script>
     <script src="/js/plugins/jquery.vticker-min.js"></script>
-    <!-- Template  JS -->
+
     <script src="/js/main.js"></script>
     <script src="/js/shop.js"></script>
-<script>
-    const setSubtotal=()=>{
-		const itemTotal=document.getElementsByClassName('item-total')
-		let subtotal=0;
-		console.log(itemTotal);
-		for (let i = 0; i < itemTotal.length; i++) {
+    <script>
+        const setSubtotal = () => {
+            const itemTotal = document.getElementsByClassName('item-total')
+            let subtotal = 0;
+            console.log(itemTotal);
+            for (let i = 0; i < itemTotal.length; i++) {
 
-			subtotal+=Number(itemTotal[i].innerHTML)
-			console.log(subtotal);
-		}
-		document.getElementById('subtotal').innerHTML=subtotal;
-
-	}
-	setSubtotal();
-
-    function incrementQuantity(cartItemId){
-        console.log(cartItemId,"ll");
-	
-    $.ajax({
-        url:'/increaseQuantity',
-        method:"post",
-        data:{cartItemId:cartItemId},
-        success:function(data){
-            if(data.success){
-                
-                $(`#product-total-price-${cartItemId}`).text(data.total)
-                
-                $(`#quantity_${cartItemId}`).text(data?.quantity)
-                
-
-                
-                
-                setSubtotal();
+                subtotal += Number(itemTotal[i].innerHTML)
+                console.log(subtotal);
             }
-            else if(data.success==false){
-      
-        if (data.maxQuantity) {
-          Toastify({
-          text: "Stock Limit Exceeded",
-          className: "info",
-              style: {
-              background: "red",
-              
-            },
-            
-            position: "center",
-            gravity: "center"
-            }).showToast();
-    }
-    
-        
-        setSubtotal();
-          }
-            else{
-                console.log('error');
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            console.error(errorThrown);
+            document.getElementById('subtotal').innerHTML = subtotal;
+
         }
-    })
-}
+        setSubtotal();
 
-function decrementQuantity(cartItemId) {
+        function incrementQuantity(cartItemId) {
+            console.log(cartItemId, "ll");
 
-  var currentQuantity = parseInt($(`#quantity_${cartItemId}`).text());
-  if (currentQuantity > 1) {
-    $.ajax({
-    url: "/decreaseQuantity",
-    method: "post",
-    data: { cartItemId: cartItemId },
-    success: function(data) {
-      // Handle success response here
-      console.log(data);
-      $(`#product-total-price-${cartItemId}`).text(data.total);
-      $(`#quantity_${cartItemId}`).text(data?.quantity);
-     
-      setSubtotal();
-      console.log(data.stock);
-      
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      // Handle error response here
-      res.send('error')
-    }
-  });
-  }else{
-    $(`#quantity_${cartItemId}`).text(1);
-  }
-  
- 
-}
-</script>
-   
+            $.ajax({
+                url: '/increaseQuantity',
+                method: "post",
+                data: { cartItemId: cartItemId },
+                success: function (data) {
+                    if (data.success) {
+
+                        $(`#product-total-price-${cartItemId}`).text(data.total)
+
+                        $(`#quantity_${cartItemId}`).text(data?.quantity)
+
+
+
+
+                        setSubtotal();
+                    }
+                    else if (data.success == false) {
+
+                        if (data.maxQuantity) {
+                            Toastify({
+                                text: "Stock Limit Exceeded",
+                                className: "info",
+                                style: {
+                                    background: "red",
+
+                                },
+
+                                position: "center",
+                                gravity: "center"
+                            }).showToast();
+                        }
+
+
+                        setSubtotal();
+                    }
+                    else {
+                        console.log('error');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(errorThrown);
+                }
+            })
+        }
+
+        function decrementQuantity(cartItemId) {
+
+            var currentQuantity = parseInt($(`#quantity_${cartItemId}`).text());
+            if (currentQuantity > 1) {
+                $.ajax({
+                    url: "/decreaseQuantity",
+                    method: "post",
+                    data: { cartItemId: cartItemId },
+                    success: function (data) {
+                        // Handle success response here
+                        console.log(data);
+                        $(`#product-total-price-${cartItemId}`).text(data.total);
+                        $(`#quantity_${cartItemId}`).text(data?.quantity);
+
+                        setSubtotal();
+                        console.log(data.stock);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Handle error response here
+                        res.send('error')
+                    }
+                });
+            } else {
+                $(`#quantity_${cartItemId}`).text(1);
+            }
+
+
+        }
+    </script>
+
 </body>
 
 

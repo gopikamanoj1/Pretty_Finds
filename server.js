@@ -41,7 +41,7 @@ app.use('/',adminRoute)
 
 // Start the server
 // const port = process.env.PORT || 3000;
-const port =3010
+const port =3012
 app.listen(port, () => {
     console.log("Listening to the server on http://localhost:"+ port);
   });

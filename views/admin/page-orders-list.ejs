@@ -190,28 +190,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
-                                <tr>
-                                    <td>2329</td>
-                                    <td><b>Darlene Robertson</b></td>
-                                    <td><template class="__cf_email__" data-cfemail="244041564d414a4164415c45495448410a474b49">[email&#160;protected]</template></td>
-                                    <td>$948.55</td>
-                                    <td><span class="badge rounded-pill alert-success">Received</span></td>
-                                    <td>03.07.2020</td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                                        <div class="dropdown">
-                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">View detail</a>
-                                                <a class="dropdown-item" href="#">Edit info</a>
-                                                <a class="dropdown-item text-danger" href="#">Delete</a>
-                                            </div>
-                                        </div> <!-- dropdown //end -->
-                                    </td>
-                                </tr>
+                                <% orders.forEach(order => { %>
+                                    <tr>
+                                        <td><%= order._id %></td>
+                                        <td><b><%= order.user.name %></b></td>
+                                        <td><%= order.user.email %></td>
+                                        <td>$<%= order.total.toFixed(2) %></td>
+                                        <td>
+                                            <span class="badge rounded-pill <% if (order.status === 'Received') { %>alert-success<% } else if (order.status === 'Shipped') { %>alert-info<% } else { %>alert-warning<% } %>">
+                                                <%= order.status %>
+                                            </span>
+                                        </td>
+                                        <td><%= order.createdAt.toDateString() %></td>
+                                        <td class="text-end">
+                                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                            <div class="dropdown">
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm">
+                                                    <i class="material-icons md-more_horiz"></i>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">View detail</a>
+                                                    <a class="dropdown-item" href="#">Edit info</a>
+                                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                                </div>
+                                            </div> <!-- dropdown //end -->
+                                        </td>
+                                    </tr>
+                                <% }); %>
                             </tbody>
                         </table>
+                        
                     </div> <!-- table-responsive //end -->
                 </div> <!-- card-body end// -->
             </div> <!-- card end// -->

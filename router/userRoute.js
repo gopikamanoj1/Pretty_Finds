@@ -76,7 +76,7 @@ userRouter.post("/removeProduct",userControllers.removeProduct)
 //checkout
 userRouter.get("/checkout-page",userControllers.loadCheckOut)
 //confirm
-userRouter.get("/confirm-order",userControllers.loadConfirmOrder)
+userRouter.post("/confirm-order",userControllers.loadConfirmOrder)
 //update quntity
 
 userRouter.post("/increaseQuantity",userControllers.updateQuantitys);
