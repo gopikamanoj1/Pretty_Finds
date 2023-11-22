@@ -179,9 +179,10 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form action="#">
-                               
-                                <input type="text" placeholder="Search for items...">
+                            <form action="/search" method="GET">
+                                <!-- Add a 'name' attribute to the input to capture the search term -->
+                                <input type="text" name="q" placeholder="Search for items...">
+                                <button type="submit">Search</button>
                             </form>
                         </div>
                         <div class="header-action-right">
@@ -384,49 +385,31 @@
                   
                     <div class="col-lg-12">
                         <div class="shop-product-fillter">
-                            <div class="totall-product">
+                            <!-- <div class="totall-product">
                                 <p> We found <strong class="text-brand">688</strong> items for you!</p>
-                            </div>
+                            </div> -->
                             <div class="sort-by-product-area">
-                                <div class="sort-by-cover mr-10">
-                                    <div class="sort-by-product-wrap">
-                                        <div class="sort-by">
-                                            <span><i class="fi-rs-apps"></i>Show:</span>
-                                        </div>
-                                        <div class="sort-by-dropdown-wrap">
-                                            <span> 50 <i class="fi-rs-angle-small-down"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="sort-by-dropdown">
-                                        <ul>
-                                            <li><a class="active" href="#">50</a></li>
-                                            <li><a href="#">100</a></li>
-                                            <li><a href="#">150</a></li>
-                                            <li><a href="#">200</a></li>
-                                            <li><a href="#">All</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <div class="sort-by-cover">
                                     <div class="sort-by-product-wrap">
                                         <div class="sort-by">
                                             <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
                                         </div>
                                         <div class="sort-by-dropdown-wrap">
-                                            <span> Featured <i class="fi-rs-angle-small-down"></i></span>
+                                            <span>
+                                                <a class="{{ sortBy === 'featured' ? 'active' : '' }}" href="/products?sortBy=featured">Featured</a>
+                                                <i class="fi-rs-angle-small-down"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="active" href="#">Featured</a></li>
-                                            <li><a href="#">Price: Low to High</a></li>
-                                            <li><a href="#">Price: High to Low</a></li>
-                                            <li><a href="#">Release Date</a></li>
-                                            <li><a href="#">Avg. Rating</a></li>
+                                            <li><a class="{{ sortBy === 'lowToHigh' ? 'active' : '' }}" href="/allProducts?sortBy=lowToHigh">Price: Low to High</a></li>
+                                            <li><a class="{{ sortBy === 'highToLow' ? 'active' : '' }}" href="/allProducts?sortBy=highToLow">Price: High to Low</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="row product-grid-3">
                           
@@ -458,16 +441,26 @@
                                                             <a href="/singleProduct"><%= product.category.name %></a>
                                                         </div>
                                                         <h2><a href="/singleProduct"><%= product.name %></a></h2>
+                                                      
                                                         <div class="rating-result" title="<%= product.rating %>">
                                                             <span>
                                                                 <span><%= product.rating %></span>
                                                             </span>
                                                         </div>
-                                                        <form action="/addToCart/<%= product._id %>" method="post">
-                                                            <div class="product-action-1 show">
-                                                                <button aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></button>
+                                                        <div class="product-price">
+                                                            <span >$<%= product.price %></span>
+                                                        </div>
+                                                        <% if (product.stock < 1) { %>
+                                                            <div class="out-of-stock-message">
+                                                                Out of Stock
                                                             </div>
-                                                        </form>
+                                                        <% } else { %>
+                                                            <form action="/addToCart/<%= product._id %>" method="post">
+                                                                <div class="product-action-1 show">
+                                                                    <button aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></button>
+                                                                </div>
+                                                            </form>
+                                                        <% } %>
                                                     </div>
                                                 </div>
                                             </div>

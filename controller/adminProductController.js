@@ -27,11 +27,11 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname)); // Define the file name with the original extension
     }
-});
+}); 
 
 const addProduct = async (req, res) => {
     try {
-        const upload = multer({ storage: storage }).array('image', 10); // Set the field name to 'image' and allow up to 10 files
+        const upload = multer({ storage: storage }).array('image', 5); // Set the field name to 'image' and allow up to 10 files
 
         upload(req, res, async function (err) {
             if (err) {
@@ -79,7 +79,7 @@ const editProduct = async (req, res) => {
         const categories = await AdminCategory.find();
 
         if (req.method === 'POST') {
-            const { name, price, category, description } = req.body;
+            const { name, price, category, description, stock } = req.body;
 
             // Handle file upload using multer middleware
             const upload = multer({ storage: storage }).single('image');
@@ -97,6 +97,7 @@ const editProduct = async (req, res) => {
                 product.price = price;
                 product.category = category;
                 product.description = description;
+                product.stock = stock; // Add this line to handle the stock field
 
                 await product.save();
                 return res.redirect('/page-product-list');
@@ -109,6 +110,7 @@ const editProduct = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
+   
 
 
 const displayProduct = async (req, res) => {

@@ -201,19 +201,22 @@
                                         <% }); %>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="stock">Product Stock</label>
+                                    <input type="number" class="form-control" name="stock" value="<%= product.stock %>" required>
+                                </div>
                                 <div class="form-group mt-3">
                                     <label for="image">Product Photo</label>
                                     <input type="file" class="form-control-file" id="image" multiple name="image" enctype="multipart/form-data">
-                                    
                                     <% if (product.image && product.image.url) { %>
                                         <img src="<%= product.image.url %>" alt="Product Image" width="200" >
                                     <% } %>
                                 </div>
-                                
                                 <br>
                                 <br>
                                 <button class="btn btn-md rounded font-sm hover-up" type="submit">Save Changes</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>

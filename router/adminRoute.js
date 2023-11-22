@@ -4,7 +4,8 @@ const adminController = require('../controller/adminController');
 const adminCategoryControll= require('../controller/adminCategoryControll')
 const adminUserControll= require('../controller/adminUserController')
 const adminProductControll= require('../controller/adminProductController')
-const AdminOrderController=require("../controller/adminOrderController")
+const adminOrderController=require("../controller/adminOrderController")
+const adminSalesController=require("../controller/adminSalesController")
 
 const bodyParser=require("body-parser")
 const path=require("path")
@@ -66,7 +67,31 @@ adminRouter.post('/block-user/:id',adminUserControll.blockUser)
 adminRouter.post("/unblock/:id",adminUserControll.unblockUser )
 // admin_route.post("/search",auth.isLogin,adminController.searchUser)
 //order
-adminRouter.get('/pageOrders',AdminOrderController.loadPageOrder)
+adminRouter.get('/pageOrders',adminOrderController.loadPageOrder)
+//order details
+adminRouter.get("/page-orderDetails/:id",adminOrderController.loadOrderDetails)
+//filter
+adminRouter.post("/admin/fetchData/:time",adminAuth.isLogin,adminController.fetchDataGraph)
+//sales report
+adminRouter.get("/salesReport",adminSalesController.LoadSalesReport)
+//daily
+adminRouter.get("/dailyOrder",adminSalesController.LoadDailyReport)
+//weekly
+adminRouter.get("/weeklyOrder",adminSalesController.loadWeeklyReport)
+//yearly
+adminRouter.get("/yearlyOrder",adminSalesController.loadYearlyReport);
+//date
+adminRouter.post("/updateOrdersByDate",adminSalesController.OrdersByDate)
+// status changing
+adminRouter.post('/changeStatus', adminSalesController.changeStatus)
+
+
+
+
+
+
+
+
 
 
 

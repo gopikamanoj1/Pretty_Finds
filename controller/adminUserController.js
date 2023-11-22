@@ -26,7 +26,7 @@ const UserDETAILS = async (req, res) => {
 
     }
 }
-
+ 
 
 const displayUserlist = async (req, res) => {
     try {
@@ -35,7 +35,7 @@ const displayUserlist = async (req, res) => {
         res.render('page-user-list', { users, data: 'user,...' });
     } catch (error) {
         console.log(error);
-    }
+    } 
 }
 
 const blockUser = async (req, res) => {
@@ -103,7 +103,6 @@ const deleteUser = async (req, res) => {
 
 
 
-
 module.exports = {
     loadUserList,
     UserDETAILS,
@@ -111,5 +110,5 @@ module.exports = {
     searchUser,
     deleteUser,
     blockUser,
-    unblockUser
+    unblockUser,
 }

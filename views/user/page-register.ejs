@@ -235,63 +235,7 @@
                                                     <button type="submit" class="btn btn-fill-out btn-block hover-up" name="register">Submit & Send OTP</button>
                                                 </div>
                                             </form>
-                                            <script>
-                                                function validateRegistrationForm() {
-                                                    const username = document.getElementById('username').value;
-                                                    const email = document.getElementById('email').value;
-                                                    const password = document.getElementById('password').value;
-                                                    const confirmPassword = document.getElementById('confirm_password').value;
-                                                    let valid = true;
-                                            
-                                                    // Reset error messages
-                                                    document.getElementById('usernameError').textContent = '';
-                                                    document.getElementById('emailError').textContent = '';
-                                                    document.getElementById('passwordError').textContent = '';
-                                                    document.getElementById('confirmPasswordError').textContent = '';
-                                            
-                                                    // Validate username
-                                                    if (username.trim() === '') {
-                                                        valid = false;
-                                                        document.getElementById('usernameError').textContent = 'Username is required';
-                                                    }
-                                            
-                                                    // Validate email
-                                                    if (!isValidEmail(email)) {
-                                                        valid = false;
-                                                        document.getElementById('emailError').textContent = 'Invalid email address';
-                                                    }
-                                            
-                                                    // Validate password
-                                                    if (password.length < 6) {
-                                                        valid = false;
-                                                        document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long';
-                                                    }
-                                            
-                                                    // Validate confirm password
-                                                    if (password !== confirmPassword) {
-                                                        valid = false;
-                                                        document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
-                                                    }
-                                            
-                                                    // Clear error messages after 5 seconds (5000 milliseconds)
-                                                    setTimeout(function () {
-                                                        document.getElementById('usernameError').textContent = '';
-                                                        document.getElementById('emailError').textContent = '';
-                                                        document.getElementById('passwordError').textContent = '';
-                                                        document.getElementById('confirmPasswordError').textContent = '';
-                                                    }, 5000);
-                                            
-                                                    return valid;
-                                                }
-                                            
-                                                // Add other validation functions if needed
-                                            
-                                                function isValidEmail(email) {
-                                                    // Implement your email validation logic here
-                                                    // You can use regular expressions or other methods
-                                                    // Return true if the email is valid, false otherwise
-                                                }
-                                            </script>
+                                           
                                     <script>
                                         setTimeout(() => {
                                             document.getElementById("msg").style.display = "none"

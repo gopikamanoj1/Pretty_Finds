@@ -6,6 +6,7 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
+  
   items: [{
     product: {
       type: mongoose.Schema.Types.ObjectId,
@@ -37,14 +38,6 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-//   payment_method:{
-//     type:String,
-//     required: true,
-//   },
-//   shipping_charge:{
-//     type:Number,
-//     required: true,
-//   },
   isWallet:{
     default:'nil',
     type:String
@@ -53,18 +46,29 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, // Change the type here
     ref: "User", // Update with your Address model name
     required: true,
-},
-   reasonForCancel:{
+  },
+  reasonForCancel:{
     default:'nil',
     type:String
   },
   delivered_date:{
     type: Date,
-
+  },
+  paymentId: {
+    type: String,
+    default: ""
+  },
+  paymentType:{
+    type: String,
+    require: true
+  },
+  paymentStatus: {
+    type: String,
+    require:true,
+    default:"pending"
   }
- 
 });
 
 const Order = mongoose.model('Order', orderSchema);
- 
-module.exports=Order;
+
+module.exports = Order;

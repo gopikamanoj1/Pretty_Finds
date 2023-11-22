@@ -15,9 +15,9 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
-    <link href="admin-assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/admin-assets/css/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -62,6 +62,11 @@
                 <li class="menu-item active">
                     <a class="menu-link" href="/pageOrders"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/salesReport"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Sales Report</span>
                     </a>
                 </li>
                
@@ -168,9 +173,11 @@
                         </div>
                         <div class="col-lg-2 col-6 col-md-3">
                             <select class="form-select">
-                                <option>Show 20</option>
-                                <option>Show 30</option>
-                                <option>Show 40</option>
+                                <option> All</option>
+                                <option>This Month</option>
+                                <option>This Week</option>
+                                <option>This day</option>
+                               
                             </select>
                         </div>
                     </div>
@@ -180,6 +187,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>#ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
@@ -190,8 +198,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% let counter = 1; %>
                                 <% orders.forEach(order => { %>
                                     <tr>
+                                        <td><%= counter %></td>
                                         <td><%= order._id %></td>
                                         <td><b><%= order.user.name %></b></td>
                                         <td><%= order.user.email %></td>
@@ -203,22 +213,14 @@
                                         </td>
                                         <td><%= order.createdAt.toDateString() %></td>
                                         <td class="text-end">
-                                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                                            <div class="dropdown">
-                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm">
-                                                    <i class="material-icons md-more_horiz"></i>
-                                                </a>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">View detail</a>
-                                                    <a class="dropdown-item" href="#">Edit info</a>
-                                                    <a class="dropdown-item text-danger" href="#">Delete</a>
-                                                </div>
-                                            </div> <!-- dropdown //end -->
+                                            <a href="/page-orderDetails/<%= order._id %>" class="btn btn-md rounded font-sm">Detail</a>
                                         </td>
                                     </tr>
+                                    <% counter++; %>
                                 <% }); %>
                             </tbody>
                         </table>
+                        
                         
                     </div> <!-- table-responsive //end -->
                 </div> <!-- card-body end// -->

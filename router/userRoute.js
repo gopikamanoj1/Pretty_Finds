@@ -14,7 +14,14 @@ userRouter.use(session({
         maxAge: 1000 * 60 * 60 * 24* 7 }
 }));
 
+const Razorpay = require('razorpay');
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_tNMVjP0jtH4ZlP',
+    key_secret: '4MoJ10O8fIWCAhLIpd',
+  });
 
+
+  
 //getting landing page
 userRouter.get('/', userControllers.landing);
 //getting login  
@@ -53,7 +60,11 @@ userRouter.get('/allProducts',userControllers.loadAllProducts)
 userRouter.get('/myprofile',userControllers.loadMyProfile)
 userRouter.get('/editProfile',userControllers.loadEditProfile)
 userRouter.post( "/editProfile",userControllers.editProfile)
+///myaddress
+ 
+userRouter.get("/loadmyaddress",userControllers.loadmyAddress)
 //add address
+
 userRouter.post('/myprofile',userControllers.addAddress)
 //edit address
 userRouter.get('/editAddress/:id', userControllers.loadEditAddress);
@@ -75,12 +86,27 @@ userRouter.post('/addToCart/:id',userControllers.AddToCart)
 userRouter.post("/removeProduct",userControllers.removeProduct)
 //checkout
 userRouter.get("/checkout-page",userControllers.loadCheckOut)
+
 //confirm
 userRouter.post("/confirm-order",userControllers.loadConfirmOrder)
 //update quntity
-
 userRouter.post("/increaseQuantity",userControllers.updateQuantitys);
 userRouter.post("/decreaseQuantity",userControllers.decrementQuantity);
+//search
+userRouter.get('/search', userControllers.searchProducts);
+//order details
+userRouter.get("/order-details",userControllers.loadOrder);
+
+userRouter.get("/order-details/:id",userControllers.orderDetails);
+//cancel order
+userRouter.post("/cancel-order/:id",userControllers.cancelOrder);
+//online payment
+userRouter.get("/razorpay",userControllers.loadRazorpay);
+
+userRouter.post("/verify-payment", userControllers.handleVerifyPayment);
+
+userRouter.get("/confirm-page", userControllers.loadConfirmPage);
+
 
 
 module.exports = userRouter;

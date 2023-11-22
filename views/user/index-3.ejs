@@ -189,11 +189,13 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form action="#">
-                               
-                                <input type="text" placeholder="Search for items...">
+                            <form action="/search" method="GET">
+                                <!-- Add a 'name' attribute to the input to capture the search term -->
+                                <input type="text" name="q" placeholder="Search for items...">
+                                <button type="submit">Search</button>
                             </form>
                         </div>
+                        
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
@@ -385,17 +387,14 @@
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="position-relative">
-                            <div class="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1">
+                            <div class="">
                                 
                                 <div class="single-hero-slider single-animation-wrap">
                                     <div class="container">
                                         <div class="slider-1-height-3 slider-animated-1">
-                                            <div class="hero-slider-content-2">
-                                               
-                                                <a class="animated btn btn-brush btn-brush-3" href="shop-product-right"> Shop Now </a>
-                                            </div>
+                                            
                                             <div class="slider-img">
-                                                <img src="/imgs/slider/plum2 landing.png" alt="">
+                                                <img src="/imgs/slider/plum image.webp" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -460,8 +459,14 @@
                         <div class="row product-grid-4">
                             <% products.forEach(function(product) { %>
                                 <div class="col-lg-3 col-md-4 col-sm-6">
-                                    <div class="product-cart-wrap mb-30 ">
+                                    <div class="product-cart-wrap mb-30 position-relative">
                                         <div class="product-img-action-wrap">
+                                            <% if (product.stock < 1) { %>
+                                                <div class="out-of-stock-overlay">
+                                                    Out of Stock
+                                                </div>
+                                            <% } %>
+                                    
                                             <div class="product-img product-img-zoom">
                                                 <a href="/singleProduct/<%= product.id %>">
                                                     <% if (product.image && product.image[0] && product.image[0].url) { %>
@@ -471,13 +476,14 @@
                                                     <% } %>
                                                 </a>
                                             </div>
-                                            
+                                    
                                             <div class="product-action-1">
                                                 <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                <a aria-label="Add To Wishlist" class "action-btn hover-up" href="shop-wishlist"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up" href="shop-compare"><i class="fi-rs-shuffle"></i></a>
                                             </div>
                                         </div>
+                                    
                                         <div class="product-content-wrap">
                                             <div class="product-category">
                                                 <a href="/singleProduct"><%= product.category.name %></a>
@@ -488,13 +494,22 @@
                                                     <span><%= product.rating %></span>
                                                 </span>
                                             </div>
-                                            <form action="/addToCart/<%= product._id %>" method="post">
-                                            <div class="product-action-1 show">
-                                                <button aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></button>
-                                            </div>
-                                        </form>
+                                    
+                                            <% if (product.stock < 1) { %>
+                                                <div class="out-of-stock-message">
+                                                    Out of Stock
+                                                </div>
+                                            <% } else { %>
+                                                <form action="/addToCart/<%= product._id %>" method="post">
+                                                    <div class="product-action-1 show">
+                                                        <button aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></button>
+                                                    </div>
+                                                </form>
+                                            <% } %>
                                         </div>
                                     </div>
+                                    
+                                    
                                 </div>
                             <% }); %>
                         </div>
@@ -747,6 +762,7 @@
     <!-- Template  JS -->
     <script src="/js/main.js"></script>
     <script src="/js/shop.js"></script>
+    
 </body>
 
 

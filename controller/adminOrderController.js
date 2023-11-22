@@ -1,4 +1,15 @@
 const AdminOrder = require("../model/orderModel");
+const User=require ("../model/userModel");
+const AdminProduct = require("../model/productModel");
+
+
+
+
+
+
+
+
+
 
 const loadPageOrder = async (req, res) => {
     try {
@@ -13,13 +24,47 @@ const loadPageOrder = async (req, res) => {
 
 
 
+const loadOrderDetails = async (req, res) => {
+    try {
+        const orderId = req.params.id;
+
+        const order = await AdminOrder.findById(orderId).populate('user').populate('items.product'); // Populate the 'user' and 'items.product' fields
+
+        res.render("ordersDetails", { order:order, orderId });
+
+    } catch (error) {
+        console.log(error);
+        // Handle other errors as needed
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const FilterByDate=async (req,res)=>{
+    try {
+        res.render("page-orders-list")
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+ 
 
 module.exports ={
-    loadPageOrder
+    loadPageOrder,
+    loadOrderDetails,
+    FilterByDate
+
 }

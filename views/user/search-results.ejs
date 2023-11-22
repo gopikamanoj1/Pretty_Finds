@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYNbBAdI4zrhqj3aRaxv5UpJH4Qv5tLL" crossorigin="anonymous">
+    <!-- Add your custom CSS if needed -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 25%;
+            /* Adjust the width as needed */
+        }
+
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .details-btn {
+            width: 20%;
+            margin-top: 10px;
+        }
+
+        .details-btn {
+            display: inline-block;
+            background-color: #6706a0;
+            /* Your preferred primary color */
+            color: #fff;
+            /* Text color */
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .details-btn:hover {
+            background-color: #6e34a5;
+            /* Change to a darker shade on hover */
+        }
+
+        .details-btn .arrow {
+            margin-left: 5px;
+            /* Adjust the spacing between text and arrow */
+        }
+
+        /* Add these styles to your existing CSS or create a new style section */
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #6706a0;
+            /* Change this to the desired background color */
+            border-color: #6706a0;
+            text-decoration: none;
+
+            /* Change this to the desired border color */
+        }
+
+        .btn-secondary:hover {
+            color: #fff;
+            background-color: #6e34a5;
+            /* Change this to the desired background color on hover */
+            border-color: #6e34a5;
+            /* Change this to the desired border color on hover */
+        }
+
+        /* Add margin-top for spacing */
+        .btn-secondary.mt-3 {
+            margin-top: 15px;
+            /* Adjust the margin-top value as needed for spacing */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Search Results for "<%= searchTerm %>"</h1>
+
+        <% if (products.length> 0) { %>
+            <div class="row">
+                <% products.forEach(function(product) { %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card product-card">
+                            <!-- Product Image -->
+                            <img src="/uploads/<%= product.image[0].url %>" alt="<%= product.name %>"
+                                class="card-img-top product-image">
+                            <div class="card-body">
+                                <!-- Product Name -->
+                                <h5 class="card-title">
+                                    <%= product.name %>
+                                </h5>
+                                <!-- Product Price -->
+                                <p class="card-text">Price: $<%= product.price %>
+                                </p>
+                                <!-- View Details Button -->
+                                <a href="/singleProduct/<%= product.id %>" class="btn btn-primary details-btn">
+                                    View Details <span class="arrow">&rarr;</span>
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+            <% } else { %>
+                <p class="alert alert-warning">No products found for "<%= searchTerm %>."</p>
+                <% } %>
+
+                    <!-- Link to go back to home page -->
+                    <a href="/" class="btn btn-secondary mt-3">Go Back to Home</a>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-pzjw8LlH5tJ6e1s8uEoD5dlQDFyzZ/JqKT83P9OQS9fY3RvFq/nJL2hHXetv8L5E"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYNbBAdI4zrhqj3aRaxv5UpJH4Qv5tLL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

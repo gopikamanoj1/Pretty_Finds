@@ -1,0 +1,352 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:35 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <title>PRETTY FINDS admin</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="admin-assets/css/main.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="index" class="brand-wrap">
+                <img src="/imgs/theme/PRETTY FINDS LOGO.png" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+                </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li>
+                    <a class="menu-link" href="/admindashboard"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/page-categories"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link " href="/page-product-list"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Product Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/loadaddproduct"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Add Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/page-user-list"> <i class="icon material-icons md-person"></i>
+                        <span class="text">User </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/pageOrders"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                </li>
+
+                <li class="menu-item active">
+                    <a class="menu-link" href="/salesReport"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Sales Report</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Reviews</span>
+                    </a>
+                </li>
+
+            </ul>
+            <hr>
+            <ul class="menu-aside">
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-settings-1">Setting sample 1</a>
+                        <a href="page-settings-2">Setting sample 2</a>
+                    </div>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="page-blank"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Starter page </span>
+                    </a>
+                </li>
+            </ul>
+            <br>
+            <br>
+        </nav>
+    </aside>
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                        <button class="btn btn-light bg" type="button"> <i
+                                class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products">
+                        <option value="New orders">
+                        <option value="Apple iphone">
+                        <option value="Ahmed Hassan">
+                    </datalist>
+                </form>
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                        class="material-icons md-apps"></i> </button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon" href="#">
+                            <i class="material-icons md-notifications animation-shake"></i>
+                            <span class="badge rounded-pill">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                class="material-icons md-cast"></i></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                            aria-expanded="false"><i class="material-icons md-public"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                            <a class="dropdown-item text-brand" href="#"><img src="/admin-assets/imgs/theme/flag-us.png"
+                                    alt="English">English</a>
+                            <a class="dropdown-item" href="#"><img src="/admin-assets/imgs/theme/flag-fr.png"
+                                    alt="Français">Français</a>
+                            <a class="dropdown-item" href="#"><img src="/admin-assets/imgs/theme/flag-jp.png"
+                                    alt="Français">日本語</a>
+                            <a class="dropdown-item" href="#"><img src="/admin-assets/imgs/theme/flag-cn.png"
+                                    alt="Français">中国人</a>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                            aria-expanded="false"> <img class="img-xs rounded-circle"
+                                src="/admin-assets/imgs/people/avatar2.jpg" alt="User"></a>
+                        <a class="dropdown-item text-danger" href="/logout"><i
+                                class="material-icons md-exit_to_app"></i>Logout</a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                                Profile</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                                Settings</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                                center</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        </header>
+
+<section class="content-main">
+    <div class="card mb-4">
+        <header class="card-header" id="header">
+            <h4 class="card-title">Latest orders</h4>
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <form method="post" action="/updateOrdersByDate" id="OrderByDateForm">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-6">
+                                <label for="from" class="form-label">From:</label>
+                                <input type="date" class="form-control" id="from" name="orderFrom">
+                                <span id="fromError" style="color: red;"></span>
+                            </div>
+                            <div class="col-md-10 col-6">
+                                <label for="to" class="form-label">To:</label>
+                                <input type="date" class="form-control" id="to" name="orderTo">
+                                <span id="toError" style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6 col-6" style="padding-top: 4%;">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+    
+    
+                <div class="col-md-2 col-6">
+                    <a href="/dailyOrder" id="dailyButton" class="btn btn-primary btn-sm rounded">Daily</a>
+                </div>
+                <div class="col-md-2 col-6">
+                    <a href="/weeklyOrder" id="MonthlyButton" class="btn btn-primary btn-sm rounded">Weekly</a>
+                </div>
+                <div class="col-md-2 col-6">
+                    <a href="/yearlyOrder" id="YearlyButton" class="btn btn-primary btn-sm rounded">Yearly</a>
+                </div>
+                <div class="col-lg-3 col-6 col-md-3">
+                    <form method="get" class="d-flex flex-row">
+                        <input type="date" id="start" name="start_date" value="{% if start_date %}{{ start_date }}{% else %}2023-11-20{% endif %}" hidden="hidden" />
+                        <input type="date" id="end" name="end_date" value="{% if end_date %}{{ end_date }}{% else %}{{ current_date }}{% endif %}" hidden="hidden"/>
+        
+                        <select class="form-select border border-dark" name="status_filter">
+                            <option value="0" >All Status</option>
+                            <option value="1" >Pending</option>
+                            <option value="2" >Shipped</option>
+                            <option value="3" >Delivered</option>
+                            <option value="4" >Cancel</option>
+                            <option value="5" >Returned</option>
+                        </select>
+                        <button type="submit" class="border border-dark border-left-0 px-3">
+                            <i class="material-icons md-published_with_changes"></i>
+                        </button>
+                    </form>
+                </div>
+    
+                <!-- <div class="col-md-2 col-6">
+                    <a href="/invoiceSales" class="btn btn-primary btn-sm rounded" >InvoiceReport</a>
+                    <button href="#" class="btn btn-primary btn-sm rounded" id="invoice">Invoice</button>
+                </div> -->
+
+
+
+                
+            
+        </header>
+    
+    
+    
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="table-responsive">
+
+
+                    <table class="table align-middle table-nowrap mb-0" id="example">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th class="align-middle" scope="col">#</th> <!-- Serial Number Column -->
+                                <th class="align-middle" scope="col">Order ID</th>
+                                <th class="align-middle" scope="col">Billing Name</th>
+                                <th class="align-middle" scope="col">Email</th>
+                                <th class="align-middle" scope="col">Date</th>
+                                <th class="align-middle" scope="col">Order Status</th>
+                                <th class="align-middle" scope="col">Amount</th>
+                                <th class="align-middle" scope="col">Payment Method</th>
+                            </tr>
+                        </thead>
+                    
+                        <tbody>
+                            <% if (orders.length > 0) { %>
+                                <% orders.forEach((order, index) => { %>
+                                    <tr class="text-center">
+                                        <td><%= index + 1 %></td> <!-- Serial Number -->
+                                        <td><%= order._id %></td>
+                                        <% if (order.user) { %>
+                                            <td><b><%= order.user.name %></b></td>
+                                            <td><%= order.user.email %></td>
+                                        <% } else { %>
+                                            <td>N/A</td>
+                                            <td>N/A</td>
+                                        <% } %>
+                                        <% if (order.createdAt) { %>
+                                            <td><%= order.createdAt.toDateString() %></td>
+                                        <% } else { %>
+                                            <td>N/A</td>
+                                        <% } %>
+                                        <td>
+                                            <span class="badge rounded-pill <% if (order.status === 'Received') { %>alert-success<% } else if (order.status === 'Shipped') { %>alert-info<% } else { %>alert-warning<% } %>">
+                                                <%= order.status %>
+                                            </span>
+                                        </td>
+                                        <td>$<%= order.total !== undefined ? order.total.toFixed(2) : 'N/A' %></td>
+                                        <td> paymentMethod</td>
+                                        <td>
+                                            <a href="/page-orderDetails/<%= order._id %>" class="btn btn-xs"> View details</a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="8" class="text-center">No sales report available for the specified date range.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                         
+                    </table>
+                    
+                   
+                </div>
+            </div> <!-- table-responsive end// -->
+        </div>
+    </div>
+    </section>
+
+    <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> ©, Evara - HTML Ecommerce Template .
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+<script src="/admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="/admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="/admin-assets/js/vendors/select2.min.js"></script>
+<script src="/admin-assets/js/vendors/perfect-scrollbar.js"></script>
+<script src="/admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+<script src="/admin-assets/js/vendors/chart.js"></script>
+<!-- Main Script -->
+<script src="/admin-assets/js/main.js" type="text/javascript"></script>
+<script src="/admin-assets/js/custom-chart.js" type="text/javascript"></script>
+
+<!-- Include the custom-chart.js file -->
+
+<!-- Call the function with the data when the page loads -->
+
+
+
+
+
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+
+</html>
