@@ -19,8 +19,14 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+
+<!-- Include SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>'
+
+
 </head>
 
 <body>
@@ -408,7 +414,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mb-sm-15">
-
+                        <div class="row">
+                            
+                           
+                             
+                             
+                            
+                            
+                        </div>
                         <div class="panel-collapse collapse login_form" id="loginform">
                             <div class="panel-body">
                                 <p class="mb-30 font-sm">If you have shopped with us before, please enter your details
@@ -418,39 +431,54 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Your HTML code -->
                     <div class="col-lg-6">
+                        
                         <div class="toggle_info">
-                            <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a coupon?</span> <a
-                                    href="#coupon" data-bs-toggle="collapse" class="collapsed"
-                                    aria-expanded="false">Click here to enter your code</a></span>
+                            <span>
+                                <i class="fi-rs-label mr-10"></i>
+                                <span class="text-muted">Have a coupon?</span>
+                                <a href="#coupon" data-bs-toggle="collapse" class="collapsed"
+                                    aria-expanded="false">Click here to enter your code</a>
+                            </span>
                         </div>
-                        <div class="panel-collapse collapse coupon_form " id="coupon">
+                        <!-- Add this section to display the user's wallet information -->
+
+
+                        <div class="panel-collapse collapse coupon_form" id="coupon">
                             <div class="panel-body">
                                 <p class="mb-30 font-sm">If you have a coupon code, please apply it below.</p>
-                                <form method="post">
+                                <form id="applyCouponForm" method="post" action="/getCoupon">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter Coupon Code...">
+                                        <input type="text" id="couponCodeInput" placeholder="Enter Coupon Code..."
+                                            name="couponCode">
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn  btn-md" name="login">Apply Coupon</button>
+                                        <button class="btn btn-md" id="applyCouponBtn" name="applyCoupon">Apply
+                                            Coupon</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="divider mt-50 mb-50"></div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-25">
                             <h4>Billing Details</h4>
                         </div>
 
-                        <form id="confirm-order">
+                        <form id="confirm-order" >
                             <div class="form-group">
                                 <% if (addresses && addresses.length> 0) { %>
 
@@ -484,13 +512,13 @@
                                     <h5>Payment</h5>
                                 </div>
                                 <div class="payment_option" id="paymentOptions">
-                                    <div class="custome-radio">
+                                    <!-- <div class="custome-radio">
                                         <input class="form-check-input" required="" type="radio" name="payment_option"
                                             id="exampleRadios3" value="direct_bank_transfer" checked="">
                                         <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse"
                                             data-target="#bankTranfer" aria-controls="bankTranfer">Direct Bank
                                             Transfer</label>
-                                    </div>
+                                    </div> -->
 
                                     <div class="custom-radio">
                                         <input class="form-check-input" required="" type="radio" value="razorypay"
@@ -506,14 +534,24 @@
                                     <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
                                         data-target="#paypal" aria-controls="paypal">Cash On Delivery</label>
                                 </div>
+                                <div class="custom-radio">
+                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="wallet" value="wallet">
+                                    <label class="form-check-label" for="exampleRadios6" data-bs-toggle="collapse" data-target="#walletPayment" aria-controls="walletPayment">Wallet</label>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-fill-out btn-block mt-30">Place Order</button>
+                            <button type="button" id="submit-button" class="btn btn-fill-out btn-block mt-30">Place Order</button>
+
                         </form>
 
 
 
 
                     </div>
+
+
+<!-- Include SweetAlert CSS -->
+
+
 
 
 
@@ -524,8 +562,9 @@
                             <div class="mb-20">
                                 <h4>Your Orders</h4>
                             </div>
+
+
                             <div class="table-responsive order_table text-center">
-                                <% /* Function to calculate cart total */ %>
                                     <% function calculateCartTotal(products) { %>
                                         <% let total=0; %>
                                             <% products.forEach(product=> { %>
@@ -534,95 +573,71 @@
                                                         <% return total; %>
                                                             <% } %>
 
-                                                                <table class="table">
-                                                                    <thead>
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">Product</th>
+                                                                        <th>Total</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% if (cart && cart.products && cart.products.length > 0) { %>
+                                                                        <% for (let i = 0; i < cart.products.length; i++) { %>
+                                                                            <tr>
+                                                                                <td class="image product-thumbnail">
+                                                                                    <% const imageUrl = cart.products[i].productId?.image?.[0]?.url; %>
+                                                                                    <% console.log("Image URL:", imageUrl); %>
+                                                                                    <img src="/uploads/<%= imageUrl %>" alt="<%= cart.products[i].productId?.name %>">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <i class="ti-check-box font-small text-muted mr-10"></i>
+                                                                                    <h5><a href="shop-product-full.html"><%= cart.products[i].productId?.name %></a></h5>
+                                                                                    <span class="product-qty">x <%= cart.products[i].quantity %></span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <% const price = cart.products[i].productId?.price?.toFixed(2); %>
+                                                                                    <%= price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %>
+                                                                                </td>
+                                                                            </tr>
+                                                                        <% } %>
+                                                                    <% } else { %>
                                                                         <tr>
-                                                                            <th colspan="2">Product</th>
-                                                                            <th>Total</th>
+                                                                            <td colspan="3">Your cart is empty</td>
                                                                         </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <% if (cart && cart.products &&
-                                                                            cart.products.length> 0) { %>
-                                                                            <% for (let i=0; i < cart.products.length;
-                                                                                i++) { %>
-                                                                                <tr>
-                                                                                    <td class="image product-thumbnail">
-                                                                                        <% const
-                                                                                            imageUrl=cart.products[i].productId
-                                                                                            &&
-                                                                                            cart.products[i].productId.image[0].url;
-                                                                                            %>
-                                                                                            <% console.log("Image URL:",
-                                                                                                imageUrl); %>
-                                                                                                <img src="/uploads/<%= imageUrl %>"
-                                                                                                    alt="<%= cart.products[i].productId && cart.products[i].productId.name %>">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i
-                                                                                            class="ti-check-box font-small text-muted mr-10"></i>
-                                                                                        <h5><a
-                                                                                                href="shop-product-full.html">
-                                                                                                <%= cart.products[i].productId
-                                                                                                    &&
-                                                                                                    cart.products[i].productId.name
-                                                                                                    %>
-                                                                                            </a></h5>
-                                                                                        <span class="product-qty">x <%=
-                                                                                                cart.products[i].quantity
-                                                                                                %></span>
-                                                                                    </td>
-                                                                                    <td>$<%= cart.products[i].productId
-                                                                                            &&
-                                                                                            cart.products[i].productId.price
-                                                                                            &&
-                                                                                            cart.products[i].productId.price.toFixed(2)
-                                                                                            %>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <% } %>
-                                                                                    <% } else { %>
-                                                                                        <tr>
-                                                                                            <td colspan="3">Your cart is
-                                                                                                empty</td>
-                                                                                        </tr>
-                                                                                        <% } %>
-
-                                                                                            <!-- Display Cart Subtotal, Shipping, and Total -->
-                                                                                            <tr>
-                                                                                                <th>SubTotal</th>
-                                                                                                <td class="product-subtotal"
-                                                                                                    colspan="2">$<%=
-                                                                                                        calculateCartTotal(cart.products).toFixed(2)
-                                                                                                        %>
-                                                                                                </td>
-                                                                                            </tr>
-
-                                                                                            <tr>
-                                                                                                <th>Shipping</th>
-                                                                                                <td colspan="2"><em>Free
-                                                                                                        Shipping</em>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <th>Total</th>
-                                                                                                <td colspan="2"
-                                                                                                    class="product-subtotal">
-                                                                                                    <span
-                                                                                                        class="font-xl text-brand fw-900">$
-                                                                                                        <%= calculateCartTotal(cart.products).toFixed(2)
-                                                                                                            %>
-                                                                                                    </span>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                                    <% } %>
+                                                            
+                                                                    <tr>
+                                                                        <th>SubTotal</th>
+                                                                        <td class="product-subtotal" colspan="2">
+                                                                            $<%= calculateCartTotal(cart.products)?.toFixed(2) %>
+                                                                        </td>
+                                                                    </tr>
+                                                            
+                                                                    <tr>
+                                                                        <th>Shipping</th>
+                                                                        <td colspan="2"><em>Free Shipping</em></td>
+                                                                    </tr>
+                                                            
+                                                                    <tr>
+                                                                        <th>Total</th>
+                                                                        <td colspan="2" class="product-subtotal2">
+                                                                            <span id="TotalAmount" class="font-xl text-brand fw-900">
+                                                                                $<%= calculateCartTotal(cart.products)?.toFixed(2) %>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            
                             </div>
+
+
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                          
+
                         </div>
 
                         <a href="/cart" class="btn btn-fill-out btn-block mt-30">Cancel Order</a>
+
 
                     </div>
                 </div>
@@ -762,29 +777,137 @@
     </div>
 
     <script>
-        $(document).ready(function(){
-
-            $("#confirm-order").submit(function(e){
-                e.preventDefault()
-                e.stopImmediatePropagation();
-                $.ajax({
-                    url:"/confirm-order",
-                    type:"POST",
-                    data: $("#confirm-order").serialize(),
-                }).done((res)=>{
-                    console.log(res)
-                   if(res.status === "razorpay"){
-                    console.log("got here")
-                   return  makeRazorpayPayment(res.data)
-                   }
-                   location.href = "/confirm-page"
-                })
-                .fail((err) =>{
-                    console.log(err)
-                })
-            })
+       $(document).ready(function () {
+    $("#submit-button").click(function (e) {
+        e.preventDefault();
+        console.log("this is checkout function")
+        $.ajax({
+            url: "/confirm-order",
+            type: "POST",
+            data: $("#confirm-order").serialize(),
         })
+        .done(function (res) {
+                if (res.status === "razorpay") {
+                    console.log("got here");
+                    return makeRazorpayPayment(res.data);
+                } else if (res.error) {
+                    console.log("got here")
+                    return showInsufficientBalanceAlert(res.error);
+                }
+                location.href = "/confirm-page";
+
+                // return showInsufficientBalanceAlert(res.error);
+                // Handle error appropriately, e.g., show an alert
+        })
+        .fail(function (err) {
+            console.log("AJAX request failed:", err);
+            if (err.error) {
+                    return showInsufficientBalanceAlert(res.error);
+                } 
+            // Handle the failure, e.g., show an alert
+        });
+    });
+});
+
+function showInsufficientBalanceAlert(message) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Balance',
+            text: message,
+        });
+    }
+
     </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const confirmOrderForm = document.getElementById('confirm-order');
+
+            confirmOrderForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Check if an address is selected
+                const selectedAddress = document.querySelector('input[name="addresses"]:checked');
+
+                if (!selectedAddress) {
+                    // Display SweetAlert if no address is selected
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Please select an address!',
+                    });
+                    return; // Stop the form submission
+                }
+
+                // Continue with the form submission logic
+                confirmOrderForm.submit();
+            });
+        });
+    </script>
+    <!-- Include SweetAlert in the head section of your HTML file -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+
+    <!-- Add this script for handling coupon application and displaying SweetAlert -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const applyCouponBtn = document.getElementById('applyCouponBtn');
+            const couponCodeInput = document.getElementById('couponCodeInput');
+            const applyCouponForm = document.getElementById('applyCouponForm');
+
+            applyCouponBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                const couponCode = couponCodeInput.value;
+
+                // Assuming you are using AJAX to send the coupon code to the server
+                fetch('/getCoupon', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ couponCode }),
+                })
+                    .then((response) => {
+                       response.json().then((data) => {
+
+                            if (data.success) {
+                                // Update total amount on the front end (replace 'yourTotalElement' with the appropriate element ID)
+                                document.getElementById('TotalAmount').innerText = '$' + data.total;
+
+                                // Display SweetAlert
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Coupon Applied Successfully',
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                });
+                            } else {
+                                // Display error message
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: data.message,
+                                });
+                            }
+                        })
+                            .catch((error) => {
+                                console.error('Error applying coupon:', error);
+                            });
+                    })
+
+            });
+        });
+    </script>
+
+
+    <!-- SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
     <!-- Vendor JS-->
     // razorpay link

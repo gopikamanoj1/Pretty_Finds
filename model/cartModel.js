@@ -12,6 +12,12 @@ const CartSchema = new mongoose.Schema(
     },
     wallet: {
       type: Number,
+      default:null
+
+    },
+    coupon:{
+      type:String,
+      default:null
     },
    
     products: [

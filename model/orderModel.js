@@ -31,12 +31,12 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Pending', 'Processing', 'Shipped', 'Delivered','Cancel'],
+    enum: ['Pending', 'Processing', 'Shipped', 'Delivered','Cancel','Returned'],
     default: 'Pending'
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now 
   },
   isWallet:{
     default:'nil',
@@ -48,6 +48,10 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
   reasonForCancel:{
+    default:'nil',
+    type:String
+  },
+  reasonForReturn:{
     default:'nil',
     type:String
   },

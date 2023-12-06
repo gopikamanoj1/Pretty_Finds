@@ -420,7 +420,7 @@
                                                 <div class="product-cart-wrap mb-30 ">
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
-                                                            <a href="/singleProduct/<%= product.id %>">
+                                                            <a href="/singleProduct/<%= product._id %>">
                                                                 <% if (product.image && product.image[0] && product.image[0].url) { %>
                                                                     <img src="/uploads/<%= product.image[0].url %>" alt="<%= product.name %>">
                                                                 <% } else { %>
@@ -446,7 +446,12 @@
                                                             </span>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span >$<%= product.price %></span>
+                                                            <span>$<%= product.discountedPrice %></span>
+                                                            <% if (product.discountPercentage && product.discountPercentage > 0) { %>
+                                                                <span class="old-price">$<%= product.price %></span>
+
+                                                                <span class="discount">(<%= product.discountPercentage %>% Off)</span>
+                                                            <% } %>
                                                         </div>
                                                         <% if (product.stock < 1) { %>
                                                             <div class="out-of-stock-message">

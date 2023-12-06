@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-
   name: {
     type: String,
     required: true,
   },
-  
   price: {
     type: Number,
     required: true,
-    // Add unique constraint on product_price field
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -18,22 +15,28 @@ const productSchema = new mongoose.Schema({
   },
   image: [
     {
-        url: {
-            type: String,
-            required: true,
-        }
-    }
-],
-
+      url: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   description: {
     type: String,
     required: true,
   },
-  
   stock: {
     type: Number,
     required: true,
-  }
+  },
+  discountPercentage: {
+    type: Number,
+    default: 0,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
-module.exports = mongoose.model("Products", productSchema); 
 
+module.exports = mongoose.model("Products", productSchema);

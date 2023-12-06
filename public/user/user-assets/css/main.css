@@ -5226,7 +5226,7 @@ h6.post-title {
 }
 
 .header-info > ul > li a {
-  color: #1a1a1a;
+  color: #fffdfd;
   font-weight: 500;
 }
 
@@ -6445,8 +6445,8 @@ h6.post-title {
 
 .header-style-1 .header-top-ptb-1 {
   padding: 13px 0;
-  border-bottom: 3px solid #39b4ac;
-  background-color: #d8f4e2;
+  border-bottom: 3px solid #420881;
+  background-color: #420881;
   background-image: none;
 }
 
@@ -6600,7 +6600,7 @@ h6.post-title {
 }
 
 .header-style-4 .header-top-ptb-1 {
-  background-color: #d8f4e2;
+  background-color: #420881;
   background-image: none;
   padding: 15px 0;
   border: 0;
@@ -9968,4 +9968,22 @@ span.fi-rs-apps {
   position: absolute;
   top: 10px;
   left: 10px;
+}
+.ordered-delivery-info {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #495057;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0;
 }

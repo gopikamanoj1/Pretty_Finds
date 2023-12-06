@@ -177,6 +177,32 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
+
+
+                            <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                                <nav>
+                                    <ul>
+                                        <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+                                        <li>
+                                            <a href="/lipscareonly">LIPS CARE</a>
+                                        </li>
+                                        <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+                                        <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+                                        <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+
                             <!--  -->
                         </div>
                         <div class="header-action-right">
@@ -184,13 +210,11 @@
                                 <div class="header-action-icon-2">
                                     <a href="">
                                         <img class="svgInject" alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
-                                        <span class="pro-count blue">4</span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="" href="/cart">
                                         <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">2</span>
                                     </a>
                                 </div>
                             </div>
@@ -203,36 +227,13 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
 
-                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
-                            <nav>
-                                <ul>
-                                    <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
 
-                                    </li>
-                                    <li>
-                                        <a href="/lipscareonly">LIPS CARE</a>
-                                    </li>
-                                    <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-
-                                </ul>
-                            </nav>
-                        </div>
                     </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-headset"></i><span>Hotline</span>123456789 </p>
-                    </div>
+
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
                     </p>
                     <div class="header-action-right d-block d-lg-none">
@@ -240,27 +241,84 @@
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">1</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="/addToCart">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
                                 </a>
                             </div>
-                            <div class="header-action-icon-2 d-block d-lg-none">
-                                <div class="burger-icon burger-icon-white">
-                                    <span class="burger-icon-top"></span>
-                                    <span class="burger-icon-mid"></span>
-                                    <span class="burger-icon-bottom"></span>
-                                </div>
-                            </div>
+                            <% if (!locals.logged) { %>
+                                <li id="loginButton"><i class="fi-rs-user"></i><a href="/page-login">Log In</a></li>
+                                <li id="signUpButton"><i class="fi-rs-user"></i><a href="/page-register">Sign Up</a>
+                                </li>
+
+                                <% } else { %>
+                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a>
+                                    </li>
+                                    <li><a href="/myprofile">My Profile </i></a>
+
+                                    </li>
+
+                                    <% } %>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </header>
+
+
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-top">
+                <div class="mobile-header-logo">
+                    <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                </div>
+                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                    <button class="close-style search-close">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-header-content-area">
+                <div class="mobile-search search-style-3 mobile-header-border">
+                    <form action="#">
+                        <input type="text" placeholder="Search for items…">
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-wrap mobile-header-border">
+
+                    <!-- mobile menu start -->
+                    <nav>
+
+                    </nav>
+                    <!-- mobile menu end -->
+                </div>
+                <div class="mobile-header-info-wrap mobile-header-border">
+                    <div class="single-mobile-header-info mt-30">
+                        <a href="page-contact"> Our location </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="/page-login">Log out </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="#">(+01) - 2345 - 6789 </a>
+                    </div>
+                </div>
+                <div class="mobile-social-icon">
+                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                    <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
     </header>
     <main class="main">
 
@@ -340,6 +398,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+
+                        <!-- Add SweetAlert2 CDN -->
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
                         <table class="table table-bordered">
                             <thead class="thead-light">
                                 <tr>
@@ -347,7 +409,6 @@
                                     <th>Date</th>
                                     <th>Total</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -365,96 +426,26 @@
                                             <td>
                                                 <%= order.status==='Cancel' ? 'Cancelled' : order.status %>
                                             </td>
-
-                                            <!-- Add actions here -->
-                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-                                            <td>
-                                                <%= order.status==='Cancel' ? 'Cancelled' : order.status %>
-                                            </td>
-                                            <td>
-
-                                                <!-- Add SweetAlert2 CDN -->
-                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
                                             <td>
                                                 <!-- View Details button -->
                                                 <a href="/order-details/<%= order._id %>"
                                                     class="btn btn-info btn-sm mr-2">View Details</a>
 
-                                                <!-- Cancel Order button (disable if already cancelled) -->
-                                                <% if (order.status !=='Cancel' ) { %>
-                                                    <button class="btn btn-danger btn-sm"
-                                                        onclick="showCancelReasonPrompt('<%= order._id %>')">Cancel
-                                                        Order</button>
-                                                    <% } else { %>
-                                                        <span class="btn btn-danger btn-sm disabled">Cancelled</span>
-                                                        <% } %>
-                                            </td>
-
-                                            <!-- Add SweetAlert2 CDN -->
-                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-                                            <script>
-                                                async function showCancelReasonPrompt(orderId) {
-                                                    const result = await Swal.fire({
-                                                        title: 'Provide a reason for cancellation',
-                                                        input: 'textarea',
-                                                        inputPlaceholder: 'Type your reason here...',
-                                                        showCancelButton: true,
-                                                        confirmButtonText: 'Cancel Order',
-                                                        preConfirm: (cancelReason) => {
-                                                            if (!cancelReason) {
-                                                                Swal.showValidationMessage('Please provide a reason');
-                                                            }
-                                                            return cancelReason;
-                                                        },
-                                                    });
-
-                                                    if (result.isConfirmed) {
-                                                        try {
-                                                            const response = await fetch(`/cancel-order/${orderId}`, {
-                                                                method: 'POST',
-                                                                headers: {
-                                                                    'Content-Type': 'application/json',
-                                                                },
-                                                                body: JSON.stringify({ cancelReason: result.value }),
-                                                            });
-
-                                                            const data = await response.json();
-
-                                                            if (data.message) {
-                                                                Swal.fire({
-                                                                    title: 'Order Cancelled!',
-                                                                    text: data.message,
-                                                                    icon: 'success',
-                                                                }).then(() => {
-                                                                    // Reload the page or update the UI as needed
-                                                                    location.reload();
-                                                                });
-                                                            } else {
-                                                                Swal.fire({
-                                                                    title: 'Error!',
-                                                                    text: 'An error occurred while canceling the order.',
-                                                                    icon: 'error',
-                                                                });
-                                                            }
-                                                        } catch (error) {
-                                                            console.error(error);
-                                                            Swal.fire({
-                                                                title: 'Error!',
-                                                                text: 'An error occurred while canceling the order.',
-                                                                icon: 'error',
-                                                            });
-                                                        }
-                                                    }
-                                                }
-                                            </script>
-
-
-
-
-
+                                                <!-- Cancel/Request Return button -->
+                                                <% if (order.status==='Delivered' ||order.status==='Returned' ) { %>
+                                                    <% if (!order.returnRequested) { %>
+                                                     
+                                                        <% } else { %>
+                                                        
+                                                            <% } %>
+                                                                <% } else if (order.status !=='Cancel' ) { %>
+                                                                    <button class="btn btn-danger btn-sm"
+                                                                        onclick="showCancelReasonPrompt('<%= order._id %>')">Cancel
+                                                                        Order</button>
+                                                                    <% } else { %>
+                                                                        <span
+                                                                            class="btn btn-danger btn-sm disabled">Cancelled</span>
+                                                                        <% } %>
                                             </td>
                                         </tr>
                                         <% }); %>
@@ -465,6 +456,66 @@
                                                 <% } %>
                             </tbody>
                         </table>
+
+                        <script>
+                            async function showCancelReasonPrompt(orderId) {
+                                const result = await Swal.fire({
+                                    title: 'Provide a reason for cancellation',
+                                    input: 'textarea',
+                                    inputPlaceholder: 'Type your reason here...',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Cancel Order',
+                                    preConfirm: (cancelReason) => {
+                                        if (!cancelReason) {
+                                            Swal.showValidationMessage('Please provide a reason');
+                                        }
+                                        return cancelReason;
+                                    },
+                                });
+
+                                if (result.isConfirmed) {
+                                    try {
+                                        const response = await fetch(`/cancel-order/${orderId}`, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({ cancelReason: result.value }),
+                                        });
+
+                                        const data = await response.json();
+
+                                        if (data.message) {
+                                            Swal.fire({
+                                                title: 'Order Cancelled!',
+                                                text: data.message,
+                                                icon: 'success',
+                                            }).then(() => {
+                                                // Reload the page or update the UI as needed
+                                                location.reload();
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Error!',
+                                                text: 'An error occurred while canceling the order.',
+                                                icon: 'error',
+                                            });
+                                        }
+                                    } catch (error) {
+                                        console.error(error);
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'An error occurred while canceling the order.',
+                                            icon: 'error',
+                                        });
+                                    }
+                                }
+                            }
+
+                           
+                        </script>
+
+
                     </div>
                 </div>
             </div>
@@ -632,7 +683,31 @@
 
         </script>
 
+        <script>
+            // Function to update the cart count using AJAX
+            function updateCartCount() {
+                $.ajax({
+                    type: "GET",
+                    url: "/getCartCount", // Update the URL to your endpoint that returns the cart count
+                    success: function (data) {
+                        // Update the cart count on the page
+                        $("#cartCount").text(data.cartCount);
+                    },
+                    error: function (error) {
+                        console.error("Error fetching cart count: ", error);
+                    }
+                });
+            }
 
+            // Call the function when the page loads
+            $(document).ready(function () {
+                updateCartCount();
+            });
+
+            // You can also call this function whenever the cart is updated (e.g., after adding or removing items)
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     </body>
 

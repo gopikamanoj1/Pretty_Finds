@@ -70,30 +70,21 @@
                         <span class="text">Sales Report</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer""></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
             </ul>
             <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-settings-1">Setting sample 1</a>
-                        <a href="page-settings-2">Setting sample 2</a>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
-            </ul>
+       
             <br>
             <br>
         </nav>
@@ -207,7 +198,6 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>User</th>
                                     <th>Email</th>
                                     <!-- <th>Status</th> -->
                                     <!-- <th>Registered</th> -->
@@ -221,11 +211,7 @@
                                         <% if (locals.data) { %>
                                             <% users.forEach((user) => { %>
                                                 <tr>
-                                                    <div class="info pl-3">
-                                                        <td class="mb-0 title">
-                                                            <%= user.name %>
-                                                        </td>
-                                                    </div>
+                                                  
                                                     <td>
                                                         <%= user.email %>
                                                     </td>
@@ -262,7 +248,7 @@
                     </div>
                 </div> <!-- card-body end// -->
             </div> <!-- card end// -->
-            <div class="pagination-area mt-15 mb-50">
+            <!-- <div class="pagination-area mt-15 mb-50">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-start">
                         <li class="page-item active"><a class="page-link" href="#">01</a></li>
@@ -274,7 +260,7 @@
                                     class="material-icons md-chevron_right"></i></a></li>
                     </ul>
                 </nav>
-            </div>
+            </div> -->
         </section> <!-- content-main end// -->
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">

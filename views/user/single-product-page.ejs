@@ -184,8 +184,13 @@
                                         <li><a href="#"><img src="/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
                                     </ul>
                                 </li>
-                                <li><i class="fi-rs-user"></i><a href="page-login-register.html">Log In / Sign Up</a>
-                                </li>
+                                <% if (!locals.logged) { %>
+                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a></li>
+                                    <li><a href="/myprofile">My Profile <i class="fi-rs-angle-down"></i></a>
+                                            
+                                    </li>
+
+                                    <% } %>                                </li>
                             </ul>
                         </div>
                     </div>
@@ -199,23 +204,32 @@
                         <a href="index.html"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
                     <div class="header-right">
-                        <div class="search-style-2">
-                            <form action="#">
-                                <select class="select-active">
-                                    <option>All Categories</option>
-                                    <option>Women's</option>
-                                    <option>Men's</option>
-                                    <option>Cellphones</option>
-                                    <option>Computer</option>
-                                    <option>Electronics</option>
-                                    <option> Accessories</option>
-                                    <option>Home & Garden</option>
-                                    <option>Luggage</option>
-                                    <option>Shoes</option>
-                                    <option>Mother & Kids</option>
-                                </select>
-                                <input type="text" placeholder="Search for items...">
-                            </form>
+                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                            <nav>
+                                <ul>
+                                    <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
+
+                                    </li>
+                                    <li>
+                                        <a href="/lipscareonly">LIPS CARE</a>
+                                    </li>
+                                    <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
+
+                                    </li>
+                                    <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+
+                                    </li>
+                                    <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
+
+                                    </li>
+                                    <!-- <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
+                                        
+                                    </li> -->
+                                    <li>
+                                        <a href="/allProducts">All Products</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
@@ -246,33 +260,7 @@
                         <div class="main-categori-wrap d-none d-lg-block">
 
                         </div>
-                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
-                            <nav>
-                                <ul>
-                                    <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li>
-                                        <a href="/lipscareonly">LIPS CARE</a>
-                                    </li>
-                                    <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <!-- <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
-                                        
-                                    </li> -->
-                                    <li>
-                                        <a href="/allProducts">All Products</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                   
                     </div>
 
                     <!-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> -->
@@ -437,8 +425,13 @@
                         <a href="page-contact.html"> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="page-login-register.html">Log In / Sign Up </a>
-                    </div>
+                        <% if (!locals.logged) { %>
+                            <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a></li>
+                            <li><a href="/myprofile">My Profile <i class="fi-rs-angle-down"></i></a>
+                                    
+                            </li>
+
+                            <% } %>                    </div>
                     <div class="single-mobile-header-info">
                         <a href="#">(+01) - 2345 - 6789 </a>
                     </div>
@@ -461,6 +454,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product-detail accordion-detail">
+
+
+
+
                             <div class="row mb-50">
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="detail-gallery">
@@ -506,10 +503,22 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand">$<%= product.price %></span></ins>
-
+                                                <% if (discountPercentage && discountPercentage > 0) { %>
+                                                    <!-- Display the discounted price -->
+                                                    <ins><span class="text-brand">$<%= discountedPrice %></span></ins>
+                                                    <!-- Display the original price with a strikethrough -->
+                                                    <del><span class="old-price font-md ml-15">$<%= product.price %></span></del>
+                                                    <!-- Calculate and display the discount percentage -->
+                                                    <span class="save-price font-md color3 ml-15"><%= product.discountPercentage %>% Off</span>
+                                                <% } else { %>
+                                                    <!-- Display the regular price if there is no offer or if the discount is zero -->
+                                                    <ins><span class="text-brand">$<%= product.price %></span></ins>
+                                                <% } %>
                                             </div>
                                         </div>
+                                        
+                                        
+                                   
                                         <div class="bt-1 border-color-1 mt-15 mb-15"></div>
                                         <div class="short-desc mb-30">
                                             <p>
@@ -538,8 +547,13 @@
                                             <div class="product-extra-link2">
 
                                                 <form id="addToCartForm" action="/addToCart/<%= product._id %>" method="post">
-                                                    <button type="submit" class="button button-add-to-cart"><i ></i>Add to cart</button>
-                                                </form>  
+                                                    <% if (product.stock > 0) { %>
+                                                      <button type="submit" class="button button-add-to-cart"><i ></i>Add to cart</button>
+                                                    <% } else { %>
+                                                      <button type="button" class="button button-add-to-cart text-danger" disabled><i ></i>Out of Stock</button>
+                                                    <% } %>
+                                                  </form>
+                                                   
                                                 <br>                              
                                                         <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                     href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
@@ -564,6 +578,11 @@
                                     <!-- Detail Info -->
                                 </div>
                             </div>
+
+
+
+
+                            
 
                             <div class="row mt-60">
 

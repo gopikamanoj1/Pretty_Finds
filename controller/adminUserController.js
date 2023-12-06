@@ -1,5 +1,6 @@
 const userModel = require("../model/userModel");
 const adminModel = require("../model/adminModel");
+const OrderModel= require("../model/orderModel");
 
 const bcrypt = require("bcrypt");
 
@@ -21,11 +22,17 @@ const UserDETAILS = async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        return res.render('page-user-detail', { user });
-    } catch (error) {
+        // Fetch user orders (replace 'orders' with your actual orders schema)
+        const orders = await OrderModel.find({ user: id });
 
+        return res.render('page-user-detail', { user, orders });
+    } catch (error) {
+        // Handle errors appropriately
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
 }
+
  
 
 const displayUserlist = async (req, res) => {

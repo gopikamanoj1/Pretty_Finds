@@ -69,10 +69,16 @@
                         <span class="text">Sales Report</span>
                     </a>
                 </li>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+                   
+                </li>
 
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
@@ -176,20 +182,27 @@
                             </span> <br>
                             <!-- <small class="text-muted">Order ID: 3453012</small> -->
                         </div>
-                        <form id="statusForm" method="post" action="/changeStatus">
+                        <form action='/changeStatus' method="post">
+                            <!-- Add a hidden input to store the order ID -->
+                            <input type="hidden" name="orderId" value="<%= order._id %>">
+                        
                             <div class="col-lg-6 col-md-6 ms-auto text-md-end">
                                 <select name="status" class="form-select d-inline-block mb-lg-0 mb-15 mw-200">
-                                    <option value="">Change status</option>
-                                    <option value="Awaiting payment">Awaiting payment</option>
+                                    <option>Change status</option>
+                                    <option value="Pending">Pending</option>
                                     <option value="Confirmed">Confirmed</option>
-                                    <option value="Shipped">Shipped</option>
+                                    <option value="Cancel">Cancel</option>
                                     <option value="Delivered">Delivered</option>
+                                    <option value="Returned">Returned</option>
+
                                 </select>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <a class="btn btn-secondary print ms-2" href="#"><i class="icon material-icons md-print"></i></a>
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>                            
                             </div>
                         </form>
                         
+                       
                     </div>
                 </header> <!-- card-header end// -->
 
@@ -307,7 +320,6 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- rest of your code -->
                     </div>
 
 
@@ -319,8 +331,7 @@
 
                 </div>
 
-                <!-- card-body end// -->
-            </div> <!-- card end// -->
+            </div>
         </section>
 
         <!-- content-main end// -->

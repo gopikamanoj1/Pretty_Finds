@@ -15,7 +15,7 @@ function makeRazorpayPayment(order){
       
             verifyPayment(response, order);
           },
-          prefill: {
+          prefill: { 
             name: "Gopika Manoj", //your customer's name
             email: "gopikamanoj008@gmail.com",
             contact: "9755627700",

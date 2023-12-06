@@ -44,7 +44,7 @@
                         <span class="text">Categories</span>
                     </a>
                 </li>
-                <li>
+                <li class="menu-item active">
                     <a class="menu-link " href="/page-product-list"> <i class="icon material-icons md-comment"></i>
                         <span class="text">Product Details</span>
                     </a>
@@ -54,7 +54,7 @@
                         <span class="text">Add Products</span>
                     </a>
                 </li>
-                <li class="menu-item active">
+                <li>
                     <a class="menu-link" href="/page-user-list"> <i class="icon material-icons md-person"></i>
                         <span class="text">User </span>
                     </a>
@@ -65,10 +65,15 @@
                         <span class="text">Orders</span>
                     </a>
                 </li>
-                
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+
+                </li>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
@@ -166,63 +171,157 @@
                 </ul>
             </div>
         </header>
-<body>
-    <h1>Edit Product</h1>
-    <form action="/editProduct/<%= product._id %>" method="POST">
-        <section class="content-main">
-            <div class="row">
-                
-                <div class="col-lg-6">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h4>Basic</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="/editProduct/<%= product.id %>" method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label>Product Name</label>
-                                    <input type="text" class="form-control" name="name" value="<%= product.name %>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Product Price</label>
-                                    <input type="number" class="form-control" name="price" value="<%= product.price %>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Product Description</label>
-                                    <textarea class="form-control" name="description" required><%= product.description %></textarea>
-                                </div>
-                                <div class="form-group dropdown mt-4">
-                                    <label for="category">Product Category</label>
-                                    <select class="form-control" id="category" name="category" required>
-                                        <% categories.forEach(function(category) { %>
-                                            <option value="<%= category.id %>">
-                                                <%= category.name %>
-                                            </option>
-                                        <% }); %>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="stock">Product Stock</label>
-                                    <input type="number" class="form-control" name="stock" value="<%= product.stock %>" required>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="image">Product Photo</label>
-                                    <input type="file" class="form-control-file" id="image" multiple name="image" enctype="multipart/form-data">
-                                    <% if (product.image && product.image.url) { %>
-                                        <img src="<%= product.image.url %>" alt="Product Image" width="200" >
-                                    <% } %>
-                                </div>
-                                <br>
-                                <br>
-                                <button class="btn btn-md rounded font-sm hover-up" type="submit">Save Changes</button>
-                            </form>
+
+        <body>
+            <h1>Edit Product</h1>
+            <section class="content-main">
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4>Basic</h4>
+                            </div>
+                            <div class="card-body">
+                                <form onsubmit="return validateEditProduct()" action="/editProduct/<%= product.id %>" method="POST" name="editProductForm">
+
+                                    <div class="form-group">
+                                        <label>Product Name</label>
+                                        <input type="text" class="form-control" name="name" value="<%= product.name %>"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product Price</label>
+                                        <input type="number" class="form-control" name="price"
+                                            value="<%= product.price %>" required>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="offerPercentage">discountPercentage</label>
+                                        <input type="number" class="form-control" name="discountPercentage"
+                                            value="<%= product.discountPercentage %>" min="0" max="100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product Description</label>
+                                        <textarea class="form-control" name="description"
+                                            required><%= product.description %></textarea>
+                                    </div>
+                                    <div class="form-group dropdown mt-4">
+                                        <label for="category">Product Category</label>
+                                        <select class="form-control" id="category" name="category" required>
+                                            <% categories.forEach(function(category) { %>
+                                                <option value="<%= category.id %>" <% if (product.category && product.category.id.toString() === category.id.toString()) { %>selected<% } %>>
+                                                    <%= category.name %>
+                                                </option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="form-group">
+                                        <label for="stock">Product Stock</label>
+                                        <input type="number" class="form-control" name="stock"
+                                            value="<%= product.stock %>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Existing Product Images</label>
+                                        <div class="existing-images">
+                                            <% if (product.image && product.image.length > 0) { %>
+                                                <% product.image.forEach((image) => { %>
+                                                    <img src="/uploads/<%= image.url %>" alt="Existing Product Image"
+                                                        width="100" class="mr-2">
+                                                <% }); %>
+                                            <% } else { %>
+                                                <p>No existing images</p>
+                                            <% } %>
+                                        </div>
+                                    </div>
+            
+                                    <!-- Add Image -->
+                                    <div class="form-group">
+                                        <label for="image">Add New Image</label>
+                                        <input type="file" class="form-control-file" id="image" multiple name="image[]"
+                                            enctype="multipart/form-data">
+                                    </div>
+            
+                                    <!-- Delete Image -->
+                                    <div class="form-group">
+                                        <label>Delete Image</label>
+                                        <div class="delete-images">
+                                            <% if (product.image && product.image.length > 0) { %>
+                                                <% product.image.forEach((image, index) => { %>
+                                                    <div class="delete-image">
+                                                        <input type="checkbox" name="deleteImage" value="<%= index %>">
+                                                        <label>Delete Image <%= index + 1 %></label>
+                                                    </div>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <p>No images to delete</p>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-md rounded font-sm hover-up" type="submit">Save
+                                        Changes</button>
+                                </form>
                             
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-    </form>
-</body>
+            </section>
+    <!-- Include SweetAlert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        function showCustomAlert(message) {
+            Swal.fire({
+                title: 'Alert',
+                text: message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+
+        function validateEditProduct() {
+            console.log("Validating edit product form...");
+
+            var name = document.editProductForm.name.value;
+            var price = document.editProductForm.price.value;
+            var discountPercentage = document.editProductForm.discountPercentage.value;
+            var description = document.editProductForm.description.value;
+            var category = document.editProductForm.category.value;
+            var stock = document.editProductForm.stock.value;
+            var image = document.editProductForm.image.value;
+
+            if (name === "" || price === "" || discountPercentage === "" || description === "" || category === "" || stock === "" || image === "") {
+                showCustomAlert("Please fill in all fields.");
+                return false;
+            }
+
+            if (price == 0) {
+                showCustomAlert("Invalid price. Please enter a valid numerical price.");
+                return false;
+            }
+
+            if (discountPercentage == 0) {
+                showCustomAlert("Invalid discount percentage. Please enter a valid numerical discount percentage.");
+                return false;
+            }
+
+            if (stock == 0) {
+                showCustomAlert("Invalid stock. Please enter a valid numerical stock.");
+                return false;
+            }
+
+            // Additional validation if needed
+
+            return true;
+        }
+    </script>
+
+        </body>
+
 </html>

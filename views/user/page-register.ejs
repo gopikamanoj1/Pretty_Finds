@@ -184,13 +184,11 @@
     <main class="main">
 
         <section class="pt-150 pb-150">
-            <div class="container">
-                <div class="row">
+            <div class="container  ">
+                <div class="row ">
                     <div class="col-lg-10 m-auto">
-                        <div class="row">
-
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-6">
+                        <div class="row ">
+                            <div class="col-lg-6 mx-auto">
                                 <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
@@ -198,111 +196,78 @@
                                         </div>
 
                                         <!-- <form method="post"> -->
-                                            <form action="/page-register" method="POST">
-                                                <% if (typeof message !== "undefined") { %>
-                                                    <p id="msg" style="color: rgb(144, 4, 4)"><%= message %></p>
+                                        <form action="/page-register" method="POST">
+                                            <% if (typeof message !=="undefined" ) { %>
+                                                <p id="msg" style="color: rgb(144, 4, 4)">
+                                                    <%= message %>
+                                                </p>
                                                 <% } %>
-                                            
-                                                <div class="form-group">
-                                                    <input type="text"  name="username" placeholder="Username" id="username">
-                                                    <span id="usernameError" class="error"></span>
-                                                </div>
-                                            
-                                                <div class="form-group">
-                                                    <input type="email"  name="email" placeholder="Email" id="email">
-                                                    <span id="emailError" class="error"></span>
-                                                </div>
-                                            
-                                                <div class="form-group">
-                                                    <input type="password"  name="password" placeholder="Password" id="password">
-                                                    <span id="passwordError" class="error"></span>
-                                                </div>
-                                            
-                                                <div class="form-group">
-                                                    <input type="password"  name="confirm_password" placeholder="Confirm password" id="confirm_password">
-                                                    <span id="confirmPasswordError" class="error"></span>
-                                                </div>
-                                            
-                                                <div class="login_footer form-group">
-                                                    <div class="chek-form">
-                                                        <div class="custome-checkbox">
-                                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="">
+
+                                                    <div class="form-group">
+                                                        <input type="text" name="username" placeholder="Username"
+                                                            id="username">
+                                                        <span id="usernameError" class="error"></span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="email" name="email" placeholder="Email" id="email">
+                                                        <span id="emailError" class="error"></span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="password" name="password" placeholder="Password"
+                                                            id="password">
+                                                        <span id="passwordError" class="error"></span>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <input type="password" name="confirm_password"
+                                                            placeholder="Confirm password" id="confirm_password">
+                                                        <span id="confirmPasswordError" class="error"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="myRefferalCode" placeholder="Referral Code (optional)" id="referralCode">
+                                                    </div>
+                                                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+                                                    <div class="login_footer form-group">
+                                                        <div class="chek-form">
+                                                            <div class="custome-checkbox">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="checkbox" id="exampleCheckbox12" value="">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-fill-out btn-block hover-up" name="register">Submit & Send OTP</button>
-                                                </div>
-                                            </form>
-                                           
-                                    <script>
-                                        setTimeout(() => {
-                                            document.getElementById("msg").style.display = "none"
 
-                                        }, 7000);
+                                                    <div class="form-group">
+                                                        <button type="submit"
+                                                            class="btn btn-fill-out btn-block hover-up"
+                                                            name="register">Submit & Send OTP</button>
+                                                    </div>
+                                        </form>
+                                        <script>
+                                            setTimeout(() => {
+                                                document.getElementById("msg").style.display = "none"
+                                            }, 7000);
+                                        </script>
 
-                                    </script>
-                                    <script>
-                                        function validateBasic() {
-                                            var name = document.getElementById('name').value;
-                                            var email = document.getElementById('email').value;
-                                            var password = document.getElementById('password').value;
-                                            var confirm_password = document.getElementById('confirm_password').value;
+                                        <div class="divider-text-center mt-15 mb-15">
+                                            <span> or</span>
+                                        </div>
 
-                                            if (name === "" || email === "" || password === "" || confirm_password === "") {
-                                                alert("Please fill all fields.");
-                                                return false;
-                                            }
-
-                                            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                            if (!emailRegex.test(email)) {
-                                                alert("Invalid email address.");
-                                                return false;
-                                            }
-
-                                            var nameRegex = /^[A-Za-z\s]+$/;
-                                            if (!nameRegex.test(name)) {
-                                                alert("Name should only contain letters and spaces.");
-                                                return false;
-                                            }
-
-                                            //   var phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,3}[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,4}$/;
-                                            //   if (!phoneRegex.test(phone)) {
-                                            //     alert("Please enter a valid phone number.");
-                                            //     return false;
-                                            //   }
-                                            // var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-                                            // if (!regularExpression.test(password)) {
-                                            //   alert("Password should be at least 8 characters long.");
-                                            //   return false;
-                                            // }
-
-                                            if (password !== confirm_password) {
-                                                alert("Confirm password does not match.");
-                                                return false;
-                                            }
-
-                                            return true;
-                                        }
-                                    </script>
-
-                                    <div class="divider-text-center mt-15 mb-15">
-                                        <span> or</span>
+                                        <div class="text-muted text-center">Already have an account? <a
+                                                href="/page-login">Sign in now</a></div>
                                     </div>
-
-                                    <div class="text-muted text-center">Already have an account? <a
-                                            href="/page-login">Sign in
-                                            now</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-
         </section>
+
     </main>
     <footer class="main">
         <section class="newsletter p-30 text-white wow fadeIn animated">

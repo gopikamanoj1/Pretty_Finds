@@ -1034,24 +1034,6 @@ i[class^="fi-rs-"]:before, i[class*=" fi-rs-"]:before, span[class^="fi-rs-"]:bef
 .fi-rs-usb-drive:before {
     content: "\f252";
 }
-.fi-rs-user-add:before {
-    content: "\f253";
-}
-.fi-rs-user-delete:before {
-    content: "\f254";
-}
-.fi-rs-user-remove:before {
-    content: "\f255";
-}
-.fi-rs-user-time:before {
-    content: "\f256";
-}
-.fi-rs-user:before {
-    content: "\f257";
-}
-.fi-rs-users:before {
-    content: "\f258";
-}
 .fi-rs-vector-2:before {
     content: "\f259";
 }

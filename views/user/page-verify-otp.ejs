@@ -68,16 +68,51 @@
 <body>
     <h1>OTP Verification</h1>
     <p>Enter the OTP sent to your email to complete the registration:</p>
-    <form action="/page-verify-otp" method="POST">
-        <div class="form-group">
-            <label for="otp">Enter OTP:</label>
-            <input type="text" id="otp" name="otp" required>
-        </div>
-        <div class="form-group">
-            <button type="submit">Verify OTP</button>
-            <a href="/resendOTP" id="resendLink" style="color: #007bff; text-decoration: none; font-weight: bold;">Resend OTP</a>
-        </div>
-    </form>
+
+    <style>
+        /* Add a style block or include in your CSS file */
+        .custom-form {
+            max-width: 400px; /* Set the maximum width of the form */
+            margin: auto; /* Center the form horizontally */
+        }
+    
+        /* Style the form groups for better spacing */
+        .form-group {
+            margin-bottom: 15px;
+        }
+    
+        /* Style the submit button */
+        button {
+            background-color: #581c8c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    
+        /* Style the resend link */
+        #resendLink {
+            color: #581c8c;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px; /* Add some spacing between the button and the link */
+        }
+    </style>
+    
+    <div class="custom-form">
+        <form action="/page-verify-otp" method="POST">
+            <div class="form-group">
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="otp" name="otp" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Verify OTP</button>
+                <a href="/resendOTP" id="resendLink">Resend OTP</a>
+            </div>
+        </form>
+    </div>
+  
 
     <div id="otpMessage"></div> <!-- This is where you can display OTP verification status -->
     <p id="remainingTime"></p>
@@ -101,7 +136,7 @@
                 }
                 timeleft -= 1;
             }, 1000);
-        }
+        }  
 
         startCountdown(); // Start the countdown when the page loads
     </script>

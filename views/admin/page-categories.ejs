@@ -70,11 +70,16 @@
                         <span class="text">Sales Report</span>
                     </a>
                 </li>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+                   
+                </li>
 
-
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
             </ul>
@@ -168,32 +173,16 @@
                     <p>Add, edit or delete a category</p>
                 </div>
                 <div>
-                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
+                    <!-- Styled link button for adding category -->
+                    <a href="/addcategory" class="btn btn-primary">Add Category</a>
                 </div>
+                
+                
             </div>
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
-
-                            <form method="post" action="/addcategory">
-
-                                <div class="mb-4">
-                                    <label class="form-label">category</label>
-                                    <input type="text" name="name" placeholder="Type here" class="form-control"
-                                        id="category_name" />
-                                </div>
-                                <div class="d-grid">
-                                    <button class="btn btn-primary">Create category</button>
-
-                                </div>
-                                <%if(locals.message){%>
-                                    <p id="msg" style="color:green">
-                                        <%=message%>
-                                    </p>
-                                    <%}%>
-                            </form>
-                        </div>
+                        
                         <div class="col-md-9">
                             <div class="table-responsive">
                                 <% if (locals.data) { %>
@@ -204,12 +193,13 @@
                                                 <th>NO</th>
                                                 <th>ID</th>
                                                 <th>CATEGORY NAME</th>
+                                                <th>OFFER</th> <!-- New header for the offer -->
                                                 <th class="text-end">ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% if (locals.categories ) { %>
-                                                <% categories.forEach((category, index)=> { %>
+                                            <% if (locals.categories) { %>
+                                                <% categories.forEach((category, index) => { %>
                                                     <tr>
                                                         <td class="text-center">
                                                             <%= index + 1 %>
@@ -223,25 +213,26 @@
                                                         <td>
                                                             <%= category.name %>
                                                         </td>
+                                                        <td>
+                                                            <%= category.offerPercentage %>%
+                                                        </td> <!-- Display the offer value -->
                                                         <td class="text-end">
-                                                            <a href="/loadeditcategory/<%= category.id %>"
-                                                                class="btn btn-primary">Edit</a>
-                                                            <a href="/deletecategory/<%= category.id %>"
-                                                                class="btn btn-danger">Delete</a>
+                                                            <a href="/loadeditcategory/<%= category.id %>" class="btn btn-primary">Edit</a>
+                                                            <a href="#" class="btn btn-danger" onclick="confirmDelete('<%= category.id %>')">Delete</a>
                                                         </td>
                                                     </tr>
-                                                    <% }); %>
-                                                        <% } else { %>
-                                                            <tr>
-                                                                <td colspan="5">No categories found.</td>
-                                                            </tr>
-                                                            <% } %>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="6">No categories found.</td>
+                                                </tr>
+                                            <% } %>
                                         </tbody>
-
                                     </table>
-                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -261,6 +252,28 @@
             </div>
         </footer>
     </main>
+    <!-- Include SweetAlert library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!-- Script to handle confirmation for deletion -->
+<script>
+    function confirmDelete(categoryId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user clicks "Yes", redirect to the delete route
+                window.location.href = '/deletecategory/' + categoryId;
+            }
+        });
+    }
+</script>
     <script src="/admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="/admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="/admin-assets/js/vendors/select2.min.js"></script>

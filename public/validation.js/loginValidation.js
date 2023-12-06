@@ -80,6 +80,6 @@ const validateInputs = () => {
         setSuccess(password);
     }
 
-};
+};   
 
 

@@ -1,110 +1,867 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/index-3 by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:06 GMT -->
+
 <head>
-    <!-- Other meta tags and stylesheets -->
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <style>
-        .gradient-custom {
-            /* fallback for old browsers */
-            background: #5d2e83;
-
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: -webkit-linear-gradient(to top left, #5d2e83, #5d2e83);
-
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to top left, #5d2e83, rgba(246, 243, 255, 1))
-        }
-    </style>
+    <meta charset="utf-8">
+    <title>PRETTY FINDS</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 
+<body>
+    <!-- Quick view -->
 
+    <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-<section class="h-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-10 col-xl-8">
-                <div class="card" style="border-radius: 10px;">
-                    <div class="card-header px-4 py-5">
-                        <% if (user && user.name) { %>
-                            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">
-                                    <%= user.name %>
-                                </span>!</h5>
-                            <% } else { %>
-                                <h5 class="text-muted mb-0">Thanks for your Order!</h5>
-                                <% } %>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
-                            <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
-                        </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="detail-gallery">
+                                <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                                <!-- MAIN SLIDES -->
+                                <div class="product-image-slider">
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-2.jpg" alt="product image">
+                                    </figure>
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-1.jpg" alt="product image">
+                                    </figure>
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-3.jpg" alt="product image">
+                                    </figure>
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-4.jpg" alt="product image">
+                                    </figure>
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-5.jpg" alt="product image">
+                                    </figure>
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-6.jpg" alt="product image">
+                                    </figure>
+                                    <figure class="border-radius-10">
+                                        <img src="/imgs/shop/product-16-7.jpg" alt="product image">
+                                    </figure>
+                                </div>
+                                <!-- THUMBNAILS -->
 
-                        
-                        <div class="card shadow-0 border mb-4">
-                            <div class="card-body">
-                                <% if (order && order.items && order.items.length > 0) { %>
-                                    <% order.items.forEach(item => { %>
-                                        <div class="row mb-4"> <!-- Add margin-bottom to separate rows -->
-                                            <div class="col-md-2">
-                                                <% if (item.product && item.product.image && item.product.image[0] && item.product.image[0].url) { %>
-                                                    <img src="/uploads/<%= item.product.image[0].url %>" alt="<%= item.product.name %>">
-                                                <% } else { %>
-                                                    <!-- Alternative content or message when there is no image -->
-                                                    <p>No Image Available</p>
-                                                <% } %>
-                                            </div>
-                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0"><%= item.product.name %></p>
-                                            </div>
-                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0 small">Qty: <%= item.quantity %></p>
-                                            </div>
-                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0 small">$<%= item.price * item.quantity %></p>
-                                            </div>
-                                        </div>
-                                    <% }); %>
-                                <% } else { %>
-                                    <div class="col-md-12">
-                                        <p class="text-muted">No products available.</p>
-                                    </div>
-                                <% } %>
-                                <!-- Rest of your code -->
+                            </div>
+                            <!-- End Gallery -->
+                            <div class="social-icons single-share">
+
                             </div>
                         </div>
-                        
-                        
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="detail-info">
+                                <h3 class="title-detail mt-30">Colorful Pattern Shirts HD450</h3>
+                                <div class="product-detail-rating">
+                                    <div class="pro-details-brand">
+                                        <span> Brands: <a href="shop-grid-right">Bootstrap</a></span>
+                                    </div>
+                                    <div class="product-rate-cover text-end">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width:90%">
+                                            </div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix product-price-cover">
+                                    <div class="product-price primary-color float-left">
+                                        <ins><span class="text-brand">$120.00</span></ins>
+                                        <ins><span class="old-price font-md ml-15">$200.00</span></ins>
+                                        <span class="save-price  font-md color3 ml-15">25% Off</span>
+                                    </div>
+                                </div>
+                                <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                <div class="short-desc mb-30">
+                                    <p class="font-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam
+                                        rem officia, corrupti reiciendis minima nisi modi,!</p>
+                                </div>
 
+                                <div class="attr-detail attr-color mb-15">
+                                    <strong class="mr-10">Color</strong>
 
+                                </div>
+                                <div class="attr-detail attr-size">
+                                    <strong class="mr-10">Size</strong>
 
-                        <div class="d-flex justify-content-between pt-2">
-                            <p class="fw-bold mb-0">Order Details</p>
-                            <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $898.00</p>
+                                </div>
+                                <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                <div class="detail-extralink">
+                                    <div class="detail-qty border radius">
+                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                        <span class="qty-val">1</span>
+                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                    </div>
+                                    <div class="product-extra-link2">
+                                        <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                        <a aria-label="Add To Wishlist" class="action-btn hover-up"
+                                            href="shop-wishlist"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare"><i
+                                                class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                </div>
+                                <ul class="product-meta font-xs color-grey mt-50">
+                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                    <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#"
+                                            rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
+                                    <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Detail Info -->
                         </div>
-
-                        <div class="d-flex justify-content-between pt-2">
-                            <p class="text-muted mb-0">Invoice Number : 788152</p>
-                            <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="text-muted mb-0">Invoice Date : 22 Dec,2019</p>
-                            <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-5">
-                            <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
-                            <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
-                        </div>
-                    </div>
-                    <div class="card-footer border-0 px-4 py-5"
-                        style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-                        <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
-                            paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+    <header class="header-area header-style-1 header-height-2">
+        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info">
+                            <ul>
+
+                                <li><i class="fi-rs-marker"></i><a href="page-contact">Our location</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-4">
+                        <div class="text-center">
+                            <div id="news-flash" class="d-inline-block">
+                                <ul>
+                                    <li>Get great devices up to 50% off <a href="shop-grid-right">View details</a>
+                                    </li>
+                                    <li>Supper Value Deals - Save more with coupons</li>
+                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right">Shop
+                                            now</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info header-info-right">
+                            <ul>
+                                <li></i><a href="/myProfile">My Profile</a></li>
+                                <li><i class="fi-rs-user"></i><a href="/page-login">Log Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="header-wrap">
+                    <div class="logo logo-width-1">
+                        <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                    </div>
+                    <div class="header-right">
+                        <div class="search-style-2">
+
+
+                            <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                                <nav>
+                                    <ul>
+                                        <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+                                        <li>
+                                            <a href="/lipscareonly">LIPS CARE</a>
+                                        </li>
+                                        <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+                                        <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+                                        <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
+
+                                        </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+
+                            <!--  -->
+                        </div>
+                        <div class="header-action-right">
+                            <div class="header-action-2">
+                                <div class="header-action-icon-2">
+                                    <a href="">
+                                        <img class="svgInject" alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
+                                    </a>
+                                </div>
+                                <div class="header-action-icon-2">
+                                    <a class="" href="/cart">
+                                        <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom header-bottom-bg-color sticky-bar">
+            <div class="container">
+                <div class="header-wrap header-space-between position-relative">
+                    <div class="logo logo-width-1 d-block d-lg-none">
+                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                    </div>
+                    <div class="header-nav d-none d-lg-flex">
+
+
+                    </div>
+
+                    <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
+                    </p>
+                    <div class="header-action-right d-block d-lg-none">
+                        <div class="header-action-2">
+                            <div class="header-action-icon-2">
+                                <a href="shop-wishlist">
+                                    <img alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
+                                </a>
+                            </div>
+                            <div class="header-action-icon-2">
+                                <a class="mini-cart-icon" href="/addToCart">
+                                    <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
+                                </a>
+                            </div>
+                            <% if (!locals.logged) { %>
+                                <li id="loginButton"><i class="fi-rs-user"></i><a href="/page-login">Log In</a></li>
+                                <li id="signUpButton"><i class="fi-rs-user"></i><a href="/page-register">Sign Up</a>
+                                </li>
+
+                                <% } else { %>
+                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a>
+                                    </li>
+                                    <li><a href="/myprofile">My Profile </i></a>
+
+                                    </li>
+
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-top">
+                <div class="mobile-header-logo">
+                    <a href="index"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                </div>
+                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                    <button class="close-style search-close">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-header-content-area">
+                <div class="mobile-search search-style-3 mobile-header-border">
+                    <form action="#">
+                        <input type="text" placeholder="Search for items…">
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-wrap mobile-header-border">
+
+                    <!-- mobile menu start -->
+                    <nav>
+
+                    </nav>
+                    <!-- mobile menu end -->
+                </div>
+                <div class="mobile-header-info-wrap mobile-header-border">
+                    <div class="single-mobile-header-info mt-30">
+                        <a href="page-contact"> Our location </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="/page-login">Log out </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="#">(+01) - 2345 - 6789 </a>
+                    </div>
+                </div>
+                <div class="mobile-social-icon">
+                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                    <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                    <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+    <main class="main">
+
+        <!-- Div starts here -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 m-auto">
+                    <div class="row">
+
+                        <div class="mobile-header-active mobile-header-wrapper-style">
+                            <div class="mobile-header-wrapper-inner">
+                                <div class="mobile-header-top">
+                                    <div class="mobile-header-logo">
+                                        <a href="index"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                                    </div>
+                                    <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                                        <button class="close-style search-close">
+                                            <i class="icon-top"></i>
+                                            <i class="icon-bottom"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mobile-header-content-area">
+                                    <div class="mobile-search search-style-3 mobile-header-border">
+                                        <form action="#">
+                                            <input type="text" placeholder="Search for items…">
+                                            <button type="submit"><i class="fi-rs-search"></i></button>
+                                        </form>
+                                    </div>
+                                    <div class="mobile-menu-wrap mobile-header-border">
+
+                                        <!-- mobile menu start -->
+                                        <nav>
+
+                                        </nav>
+                                        <!-- mobile menu end -->
+                                    </div>
+                                    <div class="mobile-header-info-wrap mobile-header-border">
+                                        <div class="single-mobile-header-info mt-30">
+                                            <a href="page-contact"> Our location </a>
+                                        </div>
+                                        <div class="single-mobile-header-info">
+                                            <a href="/page-login">Log out </a>
+                                        </div>
+                                        <div class="single-mobile-header-info">
+                                            <a href="#">(+01) - 2345 - 6789 </a>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-social-icon">
+                                        <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                                        <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                        <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                        <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                        <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                        <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- MODAL -->
+
+    <div class="modal fade" id="returnReasonModal" tabindex="-1" role="dialog" aria-labelledby="returnReasonModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="returnModalLabel">Looking for Return?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Create a form to select a reason for return -->
+                    <form id="returnReasonForm">
+                        <div class="form-group">
+                            <label for="returnReason">Please tell us why you want to Return</label>
+                            <select class="form-control" id="returnReason" name="returnReason">
+                                <option value="Wrong Item Delivered">Wrong Item Delivered</option>
+                                <option value="Damaged or Defective Product">Damaged or Defective Product</option>
+                                <option value="Size or Fit Issue">Size or Fit Issue</option>
+                                <option value="Changed My Mind">Changed My Mind</option>
+                                <option value="Late Delivery">Late Delivery</option>
+                                <!-- Add more reasons here as additional <option> elements -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="confirmReturn">Confirm Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL ENDS -->
+
+
+
+
+    <main>
+
+        <section class="h-100 ">
+
+
+            <div class="container">
+                <div class="row mt-4">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h5>Order Id: <%= order._id %>
+                            </h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="ordered-delivery-info">
+                                <h5 class="info-label">Ordered Date:</h5>
+                                <p class="info-value">
+                                    <%= order.createdAt %>
+                                </p>
+
+                                <% if(order.status==="Delivered" ) { %>
+                                    <h5 class="info-label">Delivery Date:</h5>
+                                    <% } else { %>
+                                        <h5 class="info-label">Expected Delivery:</h5>
+                                        <p class="info-value">Within 5 days!!!</p>
+                                        <% } %>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <% if (order.status !== "Cancel" && order.status !== "Delivered" && order.status !== "Returned") { %>
+                                <a href="/cancelOrder/?id=<%= order._id %>" onclick="return confirmCancel('/cancelOrder/?id=<%= order._id %>')">
+                                    <button class="btn" id="cancelOrderButton">Cancel Order</button>
+                                </a>
+                            <% } else if (order.status === "Cancel") { %>
+                                <p>Order Cancelled</p>
+                            <% } else if (order.status === "Returned") { %>
+                                <p>Order Returned</p>
+                            <% } else { %>
+                                <!-- Add your code for Delivered status here, if needed -->
+                            <% } %>
+                            
+                        
+                            <!-- Order Return -->
+                            <% if (order.status === "Delivered" ) { %>
+                                <% if (!order.return) { %>
+                                    <button class="btn" id="requestReturnButton" onclick="requestReturn('<%= order._id %>')">Request Return</button>
+                                    <h5 id="returnPlacedMessage" style="display:none; color: blue;">Return order placed</h5>
+                                <% } else { %>
+                                    <p>
+                                        <%= order.status %>
+                                    </p>
+                                    <!-- Add console log for debugging -->
+                                    <script>
+                                        console.log("Condition not met:", '<%= order.status %>');
+                                    </script>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        
+
+                    </div>
+                    <!-- Card for Address, Order Summary, and Payment Method -->
+                    <!-- Card for Address, Order Summary, and Payment Method -->
+                    <div class="card mt-10 mb-30">
+                        <div class="pt-20 pb-50 m-10">
+
+
+                            <div class="row mt-4">
+                                <!-- Delivery Address -->
+                                <div class="col-md-4">
+                                    <div class="card mt-4 mb-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Delivery Address</h5>
+                                            <% if (user.addresses && user.addresses.length> 0) { %>
+                                                <% user.addresses.forEach(address=> { %>
+                                                    <p class="card-text">
+                                                        <strong>
+                                                            <%= address.name %>
+                                                        </strong><br>
+                                                        <%= address.street %>,<br>
+                                                            <%= address.city %>,<br>
+                                                                <%= address.state %> <br>
+                                                                    <%= address.pincode %>
+                                                    </p>
+                                                    <% }); %>
+                                                        <% } else { %>
+                                                            <p class="card-text">Address information not available.</p>
+                                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product Details -->
+                                <div class="col-md-8">
+                                    <div class="card mt-4 mb-4">
+
+                                        <div class="card-body">
+                                            <h4 class="card-title">Product Details</h4>
+                                            <!-- Check if products is defined before attempting to loop through it -->
+                                            <% if (products && products.length> 0) { %>
+                                                <!-- Loop through products using forEach -->
+                                                <% products.forEach((product)=> { %>
+                                                    <div class="card mt-3 mb-3" style="background-color: #e4e6e5;">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <div class="container-fluid"
+                                                                        style="height: 100px; width: 100px;">
+                                                                        <% if (product.image && product.image[0] &&
+                                                                            product.image[0].url) { %>
+                                                                            <img src="/uploads/<%= product.image[0].url %>"
+                                                                                alt="<%= product.name %>"
+                                                                                class="img-fluid">
+                                                                            <% } else { %>
+                                                                                <div class="text-center">
+                                                                                    <img src="/path/to/default/image.jpg"
+                                                                                        alt="No Image"
+                                                                                        class="img-fluid">
+                                                                                    <p>No Image</p>
+                                                                                </div>
+                                                                                <% } %>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <h5 class="card-title">
+                                                                        <%= product.productId.name %>
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <h5 class="card-title">
+                                                                        <%= product.quantity %> units
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <h5 class="card-title">
+                                                                        $<%= product.subtotal.toFixed(2) %>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% }); %>
+                                                        <% } else { %>
+                                                            <p>No product data available.</p>
+                                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+                <script>
+                    function getStatusClass(status) {
+                        switch (status) {
+                            case 'Shipped':
+                                return 'status-shipped';
+                            case 'Delivered':
+                                return 'status-delivered';
+                            case 'Pending':
+                                return 'status-pending';
+                            case 'Cancelled':
+                                return 'status-cancelled';
+                            default:
+                                return '';
+                        }
+                    }
+                </script>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Include SweetAlert library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    async function requestReturn(orderId) {
+
+        const checkReturnResponse = await fetch(`/check-return-status/${orderId}`);
+        const checkReturnData = await checkReturnResponse.json();
+
+        if (!checkReturnData.isReturnRequested) {
+            Swal.fire({
+                title: 'Return Requested',
+                text: 'Return has already been requested for this order.',
+                icon: 'info',
+            });
+            return;
+        }
+
+        const { value: reason } = await Swal.fire({
+            title: 'Request Return',
+            input: 'text',
+            inputLabel: 'Reason for Return',
+            inputPlaceholder: 'Please provide a reason for returning...',
+            showCancelButton: true,
+            confirmButtonText: 'Submit Request',
+            cancelButtonText: 'Cancel',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'You need to provide a reason for returning.';
+                }
+            },
+        });
+
+        if (reason) {
+            const result = await Swal.fire({
+                title: 'Confirm Return Request',
+                text: `Are you sure you want to request a return for this order with the reason: ${reason}?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Request Return',
+            });
+
+            if (result.isConfirmed) {
+                // Make an API call to request return
+                const response = await fetch(`/return-order/${orderId}?reason=${encodeURIComponent(reason)}`, {
+                    method: 'POST',
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Update the UI to hide the "Request Return" button
+                    document.querySelector(`#requestReturnButton`).style.display = 'none';
+                    // Show the return placed message
+                    document.querySelector(`#returnPlacedMessage`).style.display = 'block';
+
+                    // Fetch the current status and amount in the wallet from the server
+                    const statusResponse = await fetch(`/get-order-status/${orderId}`);
+                    const statusData = await statusResponse.json();
+
+                    // Update the UI with the current status and amount in the wallet
+                    document.querySelector(`#currentStatus`).innerText = `Current Status: ${statusData.status}`;
+                    document.querySelector(`#amountInWallet`).innerText = `Amount in Wallet: $${statusData.walletAmount.toFixed(2)}`;
+
+                    // For demonstration purposes, let's show a success message
+                    Swal.fire({
+                        title: 'Return Requested!',
+                        text: 'Your return request has been submitted.',
+                        icon: 'success',
+                    });
+                } else {
+                    // Handle the case where return request failed
+                    Swal.fire({
+                        title: 'Error!',
+                        text: data.error || 'An error occurred while requesting return.',
+                        icon: 'error',
+                    });
+                }
+            }
+        }
+    }
+</script>
+
+
+
+
+    <footer class="main">
+        <section class="newsletter p-30 text-white wow fadeIn animated">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 mb-md-3 mb-lg-0">
+                        <div class="row align-items-center">
+                            <div class="col flex-horizontal-center">
+                                <img class="icon-email" src="/imgs/theme/icons/icon-email.svg" alt="">
+                                <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
+                            </div>
+                            <div class="col my-4 my-md-0 des">
+                                <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first
+                                        shopping.</strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <!-- Subscribe Form -->
+                        <form class="form-subcriber d-flex wow fadeIn animated">
+                            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
+                            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
+                        </form>
+                        <!-- End Subscribe Form -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-padding footer-mid">
+            <div class="container pt-15 pb-20">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget-about font-md mb-md-5 mb-lg-0">
+                            <div class="logo logo-width-1 wow fadeIn animated">
+                                <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                            </div>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <p class="wow fadeIn animated">
+                                <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
+                            </p>
+                            <p class="wow fadeIn animated">
+                                <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
+                            </p>
+                            <p class="wow fadeIn animated">
+                                <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
+                            </p>
+                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
+                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                                <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                        <h5 class="widget-title wow fadeIn animated">About</h5>
+                        <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Delivery Information</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Support Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-3">
+                        <h5 class="widget-title wow fadeIn animated">My Account</h5>
+                        <ul class="footer-list wow fadeIn animated">
+                            <li><a href="#">Sign In</a></li>
+                            <li><a href="#">View Cart</a></li>
+                            <li><a href="#">My Wishlist</a></li>
+                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Order</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="widget-title wow fadeIn animated">Install App</h5>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-12">
+                                <p class="wow fadeIn animated">From App Store or Google Play</p>
+                                <div class="download-app wow fadeIn animated">
+                                    <a href="#" class="hover-up mb-sm-4 mb-lg-0"><img class="active"
+                                            src="/imgs/theme/app-store.jpg" alt=""></a>
+                                    <a href="#" class="hover-up"><img src="/imgs/theme/google-play.jpg" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
+                                <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
+                                <img class="wow fadeIn animated" src="/imgs/theme/payment-method.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container pb-20 wow fadeIn animated">
+            <div class="row">
+                <div class="col-12 mb-20">
+                    <div class="footer-bottom"></div>
+                </div>
+                <div class="col-lg-6">
+                    <p class="float-md-left font-sm text-muted mb-0">&copy; 2021, <strong
+                            class="text-brand">Evara</strong> - HTML Ecommerce Template </p>
+                </div>
+                <div class="col-lg-6">
+                    <p class="text-lg-end text-start font-sm text-muted mb-0">
+                        Designed by <a href="http://alithemes.com/" target="_blank">Alithemes.com</a>. All rights
+                        reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor JS-->
+    <script src="/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/js/plugins/slick.js"></script>
+    <script src="/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="/js/plugins/wow.js"></script>
+    <script src="/js/plugins/jquery-ui.js"></script>
+    <script src="/js/plugins/perfect-scrollbar.js"></script>
+    <script src="/js/plugins/magnific-popup.js"></script>
+    <script src="/js/plugins/select2.min.js"></script>
+    <script src="/js/plugins/waypoints.js"></script>
+    <script src="/js/plugins/counterup.js"></script>
+    <script src="/js/plugins/jquery.countdown.min.js"></script>
+    <script src="/js/plugins/images-loaded.js"></script>
+    <script src="/js/plugins/isotope.js"></script>
+    <script src="/js/plugins/scrollup.js"></script>
+    <script src="/js/plugins/jquery.vticker-min.js"></script>
+    <script src="/js/plugins/jquery.theia.sticky.js"></script>
+    <script src="/js/plugins/jquery.elevatezoom.js"></script>
+    <!-- Template  JS -->
+    <script src="/js/main.js"></script>
+    <script src="/js/shop.js"></script>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/index-3 by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:07 GMT -->
+
+</html>

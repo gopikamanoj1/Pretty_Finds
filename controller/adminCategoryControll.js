@@ -6,8 +6,8 @@ const loadcategorypage = async (req, res) => {
     try {
         // res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         // res.render('page-categories')
-        const categories = await AdminCategory.find();
-        res.render('page-categories', { categories, data: "hy" });
+        const categories = await AdminCategory.find({});
+        res.render('page-categories', { categories:categories, data: "hy" });
     } catch (error) {
         console.log(error);
     }
@@ -16,25 +16,30 @@ const loadcategorypage = async (req, res) => {
 const addcategory = async (req, res) => {
     try {
         const categories = await AdminCategory.find();
-        res.render('page-categories', { categories, data: "hy" });
 
         const categoryName = req.body.name;
+        const offerPercentage=req.body.offerPercentage
 
         // Check if a category with the same name (case-insensitive) already exists
         const existingCategory = await AdminCategory.findOne({ name: { $regex: new RegExp('^' + categoryName + '$', 'i') } });
 
         if (existingCategory) {
             // Category already exists (case-insensitive)
-            return res.render('page-categories', { message: 'Category already exists!', categories });
+            const message = 'Category already exists!';
+            // Use SweetAlert for the alert
+            return res.render('page-categories', { categories: categories, message });
         } else {
             const newCategory = new AdminCategory({
-                name: categoryName
+                name: categoryName,
+                offerPercentage:offerPercentage
             });
 
             // Save the new category to the database
-            const categoryData = await newCategory.save();
+            await newCategory.save();
 
-            res.render('page-categories', { categoryData, data: 'Category added successfully', categories });
+            const successMessage = 'Category added successfully';
+            // Use SweetAlert for the success message
+            res.redirect("/page-categories")
         }
     } catch (error) {
         console.log(error);
@@ -44,17 +49,13 @@ const addcategory = async (req, res) => {
 
 
 
-const displayCategory = async (req, res) => {
-    try {
-        const categories = await AdminCategory.find();
 
-        if (categories && categories.length) {
-            res.render('page-categories', {  data: 'Category added successfully' });
-        } else {
-            res.render('page-categories', { data: 'No categories found' });
-        }
+
+const loadAddCategory=async (req,res)=>{
+    try {
+        res.render("categoryCreation")
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 }
 
@@ -67,7 +68,7 @@ const loadEditCategory = async (req, res) => {
         const { id } = req.params
         const category = await AdminCategory.findById(id)
 
-        return res.render('page-edit-category', { category })
+         res.render('page-edit-category', { category:category })
     } catch (error) {
         console.log(error);
     }
@@ -77,10 +78,12 @@ const loadEditCategory = async (req, res) => {
 const editCategory = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name } = req.body; // Extract the 'name' directly from the request body
+        const { name,offerPercentage } = req.body; // Extract the 'name' directly from the request body
         // Update the category with the new name
-        await AdminCategory.findByIdAndUpdate(id, { name });
-        return res.redirect('/page-categories');
+        await AdminCategory.findByIdAndUpdate(id, { name ,offerPercentage});
+        const categories=await AdminCategory.find({})
+
+        res.redirect("/page-categories")
     } catch (error) {
         console.log(error);
     }
@@ -92,7 +95,9 @@ const deleteCategory = async (req, res) => {
     try {
         const id = req.params.id;
         await AdminCategory.deleteOne({ _id: id });
-        return res.redirect('/addcategory')
+        const categories=await AdminCategory.find({})
+
+        res.redirect("/page-categories")
     } catch (error) {
         console.log(error.message);
     }
@@ -102,7 +107,7 @@ const deleteCategory = async (req, res) => {
 module.exports = {
     addcategory,
     loadcategorypage,
-    displayCategory,
+    loadAddCategory,
     loadEditCategory,
     editCategory,
     deleteCategory

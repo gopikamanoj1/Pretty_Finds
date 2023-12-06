@@ -445,7 +445,12 @@
                                                         </span>
                                                     </div>
                                                     <div class="product-price">
-                                                        <span >$<%= product.price %></span>
+                                                        <span>$<%= product.discountedPrice %></span>
+                                                        <% if (product.discountPercentage && product.discountPercentage > 0) { %>
+                                                            <span class="old-price">$<%= product.price %></span>
+
+                                                            <span class="discount">(<%= product.discountPercentage %>% Off)</span>
+                                                        <% } %>
                                                     </div>
                                                     <% if (product.stock < 1) { %>
                                                         <div class="out-of-stock-message">

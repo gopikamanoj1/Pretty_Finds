@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 
@@ -177,6 +178,32 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
+
+
+                            <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                                <nav>
+                                    <ul>
+                                        <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
+    
+                                        </li>
+                                        <li>
+                                            <a href="/lipscareonly">LIPS CARE</a>
+                                        </li>
+                                        <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
+    
+                                        </li>
+                                        <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+    
+                                        </li>
+                                        <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
+    
+                                        </li>
+    
+                                    </ul>
+                                </nav>
+                            </div>
+
+
                             <!--  -->
                         </div>
                         <div class="header-action-right">
@@ -184,13 +211,11 @@
                                 <div class="header-action-icon-2">
                                     <a href="">
                                         <img class="svgInject" alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
-                                        <span class="pro-count blue">4</span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="" href="/cart">
                                         <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">2</span>
                                     </a>
                                 </div>
                             </div>
@@ -203,36 +228,13 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
 
-                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
-                            <nav>
-                                <ul>
-                                    <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li>
-                                        <a href="/lipscareonly">LIPS CARE</a>
-                                    </li>
-                                    <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-                                    <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
-
-                                    </li>
-
-                                </ul>
-                            </nav>
-                        </div>
+                       
                     </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-headset"></i><span>Hotline</span>123456789 </p>
-                    </div>
+                  
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
                     </p>
                     <div class="header-action-right d-block d-lg-none">
@@ -240,22 +242,26 @@
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">1</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="/addToCart">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
                                 </a>
                             </div>
-                            <div class="header-action-icon-2 d-block d-lg-none">
-                                <div class="burger-icon burger-icon-white">
-                                    <span class="burger-icon-top"></span>
-                                    <span class="burger-icon-mid"></span>
-                                    <span class="burger-icon-bottom"></span>
-                                </div>
-                            </div>
+                            <% if (!locals.logged) { %>
+                                <li id="loginButton"><i class="fi-rs-user"></i><a href="/page-login">Log In</a></li>
+                                <li id="signUpButton"><i class="fi-rs-user"></i><a href="/page-register">Sign Up</a>
+                                </li>
+
+                                <% } else { %>
+                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a>
+                                    </li>
+                                    <li><a href="/myprofile">My Profile </i></a>
+
+                                    </li>
+
+                                    <% } %>
                         </div>
                     </div>
                 </div>
@@ -268,7 +274,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                    <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -314,6 +320,7 @@
             </div>
         </div>
     </div>
+    </header>
     <main class="main">
 
         <!-- Div starts here -->
@@ -345,10 +352,9 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab"
-                                                href="#track-orders" role="tab" aria-controls="track-orders"
-                                                aria-selected="false"><i
-                                                    class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
+                                            <a class="nav-link" id="referral-code-tab" data-bs-toggle="tab" href="#referral-code" role="tab" aria-controls="referral-code" aria-selected="false">
+                                                <i class="fi-rs-user-referral mr-10"></i>Your Referral Code
+                                            </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="address-tab-myAddress" href="/loadmyaddress" role="tab" aria-controls="address" aria-selected="true">
@@ -368,6 +374,11 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/page-login"><i
                                                     class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="wallet-tab" href="/wallet" role="tab" aria-controls="wallet" aria-selected="true">
+                                                <i class="fi-rs-credit-card mr-10"></i>Wallet
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -405,45 +416,20 @@
 
 
                                                 <!-- Track Your Order -->
-                                                <div class="tab-pane fade" id="track-orders" role="tabpanel"
-                                                    aria-labelledby="track-orders-tab">
+                                                <div class="tab-pane fade" id="referral-code" role="tabpanel" aria-labelledby="referral-code-tab">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5 class="mb-0">Orders tracking</h5>
+                                                            <h5 class="mb-0">Your Referral Code</h5>
                                                         </div>
                                                         <div class="card-body contact-from-area">
-                                                            <p>To track your order please enter your OrderID in the box
-                                                                below and
-                                                                press "Track" button. This was given to you on your
-                                                                receipt and in
-                                                                the confirmation email you should have received.</p>
-                                                            <div class="row">
-                                                                <div class="col-lg-8">
-                                                                    <form class="contact-form-style mt-30 mb-50"
-                                                                        action="#" method="post">
-                                                                        <div class="input-style mb-20">
-                                                                            <label>Order ID</label>
-                                                                            <input name="order-id"
-                                                                                placeholder="Found in your order confirmation email"
-                                                                                type="text" class="square">
-                                                                        </div>
-                                                                        <div class="input-style mb-20">
-                                                                            <label>Billing email</label>
-                                                                            <input name="billing-email"
-                                                                                placeholder="Email you used during checkout"
-                                                                                type="email" class="square">
-                                                                        </div>
-                                                                        <button class="submit submit-auto-width"
-                                                                            type="submit">Track</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
+                                                            <p>Your referral code is a special code you can share with others to earn rewards. It was provided to you when you joined our referral program.</p>
+                                                            <!-- Display the referral code here -->
+                                                            <p>Your Referral Code: <strong><%= user.myRefferalCode %></strong></p>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
-                                           
+                                              
                                                 <div class="tab-pane fade" id="address" role="tabpanel"
                                                     aria-labelledby="address-tab">
 

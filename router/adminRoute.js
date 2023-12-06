@@ -6,12 +6,12 @@ const adminUserControll= require('../controller/adminUserController')
 const adminProductControll= require('../controller/adminProductController')
 const adminOrderController=require("../controller/adminOrderController")
 const adminSalesController=require("../controller/adminSalesController")
+const adminCouponController=require("../controller/adminCouponController")
+const adminBannerController=require("../controller/bannerController")
 
 const bodyParser=require("body-parser")
 const path=require("path")
 const session=require("express-session")
-// admin_route.set("view engine","ejs");
-// admin_route.set("views","./views/admin")
 adminRouter.use(express.static("public"))
 const adminAuth = require("../middleware/adminAuth"); // Assuming you have defined this middleware
 
@@ -31,14 +31,13 @@ adminRouter.get("/logout",adminController.adminLogout)
 
 //** category ** //
 adminRouter.get('/page-categories',adminAuth.isLogin,adminCategoryControll.loadcategorypage)
+//add category
+adminRouter.get("/addcategory",adminCategoryControll.loadAddCategory)
 adminRouter.post('/addcategory',adminCategoryControll.addcategory)
-adminRouter.get('/addcategory',adminCategoryControll. displayCategory);
 
 //**  edit category ** //
 adminRouter.get('/loadeditcategory/:id',adminCategoryControll.loadEditCategory)
 adminRouter.post('/loadeditcategory/:id',adminCategoryControll.editCategory)
-adminRouter.post('/editcategory',adminCategoryControll.editCategory)
-adminRouter.get('/editcategory',adminCategoryControll.editCategory)
 
 //** delete category ** //
 adminRouter.get('/deletecategory/:id',adminCategoryControll.deleteCategory);
@@ -46,10 +45,9 @@ adminRouter.get('/deletecategory/:id',adminCategoryControll.deleteCategory);
 
 //**  products ** //
 adminRouter.get('/loadaddproduct',adminProductControll.loadAddProductPage)
-adminRouter.post('/page-product-list',adminProductControll.addProduct);
-adminRouter.get('/page-product-list',adminProductControll.displayProduct);
-adminRouter.post('/page-product-list',adminProductControll.displayProduct)
-
+adminRouter.post('/loadaddproduct',adminProductControll.addProduct);
+adminRouter.get('/page-product-list',adminProductControll.loadProductList);
+adminRouter.post('/updateProductStatus/:id',adminProductControll.updateProductStatus)
 
 //** delete products ** //
 adminRouter.get('/deleteProduct/:id',adminProductControll.deleteProduct)
@@ -82,16 +80,25 @@ adminRouter.get("/weeklyOrder",adminSalesController.loadWeeklyReport)
 adminRouter.get("/yearlyOrder",adminSalesController.loadYearlyReport);
 //date
 adminRouter.post("/updateOrdersByDate",adminSalesController.OrdersByDate)
-// status changing
-adminRouter.post('/changeStatus', adminSalesController.changeStatus)
+//change status
+adminRouter.post("/changeStatus", adminSalesController.changeStatus);
+//filterByStatus
+adminRouter.get("/filterByStatus",adminSalesController.filterByStatus)
+//addCoupen
+adminRouter.get("/addCoupon",adminCouponController.loadCoupenPage)
+adminRouter.post("/addCoupon",adminCouponController.createCoupon)
+//edit coupon 
+adminRouter.get("/editCoupon/:id",adminCouponController.loadEditCoupon)
+ adminRouter.post("/editCoupon",adminCouponController.editCoupon)
 
-
-
-
-
-
-
-
+//delete coupon 
+adminRouter.get("/deleteCoupon/:id",adminCouponController.deleteCoupon)
+//apply Coupon
+// adminRouter.get("/addCoupon",adminCouponController.createCoupon)
+//banners
+adminRouter.get("/banners",adminBannerController.loadBanners)
+adminRouter.get('/addBanners',adminBannerController.loadAddBanners)
+adminRouter.post('/addBanner',adminBannerController.addBanners)
 
 
 

@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Evara Dashboard</title>
+    <title>PRETTY FINDS admin</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,10 +69,16 @@
                         <span class="text">Sales Report</span>
                     </a>
                 </li>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+                   
+                </li>
 
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
@@ -176,129 +182,102 @@
                     <h2 class="content-title card-title">Products List</h2>
                 </div>
                 <div>
-                    <a href="#" class="btn btn-light rounded font-md">Export</a>
-                    <a href="#" class="btn btn-light rounded  font-md">Import</a>
+                    
                     <a href="/loadaddproduct" class="btn btn-primary btn-sm rounded">Create new</a>
                 </div>
             </div>
-            <div class="card mb-4">
-                <!-- card-header end// -->
 
-                <% if (locals.data) { %>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>IMAGE</th>
-                                <th>PRODUCT NAME</th>
-                                <th>CATEGORY NAME</th>
-                                <th>PRICE</th>
-                                <th>DESCRIPTION</th>
-                                <th>STOCK QUANTITY</th>
-
-                                <th class="text-end">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% products.forEach(function(product,index) { %>
-                                <tr>
-                                    <td>
-                                        <%= index+1 %>
-                                    </td>
-                                    <td>
-                                        <% if (product.image && product.image.length > 0) { %>
-                                          <% product.image.forEach((image) => { %>
-                                            <img src="/uploads/<%= image.url %>" alt="Product Image">
-                                          <% }); %>
-                                        <% } else { %>
-                                          <!-- Provide an alternative content or message when there are no images -->
-                                        <% } %>
-                                      </td>
-                                      
-                                    
-                                    <td>
-                                        <%= product.name %>
-                                    </td>
-                                    <td>
-                                        <% if (product.category) { %>
-                                            <%= product.category.name %> <!-- Assuming 'name' is the field in the AdminCategory schema that contains the category name -->
-                                        <% } else { %>
-                                            No Category
-                                        <% } %>
-                                        
-                                    </td>
-                                    <td>
-                                        <%= product.price %>
-                                    </td>
-                                    <td >
-                                        <%= product.description %>
-                                    </td>
-                                    <td >
-                                        <%= product.stock %>
-                                    </td>
-                                    <a href="/edit/<%= product.id %>">
+            
+            <div class="row">
+                <% products.forEach(function(product, index) { %>
+                    <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                        <div class="card card-product-grid">
+                            <div class="img-wrap">
+                                <% if (product.image && product.image.length > 0) { %>
+                                    <img src="/uploads/<%= product.image[0].url %>" alt="Product Image" class="img-fluid">
+                                <% } else { %>
+                                    <!-- Provide an alternative content or message when there are no images -->
+                                <% } %>
+                            </div>
+                            <div class="info-wrap">
+                                <div class="dropdown float-end">
+                                    <a href="/editProduct/<%= product.id %>" class="btn btn-sm btn-brand rounded">
+                                        <i class="material-icons md-edit mr-5"></i>Edit
                                     </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="#">Edit info</a>
+                                        <a class="dropdown-item text-danger" href="#">Delete</a>
+                                    </div>
+                                </div>
+                                <a href="#" class="title"><%= product.name %></a>
 
-                                    <td class="text-end">
-                                        <!-- Add your action buttons here -->
-                                        <!-- Example: Edit and Delete buttons -->
-                                        <a href="/editProduct/<%= product.id %>" class="btn btn-primary">Edit</a>
-                                        <a href="/deleteProduct/<%= product.id %>" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <% }); %>
-                        </tbody>
-                    </table>
-                    <% } %>
+                                <div class="price mt-1">price:	 &#x20B9;<%= product.price %></div>
+                                <p>Category: <%= product.category.name %></p>
+
+                                <!-- Display product offer, category offer, and stock -->
+                                <p class="mt-1">Product Offer: <%= product.discountPercentage ? product.discountPercentage + '%' : 'No Offer' %></p>
+                                <p>Category Offer: <%= product.category && product.category.offerPercentage ? product.category.offerPercentage + '%' : 'No Offer' %></p>
+                                <p>Stock: <%= product.stock %></p>
+                            </div>
+
+                            <form action="/updateProductStatus/<%= product.id %>" method="POST" class="d-inline">
+                                <div class="form-check">
+                                    <input type="radio" id="activate<%= index %>" name="status" value="activate" <% if (!product.isDeleted) { %> checked <% } %>>
+                                    <label for="activate<%= index %>" class="form-check-label text-success">Activate</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" id="softDelete<%= index %>" name="status" value="softDelete" <% if (product.isDeleted) { %> checked <% } %>>
+                                    <label for="softDelete<%= index %>" class="form-check-label text-danger">Soft Delete</label>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary mt-2">Update Status</button>
+                            </form> 
+
+                        </div> 
+   
+                                         </div>
+                    
+          
+                <% }); %>
             </div>
-            <script>
-                function validateBasic() {
+            
+            
+            
+      
 
-                    var name = document.basic.name.value;
-                    var price = document.basic.price.value;
-                    var category = document.basic.category.value;
-                    var image = document.basic.image.value;
+<div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-start">
 
+            <% if (currentPage > 1) { %>
+                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+            <% } %>
 
-                    if (name === "" || price === "" || image === "" || stock === "") {
-                        alert("Please fill all fields.");
-                        return false;
-                    }
+            <% if (currentPage > 2) { %>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+            <% } %>
 
-                    // Validate email
-                    var priceRegex = /^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
-                    if (!priceRegex.test(price)) {
-                        alert("Invalid price .");
-                        return false;
-                    }
+            <% for (let i = Math.max(1, currentPage - 1); i <= Math.min(currentPage + 1, totalPages); i++) { %>
+                <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                    <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                </li>
+            <% } %>
 
-                    // Validate name
-                    var nameRegex = /^[A-Za-z\s]+$/;
-                    if (!nameRegex.test(name)) {
-                        alert("Name should only contain letters and spaces.");
-                        return false;
-                    }
+            <% if (currentPage < totalPages - 1) { %>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+            <% } %>
 
+            <% if (currentPage < totalPages) { %>
+                <li class="page-item"><a class="page-link" href="?page=<%= totalPages %>"><%= totalPages %></a></li>
+            <% } %>
 
-                    return true;
-                }
-
-
-            </script>
-
-            <div class="pagination-area mt-30 mb-50">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-start">
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">16</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i
-                                    class="material-icons md-chevron_right"></i></a></li>
-                    </ul>
-                </nav>
-            </div>
+            <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                <% if (currentPage < totalPages) { %>
+                    <a class="page-link" href="?page=<%= currentPage + 1 %>"><i class="fi-rs-angle-double-small-right"></i></a>
+                <% } %>
+            </li>
+        </ul>
+    </nav>
+</div>
         </section> <!-- content-main end// -->
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
@@ -315,6 +294,40 @@
             </div>
         </footer>
     </main>
+    <script>
+        function validateBasic() {
+
+            var name = document.basic.name.value;
+            var price = document.basic.price.value;
+            var category = document.basic.category.value;
+            var image = document.basic.image.value;
+
+
+            if (name === "" || price === "" || image === "" || stock === "") {
+                alert("Please fill all fields.");
+                return false;
+            }
+
+            // Validate email
+            var priceRegex = /^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
+            if (!priceRegex.test(price)) {
+                alert("Invalid price .");
+                return false;
+            }
+
+            // Validate name
+            var nameRegex = /^[A-Za-z\s]+$/;
+            if (!nameRegex.test(name)) {
+                alert("Name should only contain letters and spaces.");
+                return false;
+            }
+
+
+            return true;
+        }
+
+
+    </script>
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/select2.min.js"></script>

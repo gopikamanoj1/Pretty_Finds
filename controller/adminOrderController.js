@@ -39,13 +39,7 @@ const loadOrderDetails = async (req, res) => {
     }
 };
 
-const FilterByDate=async (req,res)=>{
-    try {
-        res.render("page-orders-list")
-    } catch (error) {
-        console.log(error);
-    }
-}
+
 
 
 
@@ -65,6 +59,5 @@ const FilterByDate=async (req,res)=>{
 module.exports ={
     loadPageOrder,
     loadOrderDetails,
-    FilterByDate
 
 }

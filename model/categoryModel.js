@@ -14,6 +14,11 @@ const categoryschema=mongoose.Schema({
           }
       }
   ]
+  ,
+  offerPercentage:{
+    type:Number,
+    default:0
+  }
 })
 
 module.exports=mongoose.model('Category',categoryschema)

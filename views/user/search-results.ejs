@@ -1,95 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/index-3 by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:06 GMT -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <!-- Add Bootstrap CSS link -->
+    <meta charset="utf-8">
+    <title>PRETTY FINDS</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYNbBAdI4zrhqj3aRaxv5UpJH4Qv5tLL" crossorigin="anonymous">
     <!-- Add your custom CSS if needed -->
-    <style>
-        /* Add your custom styles here */
-        body {
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-
-        .product-card {
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 25%;
-            /* Adjust the width as needed */
-        }
-
-        .product-image {
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .details-btn {
-            width: 20%;
-            margin-top: 10px;
-        }
-
-        .details-btn {
-            display: inline-block;
-            background-color: #6706a0;
-            /* Your preferred primary color */
-            color: #fff;
-            /* Text color */
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .details-btn:hover {
-            background-color: #6e34a5;
-            /* Change to a darker shade on hover */
-        }
-
-        .details-btn .arrow {
-            margin-left: 5px;
-            /* Adjust the spacing between text and arrow */
-        }
-
-        /* Add these styles to your existing CSS or create a new style section */
-
-        .btn-secondary {
-            color: #fff;
-            background-color: #6706a0;
-            /* Change this to the desired background color */
-            border-color: #6706a0;
-            text-decoration: none;
-
-            /* Change this to the desired border color */
-        }
-
-        .btn-secondary:hover {
-            color: #fff;
-            background-color: #6e34a5;
-            /* Change this to the desired background color on hover */
-            border-color: #6e34a5;
-            /* Change this to the desired border color on hover */
-        }
-
-        /* Add margin-top for spacing */
-        .btn-secondary.mt-3 {
-            margin-top: 15px;
-            /* Adjust the margin-top value as needed for spacing */
-        }
-    </style>
+  
 </head>
 
 <body>
+
+    <header class="header-area header-style-3 header-height-2">
+        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info">
+                            <ul>
+                                <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
+                                <li><i class="fi-rs-marker"></i><a  href="page-contact">Our location</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-4">
+                        <div class="text-center">
+                            <div id="news-flash" class="d-inline-block">
+                                <ul>
+                                    <li>Get great devices up to 50% off <a href="shop-grid-right">View details</a></li>
+                                    <li>Supper Value Deals - Save more with coupons</li>
+                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right">Shop now</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info header-info-right">
+                            <ul>
+                                <li>
+                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
+                                    <ul class="language-dropdown">
+                                        <li><a href="#"><img src="/imgs/theme/flag-fr.png" alt="">Français</a></li>
+                                        <li><a href="#"><img src="/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
+                                        <li><a href="#"><img src="/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
+                                    </ul>
+                                </li>
+                                <% if (!locals.logged) { %>
+                                    <li id="loginButton"><i class="fi-rs-user"></i><a href="/page-login">Log In</a></li>
+                                    <li id="signUpButton"><i class="fi-rs-user"></i><a href="/page-register">Sign Up</a></li>
+                                    
+                                <% } else { %>
+                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a></li>
+                                    <li><a href="/myprofile">My Profile <i class="fi-rs-angle-down"></i></a>
+                                        
+                                    </li>
+
+                                <% } %>
+                                
+
+                              
+                    
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="header-wrap">
+                    <div class="logo logo-width-1">
+                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                    </div>
+                    <div class="header-right">
+                        
+                        <div class="search-style-2">
+                            <form action="/search" method="GET">
+                                <!-- Add a 'name' attribute to the input to capture the search term -->
+                                <input type="text" name="q" placeholder="Search for items...">
+                                <button type="submit">Search</button>
+                            </form>
+                        </div>
+                        
+                        <div class="header-action-right">
+                            <div class="header-action-2">
+                                <div class="header-action-icon-2">
+                                    <a href="shop-wishlist">
+                                        <img class="svgInject" alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
+                                    </a>
+                                </div>
+                                <div class="header-action-icon-2">
+                                    <a class="mini-cart-icon" href="/cart">
+                                        <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
+                                    </a>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom header-bottom-bg-color sticky-bar">
+            <div class="container">
+                <div class="header-wrap header-space-between position-relative  main-nav">
+                    <div class="logo logo-width-1 d-block d-lg-none">
+                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                    </div>
+                    <div class="header-nav d-none d-lg-flex">
+                        <div class="main-categori-wrap d-none d-lg-block">
+                           
+                        </div>
+                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                            <nav>
+                                <ul>
+                                    <li><a class="active" href="/index">Home <i class="fi-rs-angle-down"></i></a>
+                                       
+                                    </li>
+                                    <li>
+                                        <a href="/lipscareonly">LIPS CARE</a>
+                                    </li>
+                                    <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
+                                       
+                                    </li>
+                                    <li ><a href="/bodycareonly">BODY CARE  <i class="fi-rs-angle-down"></i></a>
+                                    
+                                    </li>
+                                    <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
+                                        
+                                    </li>
+                                    <!-- <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
+                                        
+                                    </li> -->
+                                    <li>
+                                        <a href="/allProducts">All Products</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                   
+                    <!-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> -->
+                    <div class="header-action-right d-block d-lg-none">
+                        <div class="header-action-2">
+                            <div class="header-action-icon-2">
+                                <a href="shop-wishlist">
+                                    <img alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
+                                </a>
+                            </div>
+                            <div class="header-action-icon-2">
+                                <a class="mini-cart-icon" href="/cart">
+                                    <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
+                                </a>
+                              
+                                
+                            </div>
+                            <div class="header-action-icon-2 d-block d-lg-none">
+                                <div class="burger-icon burger-icon-white">
+                                    <span class="burger-icon-top"></span>
+                                    <span class="burger-icon-mid"></span>
+                                    <span class="burger-icon-bottom"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <br><br>
     <div class="container">
-        <h1 class="mt-5 mb-4">Search Results for "<%= searchTerm %>"</h1>
+        <h3 class="mt-5 mb-4">Search Results for "<%= searchTerm %>"</h3>
 
         <% if (products.length> 0) { %>
             <div class="row">
@@ -111,8 +209,6 @@
                                 <a href="/singleProduct/<%= product.id %>" class="btn btn-primary details-btn">
                                     View Details <span class="arrow">&rarr;</span>
                                 </a>
-
-
                             </div>
                         </div>
                     </div>
@@ -124,6 +220,7 @@
 
                     <!-- Link to go back to home page -->
                     <a href="/" class="btn btn-secondary mt-3">Go Back to Home</a>
+                    <br><br>
     </div>
 
     <!-- Add Bootstrap JS and Popper.js (if needed) -->

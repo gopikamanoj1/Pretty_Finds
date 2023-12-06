@@ -60,14 +60,25 @@
                     </a>
 
                 </li>
-                <li class="menu-item has-submenu">
+                <li >
                     <a class="menu-link" href="/pageOrders"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Orders</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li >
+                    <a class="menu-link" href="/salesReport"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Sales Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
@@ -170,50 +181,46 @@
                 <a href="javascript:history.back()"><i class="material-icons md-arrow_back"></i> Go back </a>
             </div>
             <div class="card mb-4">
-                <div class="card-header bg-primary" style="height:150px">
-                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl col-lg flex-grow-0" style="flex-basis:230px">
-                            <div class="img-thumbnail shadow w-100 bg-white position-relative text-center"
-                                style="height:190px; width:200px; margin-top:-120px">
-                                <img src="assets/imgs/brands/brand-3.jpg" class="center-xy img-fluid" alt="Logo Brand">
-                            </div>
-                        </div> <!--  col.// -->
-                        <div class="col-xl col-lg">
-                            <h3><%= user.name %></h3>
-                        </div> <!--  col.// -->
+                            <h4>User Details</h4>
+                        </div>
                     </div>
                     <hr class="my-4">
                     <div class="row g-4">
                         <div class="col-sm-6 col-lg-4 col-xl-3">
-                            <h6><%= user.email %></h6>
+                            <h6 class="mb-3">Email</h6>
+                            <p><%= user.email %></p>
                         </div>
-                        <!-- <div class="col-sm-6 col-lg-4 col-xl-3">
-                            <h6>Address</h6>
-                            <p>
-                                Country: California <br>
-                                Address: Ranchview Dr. Richardson <br>
-                                Postal code: 62639
-                            </p>
-                        </div> -->
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                            <h6 class="mb-3">Address</h6>
+                            <% user.addresses.forEach(address => { %>
+                                <p>
+                                    <strong>Name:</strong> <%= address.name %> <br>
+                                    <strong>Country:</strong> <%= address.state %> <br>
+                                    <strong>Address:</strong> <%= address.street %> <br>
+                                    <strong>Postal code:</strong> <%= address.pincode %>
+                                </p>
+                            <% }) %>
+                        </div>
                     </div>
+            
+                    <!-- Display orders -->
+                    <h6 class="mt-4">Orders</h6>
+                    <ul class="list-group">
+                        <% orders.forEach(order => { %>
+                            <li class="list-group-item">
+                                <strong>Order ID:</strong> <%= order._id %> <!-- Adjust this based on your orders schema -->
+                                <!-- Display other order details as needed -->
+                            </li>
+                        <% }) %>
+                    </ul>
                 </div>
             </div>
+            
 
-            <div class="pagination-area mt-30 mb-50">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-start">
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">16</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i
-                                    class="material-icons md-chevron_right"></i></a></li>
-                    </ul>
-                </nav>
-            </div>
+         
         </section> <!-- content-main end// -->
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">

@@ -65,11 +65,16 @@
                     <a class="menu-link" href="/pageOrders"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Orders</span>
                     </a>
-                  
+                    <li>
+                        <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                            <span class="text"> Coupon </span>
+                        </a>
+                       
+                    </li>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
@@ -183,13 +188,15 @@
                 <form action="/loadeditcategory/<%= category.id %>" method="POST">
                     <div class="form-group">
                         <label for="name">Category Name</label>
-                        <br>
-                        <br>
                         <input type="text" class="form-control" id="name" name="name" value="<%= category.name %>" required>
                     </div>
-            <br><br>
+                    <div class="form-group">
+                        <label for="offerPercentage">Category Offer (Optional)</label>
+                        <input type="number" class="form-control" id="offerPercentage" name="offerPercentage" value="<%= category.offerPercentage %>" min="0" max="100">
+                    </div>
                     <button type="submit" class="btn btn-primary">Save Name</button>
                 </form>
+                
             </div>
 
 

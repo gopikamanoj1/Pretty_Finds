@@ -107,35 +107,57 @@ const OrdersByDate = async (req, res) => {
 
 const changeStatus = async (req, res) => {
     try {
-        const orderId = req.params.id;
+        const orderId = req.body.orderId;
         const newStatus = req.body.status;
 
-        // Check if the new status is "Delivered" and update delivered_date
-        const updateData = (newStatus === "Delivered")
-            ? { delivered_date: Date.now(), status: newStatus }
-            : { status: newStatus };
+        // Update the order status in the database
+        const updatedOrder = await Order.findByIdAndUpdate(
+            orderId,
+            { status: newStatus },
+            { new: true } // Return the updated document 
+        );
 
-        // Use findByIdAndUpdate to update the order
-        const updatedOrder = await Order.findByIdAndUpdate(orderId, updateData, { new: true });
+        if (!updatedOrder) {
+            // Order not found
+            return res.status(404).send('Order not found');
+        }
 
-       
-
-        res.redirect("/ordersDetails");
+        // Redirect back to the order details page
+        res.redirect(`/page-orderDetails/${orderId}`);
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
+        console.error('Error updating status:', error);
+        res.status(500).send('Internal Server Error');
     }
 };
 
-module.exports = OrdersByDate;
+const filterByStatus = async (req, res) => {
+    try {
+        // Fetch the status from the query parameters
+        const enterStatus = req.query.status;
+
+        // Fetch orders from the database based on the provided status
+        const orders = await Order.find({ status: enterStatus }).populate('user');
+
+        // Render the salesReport template with filtered orders and the status variable
+        res.render('salesReport', { orders, status: enterStatus });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 
 
 
+
+
+ 
 module.exports={
     LoadSalesReport,
     LoadDailyReport,
     loadWeeklyReport,
     loadYearlyReport,
     OrdersByDate,
-    changeStatus
+    changeStatus,
+    filterByStatus
+
 }

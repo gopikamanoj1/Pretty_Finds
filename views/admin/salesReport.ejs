@@ -76,9 +76,15 @@
                         <span class="text">Sales Report</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
+                <li>
+                    <a class="menu-link" href="/addCoupon"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text"> Coupon </span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a class="menu-link" href="/banners"> <i class="icon material-icons md-image"></i>
+                        <span class="text">Banners</span>
                     </a>
                 </li>
 
@@ -89,7 +95,7 @@
                     <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
                         <span class="text">Settings</span>
                     </a>
-                    <div class="submenu">
+                    <div class="submenu"> 
                         <a href="page-settings-1">Setting sample 1</a>
                         <a href="page-settings-2">Setting sample 2</a>
                     </div>
@@ -215,21 +221,20 @@
                     <a href="/yearlyOrder" id="YearlyButton" class="btn btn-primary btn-sm rounded">Yearly</a>
                 </div>
                 <div class="col-lg-3 col-6 col-md-3">
-                    <form method="get" class="d-flex flex-row">
-                        <input type="date" id="start" name="start_date" value="{% if start_date %}{{ start_date }}{% else %}2023-11-20{% endif %}" hidden="hidden" />
-                        <input type="date" id="end" name="end_date" value="{% if end_date %}{{ end_date }}{% else %}{{ current_date }}{% endif %}" hidden="hidden"/>
+                    <form method="get" class="d-flex flex-row" action="/filterByStatus">
+                        <!-- <input type="date" id="start" name="start_date" value="{% if start_date %}{{ start_date }}{% else %}2023-11-20{% endif %}" hidden="hidden" /> -->
+                        <!-- <input type="date" id="end" name="end_date" value="{% if end_date %}{{ end_date }}{% else %}{{ current_date }}{% endif %}" hidden="hidden"/> -->
         
-                        <select class="form-select border border-dark" name="status_filter">
-                            <option value="0" >All Status</option>
-                            <option value="1" >Pending</option>
-                            <option value="2" >Shipped</option>
-                            <option value="3" >Delivered</option>
-                            <option value="4" >Cancel</option>
-                            <option value="5" >Returned</option>
+                        <select class="form-select border border-dark" name="status">
+                            <option value="" selected>All Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancel">Cancel</option>
+                            <option value="Returned">Returned</option>
                         </select>
-                        <button type="submit" class="border border-dark border-left-0 px-3">
-                            <i class="material-icons md-published_with_changes"></i>
-                        </button>
+                        
+                        <button type="submit">Find</button>
                     </form>
                 </div>
     
@@ -289,9 +294,10 @@
                                             </span>
                                         </td>
                                         <td>$<%= order.total !== undefined ? order.total.toFixed(2) : 'N/A' %></td>
-                                        <td> paymentMethod</td>
+                                        <td> <%=order.paymentType %></td>
                                         <td>
                                             <a href="/page-orderDetails/<%= order._id %>" class="btn btn-xs"> View details</a>
+                                            
                                         </td>
                                     </tr>
                                 <% }); %>

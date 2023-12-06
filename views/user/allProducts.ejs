@@ -438,7 +438,6 @@
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <div class="product-category">
-                                                            <a href="/singleProduct"><%= product.category.name %></a>
                                                         </div>
                                                         <h2><a href="/singleProduct"><%= product.name %></a></h2>
                                                       
@@ -448,7 +447,12 @@
                                                             </span>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span >$<%= product.price %></span>
+                                                            <span>$<%= product.discountedPrice %></span>
+                                                            <% if (product.discountPercentage && product.discountPercentage > 0) { %>
+                                                                <span class="old-price">$<%= product.price %></span>
+
+                                                                <span class="discount">(<%= product.discountPercentage %>% Off)</span>
+                                                            <% } %>
                                                         </div>
                                                         <% if (product.stock < 1) { %>
                                                             <div class="out-of-stock-message">
@@ -477,15 +481,38 @@
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-start">
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">16</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                        
+                                    <% if (currentPage > 1) { %>
+                                        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                                    <% } %>
+                        
+                                    <% if (currentPage > 2) { %>
+                                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                                    <% } %>
+                        
+                                    <% for (let i = Math.max(1, currentPage - 1); i <= Math.min(currentPage + 1, totalPages); i++) { %>
+                                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                            <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                                        </li>
+                                    <% } %>
+                        
+                                    <% if (currentPage < totalPages - 1) { %>
+                                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                                    <% } %>
+                        
+                                    <% if (currentPage < totalPages) { %>
+                                        <li class="page-item"><a class="page-link" href="?page=<%= totalPages %>"><%= totalPages %></a></li>
+                                    <% } %>
+                        
+                                    <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                                        <% if (currentPage < totalPages) { %>
+                                            <a class="page-link" href="?page=<%= currentPage + 1 %>"><i class="fi-rs-angle-double-small-right"></i></a>
+                                        <% } %>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
+                        
                     </div>
                 </div>
             </div>
