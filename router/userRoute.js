@@ -116,5 +116,9 @@ userRouter.post("/getCoupon", userControllers.applyCoupon);
 //wallet
 userRouter.get("/wallet", userControllers.loadWallet);
 userRouter.get( "/check-return-status/:orderId", userControllers.checkStatusForReturn);
+//wishlist
+userRouter.get('/WishList',userControllers.loadWishList)
+userRouter.post("/addToWishList/:id",userControllers.addToWishList)
 
 module.exports = userRouter;
+   

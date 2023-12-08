@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Evara - eCommerce HTML Template</title>
+    <title>PRETTY FINDS</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -196,57 +196,139 @@
                                         </div>
 
                                         <!-- <form method="post"> -->
-                                        <form action="/page-register" method="POST">
-                                            <% if (typeof message !=="undefined" ) { %>
-                                                <p id="msg" style="color: rgb(144, 4, 4)">
-                                                    <%= message %>
-                                                </p>
+                                            <form onsubmit="return validateRegistrationForm()" action="/page-register" method="POST" >
+                                                <% if (typeof message !== "undefined") { %>
+                                                    <p id="msg" style="color: rgb(144, 4, 4)">
+                                                        <%= message %>
+                                                    </p>
                                                 <% } %>
-
-                                                    <div class="form-group">
-                                                        <input type="text" name="username" placeholder="Username"
-                                                            id="username">
-                                                        <span id="usernameError" class="error"></span>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <input type="email" name="email" placeholder="Email" id="email">
-                                                        <span id="emailError" class="error"></span>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <input type="password" name="password" placeholder="Password"
-                                                            id="password">
-                                                        <span id="passwordError" class="error"></span>
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <input type="password" name="confirm_password"
-                                                            placeholder="Confirm password" id="confirm_password">
-                                                        <span id="confirmPasswordError" class="error"></span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="text" name="myRefferalCode" placeholder="Referral Code (optional)" id="referralCode">
-                                                    </div>
-                                                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-
-                                                    <div class="login_footer form-group">
-                                                        <div class="chek-form">
-                                                            <div class="custome-checkbox">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="checkbox" id="exampleCheckbox12" value="">
-                                                            </div>
+                                            
+                                                <div class="form-group">
+                                                    <input type="text" name="username" placeholder="Username" id="username">
+                                                    <span id="usernameError" class="error"></span>
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <input type="email" name="email" placeholder="Email" id="email">
+                                                    <span id="emailError" class="error"></span>
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <input type="password" name="password" placeholder="Password" id="password">
+                                                    <span id="passwordError" class="error"></span>
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <input type="password" name="confirm_password" placeholder="Confirm password" id="confirm_password">
+                                                    <span id="confirmPasswordError" class="error"></span>
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <input type="text" name="myRefferalCode" placeholder="Referral Code (optional)" id="referralCode">
+                                                </div>
+                                            
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                                            
+                                                <div class="login_footer form-group">
+                                                    <div class="chek-form">
+                                                        <div class="custome-checkbox">
+                                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="">
                                                         </div>
                                                     </div>
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-fill-out btn-block hover-up" name="register">Submit & Send OTP</button>
+                                                </div>
+                                            </form>
+                                            
+                                                <script>
+                                                    function validateRegistrationForm() {
+                                                        var username = document.getElementById("username").value;
+                                                        var email = document.getElementById("email").value;
+                                                        var password = document.getElementById("password").value;
+                                                        var confirmPassword = document.getElementById("confirm_password").value;
+                                                
+                                                        var usernameError = document.getElementById("usernameError");
+                                                        var emailError = document.getElementById("emailError");
+                                                        var passwordError = document.getElementById("passwordError");
+                                                        var confirmPasswordError = document.getElementById("confirmPasswordError");
+                                                
+                                                        // Reset error messages
+                                                        usernameError.innerHTML = "";
+                                                        emailError.innerHTML = "";
+                                                        passwordError.innerHTML = "";
+                                                        confirmPasswordError.innerHTML = "";
+                                                
+                                                        // Username validation
+                                                        if (username.trim() === "") {
+                                                            usernameError.innerHTML = "Username is required";
+                                                            usernameError.style.color = "red";
+                                                            setTimeout(() => {
+                                                                usernameError.innerHTML = "";
+                                                            }, 5000);
+                                                            return false;
+                                                        }
+                                                
+                                                        // Email validation
+                                                        if (email.trim() === "") {
+                                                            emailError.innerHTML = "Email is required";
+                                                            emailError.style.color = "red";
+                                                            setTimeout(() => {
+                                                                emailError.innerHTML = "";
+                                                            }, 5000);
+                                                            return false;
+                                                        }
+                                                        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                                        if (!emailRegex.test(email)) {
+                                                            emailError.innerHTML = "Invalid email address";
+                                                            emailError.style.color = "red";
+                                                            setTimeout(() => {
+                                                                emailError.innerHTML = "";
+                                                            }, 5000);
+                                                            return false;
+                                                        }
+                                                       
+                                                
+                                                        // Password validation
+                                                        if (password.length < 6) {
+                                                            passwordError.innerHTML = "Password must be at least 6 characters";
+                                                            passwordError.style.color = "red";
+                                                            setTimeout(() => {
+                                                                passwordError.innerHTML = "";
+                                                            }, 5000);
+                                                            return false;
+                                                        }
+                                                
+                                                        // Confirm Password validation
+                                                        if (confirmPassword !== password) {
+                                                            confirmPasswordError.innerHTML = "Passwords do not match";
+                                                            confirmPasswordError.style.color = "red";
+                                                            setTimeout(() => {
+                                                                confirmPasswordError.innerHTML = "";
+                                                            }, 5000);
+                                                            return false;
+                                                        }
+                                                
+                                                        // Add more validation as needed
+                                                
+                                                        return true;
+                                                    }
+                                                
+                                                    setTimeout(() => {
+                                                        document.getElementById("msg").style.display = "none";
+                                                    }, 5000);
+                                                </script>
+                                                
+                                       
+                                            
 
-                                                    <div class="form-group">
-                                                        <button type="submit"
-                                                            class="btn btn-fill-out btn-block hover-up"
-                                                            name="register">Submit & Send OTP</button>
-                                                    </div>
-                                        </form>
+
+
+
+
+
+
                                         <script>
                                             setTimeout(() => {
                                                 document.getElementById("msg").style.display = "none"

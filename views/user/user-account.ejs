@@ -113,9 +113,8 @@
                                     <div class="product-extra-link2">
                                         <button type="submit" class="button button-add-to-cart">Add to cart</button>
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                            href="shop-wishlist"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare"><i
-                                                class="fi-rs-shuffle"></i></a>
+                                            href="/WishList"><i class="fi-rs-heart"></i></a>
+                                   
                                     </div>
                                 </div>
                                 <ul class="product-meta font-xs color-grey mt-50">
@@ -209,7 +208,7 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a href="">
+                                    <a href="/WishList">
                                         <img class="svgInject" alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
                                     </a>
                                 </div>
@@ -240,7 +239,7 @@
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist">
+                                <a href="/WishList">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
                                 </a>
                             </div>
@@ -397,8 +396,7 @@
 
                                             </div>
                                             <div class="card-body">
-                                                <p>Name: <%= user.name %>
-                                                </p>
+                                               
                                                 <p>Email: <%= user.email %>
                                                 </p>
 
@@ -493,20 +491,7 @@
                                                             <form action="/editProfile" method="get" id="form"
                                                                 name="enq">
                                                                 <div class="row">
-                                                                    <div class="form-group col-md-12">
-                                                                        <label>Email <span
-                                                                                class="required">*</span></label>
-                                                                        <input required="" class="form-control square"
-                                                                            value="<%= user.email %>" name="email"
-                                                                            id="email" type="email">
-                                                                    </div>
-                                                                    <div class="form-group col-md-12">
-                                                                        <label>Name <span
-                                                                                class="required"></span>*</label>
-                                                                        <input required="" class="form-control square"
-                                                                            value="<%= user.name %>" name="name"
-                                                                            id="name" type="text">
-                                                                    </div>
+                                                                  
 
                                                                     <div class="col-md-12">
                                                                         <button type="submit"
@@ -561,10 +546,7 @@
                     </div>
                     <div class="col-lg-5">
                         <!-- Subscribe Form -->
-                        <form class="form-subcriber d-flex wow fadeIn animated">
-                            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
-                            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
-                        </form>
+                     
                         <!-- End Subscribe Form -->
                     </div>
                 </div>
@@ -576,60 +558,37 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                                <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                                <a ><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a ><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a ><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a ><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a ><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">About</h5>
-                        <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Support Center</a></li>
-                        </ul>
+                        <h5 class="widget-title wow fadeIn animated"></h5>
+                   
                     </div>
                     <div class="col-lg-2  col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">My Account</h5>
-                        <ul class="footer-list wow fadeIn animated">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Order</a></li>
-                        </ul>
+                        <h5 class="widget-title wow fadeIn animated"></h5>
+                       
                     </div>
                     <div class="col-lg-4">
-                        <h5 class="widget-title wow fadeIn animated">Install App</h5>
                         <div class="row">
                             <div class="col-md-8 col-lg-12">
-                                <p class="wow fadeIn animated">From App Store or Google Play</p>
-                                <div class="download-app wow fadeIn animated">
-                                    <a href="#" class="hover-up mb-sm-4 mb-lg-0"><img class="active"
-                                            src="/imgs/theme/app-store.jpg" alt=""></a>
-                                    <a href="#" class="hover-up"><img src="/imgs/theme/google-play.jpg" alt=""></a>
-                                </div>
+                              
                             </div>
                             <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                                 <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
@@ -646,14 +605,10 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-lg-6">
-                    <p class="float-md-left font-sm text-muted mb-0">&copy; 2021, <strong
-                            class="text-brand">Evara</strong> - HTML Ecommerce Template </p>
+                  
                 </div>
                 <div class="col-lg-6">
-                    <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        Designed by <a href="http://alithemes.com/" target="_blank">Alithemes.com</a>. All rights
-                        reserved
-                    </p>
+                   
                 </div>
             </div>
         </div>

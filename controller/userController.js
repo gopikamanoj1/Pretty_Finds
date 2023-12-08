@@ -11,6 +11,8 @@ const Coupon = require("../model/couponModel");
 const Wallet = require("../model/walletModel");
 const uuid = require("uuid");
 const Banners = require("../model/bannerModel");
+const Wishlist = require("../model/wishListModel");
+
 
 
 const Razorpay = require("razorpay");
@@ -25,7 +27,7 @@ const securePassword = async (password) => {
     const passwordHash = await bcrypt.hash(password, 10);
     return passwordHash;
   } catch (err) {
-    res.render("page-error-404")
+    res.render("page-404")
     console.log(err.message);
   }
 };
@@ -36,7 +38,7 @@ const landing = async (req, res) => {
     const banners=await Banners.find()
     return res.render("index-3", { products: products ,banners:banners});
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);   
     res.status(500).send("Internal Server Error");
@@ -50,7 +52,7 @@ const login = async (req, res) => {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("page-login",{banners:banners});
   } catch (err) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(err.message);
   }
@@ -62,13 +64,13 @@ const register = async (req, res) => {
 
     return res.status(200).render("page-register",{banners:banners});
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
 };
 
-const verifyUser = async (req, res) => {
+const verifyUser = async (req, res) => { 
   try {
     const email = req.body.email;
     const password = req.body.password;
@@ -78,6 +80,8 @@ const verifyUser = async (req, res) => {
 
     if (userData) {
       const passwordMatch = await bcrypt.compare(password, userData.password); // Compare the hashed password
+      console.log(password, userData.password);
+      console.log(passwordMatch,"passwordMatch");
       if(userData.isBlocked===false){
         if (passwordMatch) {
             const products = await AdminProduct.find().limit(8);
@@ -92,21 +96,23 @@ const verifyUser = async (req, res) => {
               products: products,
               cartCount: cartCount,
               banners:banners
+              
+            });
+          }else {
+            return res.render("page-login", {
+              message: "INVALID USERNAME OR PASSWORD!",
             });
           }
+        } 
+        else {
+          return res.render("page-login", {
+            message: "User Not Exist",
+          });
+        }
       }
-       else {
-        return res.render("page-login", {
-          message: "INVALID USERNAME OR PASSWORD!",
-        });
-      }
-    } else {
-      return res.render("page-login", {
-        message: "INVALID USERNAME OR PASSWORD!!",
-      });
-    }
+       
   } catch (err) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error(err.message);
     res.status(500).send("Internal Server Error");
@@ -123,135 +129,253 @@ const verifyUser = async (req, res) => {
 
 
 const Swal = require("sweetalert2");
+const productModel = require("../model/productModel");
 
 var otp;
 
-const userRegister = async (req, res) => {
-    try {
-      const checkEmail = await User.findOne({ email: req.body.email });
+// const userRegister = async (req, res) => {
+//     try {
+//       const checkEmail = await User.findOne({ email: req.body.email });
   
-      if (checkEmail) {
-        // Email already exists, display validation message
-        return res.render("page-register", {
-          message: "Email already exists. Try again",
-        });
-    } 
-    else {
-        // Check if a referral code is provided
-        const referralCode = req.body.myRefferalCode || "";
-  
-        // Validate the referral code if provided
-        if (referralCode !== "") {
-          const isValidReferralCode = await isValidReferralCodeFunction(referralCode);
+//       if (checkEmail) {
+//         // Email already exists, display validation message
+//         return res.render("page-register", {
+//           message: "Email already exists. Try again",
+//         });
+//       } 
 
 
-          if (!isValidReferralCode) {
-            // Show SweetAlert for an invalid referral code
-            Swal.fire({
-              icon: "error",
-              title: "Invalid Referral Code",
-              text: "The referral code you provided is invalid. Please try again.",
-            });
+//     else {
+//         // Check if a referral code is provided
+//         const referralCode = req.body.myRefferalCode || "";
   
-            return res.render("page-register", {
-              message: "Invalid referral code. Try again",
-            });
-          }
-     // Get the referral code owner
+//         // Validate the referral code if provided
+//         if (referralCode !== "") {
+//           const isValidReferralCode = await isValidReferralCodeFunction(referralCode);
 
 
+//           if (!isValidReferralCode) {
+//             // Show SweetAlert for an invalid referral code
+//             Swal.fire({
+//               icon: "error",
+//               title: "Invalid Referral Code",
+//               text: "The referral code you provided is invalid. Please try again.",
+//             });
   
-        otp = randomstring.generate({
-          length: 6,
-          charset: "numeric",
-        });
-  
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "muhzinsidhiq333@gmail.com",
-            pass: "iiue xtwn lkkf jfps",
-          },
-        });
-  
-        const mailOptions = {
-          from: "muhzinsidhiq333@gmail.com",
-          to: req.body.email,
-          subject: "OTP Verification",
-          text: `Your OTP code is: ${otp}`,
-        };
-  
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            console.log("Email send error: " + error);
-            return res.status(500).json({ error: "Failed to send OTP" });
-          } else {
-            console.log("Email sent: " + info.response);
-            // Redirect to the OTP verification page
-            return res.status(200).redirect("/page-verify-otp");
-          }
-        });
-  
-        const randomReferralCode = generateRandomReferralCode();
-  
-        // Update the user's information with the generated referral code
-        // await User.findOneAndUpdate( 
-        //   { email: req.body.email },
-        //   { $set: { myRefferalCode: randomReferralCode } },
-        //   { new: true }
-        // );
-        console.log(randomReferralCode,"randomReferralCoderandomReferralCode");
+//             return res.render("page-register", {
+//               message: "Invalid referral code. Try again",
+//             });
+//           }
+//         }
 
-        const sPassword = await securePassword(req.body.password);
   
-        const userData = {
-          username: req.body.username,
-          email: req.body.email,
-          password: sPassword,
-          // other user data...  
-          myRefferalCode: randomReferralCode, // Assuming you want to save it as user_referral_code too
-        };
+//         otp = randomstring.generate({
+//           length: 6,
+//           charset: "numeric",
+//         });
   
-    console.log(userData,"userDatauserData||||||||||||||||||");
+//         const transporter = nodemailer.createTransport({
+//           service: "gmail",
+//           auth: {
+//             user: "muhzinsidhiq333@gmail.com",
+//             pass: "iiue xtwn lkkf jfps",
+//           },
+//         });
   
-        req.session.userData = userData;
+//         const mailOptions = {
+//           from: "muhzinsidhiq333@gmail.com",
+//           to: req.body.email,
+//           subject: "OTP Verification",
+//           text: `Your OTP code is: ${otp}`,
+//         };
+  
+//         transporter.sendMail(mailOptions, (error, info) => {
+//           if (error) {
+//             console.log("Email send error: " + error);
+//             return res.status(500).json({ error: "Failed to send OTP" });
+//           } else {
+//             console.log("Email sent: " + info.response);
+//             // Redirect to the OTP verification page
+//             return res.status(200).redirect("/page-verify-otp");
+//           }
+//         });
+  
+//         const randomReferralCode = generateRandomReferralCode();
+  
+//         // Update the user's information with the generated referral code
+//         // await User.findOneAndUpdate( 
+//         //   { email: req.body.email },
+//         //   { $set: { myRefferalCode: randomReferralCode } },
+//         //   { new: true }
+//         // );
+//         console.log(randomReferralCode,"randomReferralCoderandomReferralCode");
+
+//         const sPassword = await securePassword(req.body.password);
+  
+//         const userData = {
+//           username: req.body.username,
+//           email: req.body.email,
+//           password: sPassword,
+//           // other user data...  
+//           myRefferalCode: randomReferralCode, // Assuming you want to save it as user_referral_code too
+//         };
+  
+//     console.log(userData,"userDatauserData||||||||||||||||||");
+  
+//         req.session.userData = userData;
 
 
-        const referralCodeOwner = await User.findOne({ myRefferalCode: referralCode });
-         const user_id=referralCodeOwner._id
-        //  console.log(user_id,"usereeeee ");
-        // console.log(referralCodeOwner,"referralCodeOwnerppppppppppppppppppppp");
-        const wallet=await Wallet.findOne({userId:user_id })
-            // console.log(wallet,"wallettttttttttttttttttttttttttttttttttttttttttt");
-       if (wallet) {
-         // Update the wallet of the referral code owner with 100 rupees
-         wallet.balance += 100;
+//         const referralCodeOwner = await User.findOne({ myRefferalCode: referralCode });
+//          const user_id=referralCodeOwner._id
+//         //  console.log(user_id,"usereeeee ");
+//         // console.log(referralCodeOwner,"referralCodeOwnerppppppppppppppppppppp");
+//         const wallet=await Wallet.findOne({userId:user_id })
+//             // console.log(wallet,"wallettttttttttttttttttttttttttttttttttttttttttt");
+//        if (wallet) {
+//          // Update the wallet of the referral code owner with 100 rupees
+//          wallet.balance += 100;
 
        
-            const transaction = {
-              date: new Date(),
-              type: "recived",
-              from: "Refferal code ",
-              amount: 100,
-            };
-            console.log(transaction, "traa....");
-            wallet.transactions.push(transaction);
+//             const transaction = {
+//               date: new Date(),
+//               type: "recived",
+//               from: "Refferal code ",
+//               amount: 100,
+//             };
+//             console.log(transaction, "traa....");
+//             wallet.transactions.push(transaction);
     
-            await wallet.save();
+//             await wallet.save();  
           
 
-       }
-    } 
-      }
-    } catch (err) { 
-      res.render("page-error-404")
+//        }
+     
+//       }
+//     } 
+    
+//     catch (err) { 
+//       res.render("page-404")
 
+//       console.error(err.message);
+//       return res.status(500).send("Internal Server Error");
+//     }
+//   };  
+     
+
+
+const userRegister = async (req, res) => {
+  try {
+      const checkEmail = await User.findOne({ email: req.body.email });
+
+      if (checkEmail) {
+          // Email already exists, display validation message
+          return res.render("page-register", {
+              message: "Email already exists. Try again",
+          });
+      } else {
+          // Check if a referral code is provided
+          const referralCode = req.body.myRefferalCode || "";
+
+          // Validate the referral code if provided
+          if (referralCode !== "") {
+              const isValidReferralCode = await isValidReferralCodeFunction(referralCode);
+
+              if (!isValidReferralCode) {
+                  // Show SweetAlert for an invalid referral code
+                  Swal.fire({
+                      icon: "error",
+                      title: "Invalid Referral Code",
+                      text: "The referral code you provided is invalid. Please try again.",
+                  });
+
+                  return res.render("page-register", {
+                      message: "Invalid referral code. Try again",
+                  });
+              }
+          }
+
+          const otp = randomstring.generate({
+              length: 6,
+              charset: "numeric",
+          });
+
+          const transporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                  user: "muhzinsidhiq333@gmail.com",
+                  pass: "iiue xtwn lkkf jfps",
+              },
+          });
+
+          const mailOptions = {
+              from: "muhzinsidhiq333@gmail.com",
+              to: req.body.email,
+              subject: "OTP Verification",
+              text: `Your OTP code is: ${otp}`,
+          };
+
+          transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                  console.log("Email send error: " + error);
+                  return res.status(500).json({ error: "Failed to send OTP" });
+              } else {
+                  console.log("Email sent: " + info.response);
+                  // Redirect to the OTP verification page
+                  return res.status(200).redirect("/page-verify-otp");
+              }
+          });
+
+          const randomReferralCode = generateRandomReferralCode();
+
+          const sPassword = await securePassword(req.body.password);
+
+          const userData = {
+              username: req.body.username,
+              email: req.body.email,
+              password: sPassword,
+              myRefferalCode: randomReferralCode,
+          };
+
+          console.log(userData, "userDatauserData||||||||||||||||||");
+
+          req.session.userData = userData;
+
+          const referralCodeOwner = await User.findOne({ myRefferalCode: referralCode });
+
+          if (referralCodeOwner) {
+              const user_id = referralCodeOwner._id;
+              const wallet = await Wallet.findOne({ userId: user_id });
+
+              if (wallet) {
+                  // Update the wallet of the referral code owner with 100 rupees
+                  wallet.balance += 100;
+
+                  const transaction = {
+                      date: new Date(),
+                      type: "recived",
+                      from: "Refferal code ",
+                      amount: 100,
+                  };
+
+                  console.log(transaction, "traa....");
+                  wallet.transactions.push(transaction);
+
+                  await wallet.save();
+              }
+          } else {
+              console.log("Referral code owner not found");
+              // Handle the case where referralCodeOwner is null
+          }
+
+          // Continue with the rest of your code...
+      }
+  } catch (err) {
       console.error(err.message);
       return res.status(500).send("Internal Server Error");
-    }
-  }; 
-     
-  
+  }
+};
+
+       
   
 
 const isValidReferralCodeFunction = async (referralCode) => {
@@ -263,7 +387,7 @@ const isValidReferralCodeFunction = async (referralCode) => {
     // Return true if a user with the referral code is found, indicating it's valid
     return !!userWithReferralCode;
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error("Error validating referral code:", error);
     return false; // Consider it as invalid in case of an error
@@ -310,7 +434,7 @@ const loadhome = async (req, res) => {
       res.redirect("/");
     }
   } catch (err) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(err.message);
     res.status(500).send("Internal Server Error");
@@ -338,7 +462,7 @@ const loadverifyUserOTP = async (req, res) => {
       res.render("page-verify-otp", { remainingTime: remainingTimeInSeconds });
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
@@ -370,7 +494,7 @@ const verificationOtp = async (req, res) => {
       res.render("page-verify-otp", { message: "invalid OTP" });
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -411,7 +535,7 @@ const resendOTP = async (req, res) => {
       }
     });
   } catch (err) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error(err.message);
     res.status(500).send("Internal Server Error");
@@ -422,7 +546,7 @@ const success = async (req, res) => {
   try {
     return res.status(200).render("success-login");
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
@@ -451,7 +575,7 @@ const loadSingleProductPage = async (req, res) => {
       discountPercentage,
     });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
@@ -517,7 +641,7 @@ const categoryOffer=lipsCareCategory.offerPercentage
     // Render the 'lipscare' EJS template and pass the products and sortBy as variables
     res.render("lipscare", { products: productsWithDiscount, sortBy: sortBy ,lipsCareCategory:lipsCareCategory});
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -624,7 +748,7 @@ const loadBodyCare = async (req, res) => {
     // Render the 'bodycare' EJS template and pass the products and sortBy as variables
     res.render("bodycare", { products: productsWithDiscount, sortBy: sortBy });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -678,7 +802,7 @@ const loadHairCare = async (req, res) => {
     // Render the 'haircare' EJS template and pass the products and sortBy as variables
     res.render("haircare", { products: productsWithDiscount, sortBy: sortBy });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -739,7 +863,7 @@ const loadAllProducts = async (req, res) => {
       totalPages,
     });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     // Handle the error appropriately
@@ -779,7 +903,7 @@ const addAddress = async (req, res) => {
       });
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -805,12 +929,14 @@ const loadMyProfile = async (req, res) => {
       });
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
   
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 };
+
+
 
 const loadEditProfile = async (req, res) => {
   try {
@@ -821,7 +947,7 @@ const loadEditProfile = async (req, res) => {
       res.render("edit-profile", { user: userData });
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
@@ -854,7 +980,7 @@ const loadEditAddress = async (req, res) => {
 
     res.render("editAddress", { addresses: address });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -885,7 +1011,7 @@ const editAddress = async (req, res) => {
     // Redirect back to the user account page or any other desired page
     res.redirect("/loadmyaddress");
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error(error);
     // Handle errors appropriately, e.g., render an error page or provide an error response
@@ -904,7 +1030,7 @@ const loadmyAddress = async (req, res) => {
       res.status(404).send("User not found");
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -939,7 +1065,7 @@ const deleteAddress = async (req, res) => {
 
     res.redirect("/loadmyaddress"); // Redirect back to the user account page or any other desired page after deleting.
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.error(error);
     // Handle errors appropriately, e.g., render an error page or provide an error response
@@ -951,7 +1077,7 @@ const loadEnterEmail = async (req, res) => {
   try {
     res.render("email-reset-otp");
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
@@ -1011,7 +1137,7 @@ const loadForgottPassword = async (req, res) => {
       res.render("enterOTP", { message: "please check the OTP" });
     }
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -1035,7 +1161,7 @@ const resetPassword = async (req, res) => {
     const successMessage = "Password reset successful.";
     res.render("forgott-password", { successMessage });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     res.status(500).json({ message: "Error updating user information" });
@@ -1085,7 +1211,7 @@ const loadAddToCart = async (req, res) => {
       totalAmount,
     });
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
     // Handle other errors as needed
@@ -1131,7 +1257,7 @@ const AddToCart = async (req, res) => {
 
 
   } catch (error) {
-    res.render("page-error-404")
+    res.render("page-404")
 
     console.log(error);
   }
@@ -1929,6 +2055,77 @@ const getWalletTransactions = async (userId) => {
 };
 
 
+
+const loadWishList = async (req, res) => {
+  try {
+    const userId = req.session.user_id; // Adjust this line based on how you get the userId from the request
+
+      const wishlist = await Wishlist.findOne({ user:userId });
+      console.log(wishlist,"wishlistllllllllllllllllllll");
+      const products = await Promise.all(wishlist.product.map(async(item)=>{
+        return productModel.findById(item.item)
+      }))
+      console.log(products);
+      if (!wishlist) {
+          // If the wishlist is empty, you can handle it accordingly
+          return res.render('wishList', { wishlist: { products: [] } });
+      }
+
+      res.render('wishList', { products });
+  } catch (error) {
+      console.error(error);
+      res.status(500).render('page-404', { error: 'Internal Server Error' });
+  }
+};
+
+const addToWishList = async (req, res) => {
+  console.log("haiiiiiiiiiiiiiiiii88888");
+  const userId = req.session.user_id;
+
+  const productId = req.params.id;
+
+  try {
+      const product = await AdminProduct.findById(productId);
+      console.log(product,"product00000000000000");
+      const wishlist = await Wishlist.findOne({ user: userId });
+      console.log(wishlist,"wishlist9999999999");
+
+      if (!wishlist) {
+          // If the wishlist doesn't exist, create a new one
+          const newWishlist = new Wishlist({
+              user: userId,
+              product: [{ item: product._id, quantity: 1 }]
+          });
+          await newWishlist.save();
+
+          res.status(200).json({ error: false, message: 'Product added to wishlist' });
+      } else {
+          const productExistIndex = wishlist.product.findIndex((item) => item.item.equals(product._id));
+
+          if (productExistIndex !== -1) {
+              // Product already exists in the wishlist, increment quantity
+              await Wishlist.updateOne(
+                  { user: userId, 'product.item': product._id },
+                  { $inc: { 'product.$.quantity': 1 } }
+              );
+          } else {
+              // Product doesn't exist in the wishlist, add it
+              wishlist.product.push({ item: product._id, quantity: 1 });
+              await wishlist.save();
+          }
+
+          // res.status(200).json({ error: false, message: 'Product added to wishlist' });
+          res.redirect('/WishList')
+      }
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: true, message: 'Internal server error occurred' });
+  }
+};
+
+
+
+
 module.exports = {
   landing,
   login,
@@ -1977,4 +2174,6 @@ module.exports = {
   loadConfirmPage,
   applyCoupon,
   loadWallet,
+  loadWishList,
+  addToWishList,
 };
