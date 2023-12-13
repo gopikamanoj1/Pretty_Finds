@@ -119,6 +119,17 @@ userRouter.get( "/check-return-status/:orderId", userControllers.checkStatusForR
 //wishlist
 userRouter.get('/WishList',userControllers.loadWishList)
 userRouter.post("/addToWishList/:id",userControllers.addToWishList)
+//remove from wishlist
+userRouter.post('/removeFromWishlist/:id',userControllers.removeFromWishlist)
+
+
+
+
+
+
+
+
+
 
 module.exports = userRouter;
    

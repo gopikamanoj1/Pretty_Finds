@@ -94,7 +94,7 @@ const createCoupon = async (req, res) => {
             await existingCoupon.save();
     
             // Redirect to the addCoupen page or any other page as needed
-            res.redirect("/addCoupen");
+            res.redirect("/addCoupon");
         } catch (error) {
             console.error(error);
             res.status(500).send("Internal Server Error");

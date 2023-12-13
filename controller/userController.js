@@ -79,7 +79,7 @@ const verifyUser = async (req, res) => {
 
 
     if (userData) {
-      const passwordMatch = await bcrypt.compare(password, userData.password); // Compare the hashed password
+      const passwordMatch = await bcrypt.compare(password, userData.password); 
       console.log(password, userData.password);
       console.log(passwordMatch,"passwordMatch");
       if(userData.isBlocked===false){
@@ -1171,6 +1171,9 @@ const resetPassword = async (req, res) => {
 const loadAddToCart = async (req, res) => {
   try {
     let userId = req.session.user_id;
+    if (!userId){
+      res.render("page-login")
+   }
     const userdata = await User.findById(userId);
 
     // Check if the user is not logged in
@@ -1222,6 +1225,9 @@ const loadAddToCart = async (req, res) => {
 const AddToCart = async (req, res) => {
   try {
     const userId = req.session.user_id;
+    if (!userId){
+      res.render("page-login")
+   }
 
     const productId = req.params.id;
     let userCart = await Cart.findOne({ user: userId });
@@ -1245,13 +1251,7 @@ const AddToCart = async (req, res) => {
       userCart.products[productIndex].quantity += 1;
     }
 
-    // for (let i=0;i<products.length;i++){
-    //   // console.log(products[i].productId.discountPercentage,"(products[i].productId.discountPercentagggggggggggggggggggggggge");
-    //   if(products[i].productId.discountPercentage!==0){
   
-    //     products[i].productId.price=calculateDiscountedPrice(products[i].productId.price,products[i].productId.discountPercentage)
-    //   }
-    // }
     await userCart.save();
     res.redirect("/cart");
 
@@ -1943,7 +1943,7 @@ const applyCoupon = async (req, res) => {
 
     // Retrieve the coupon details from the database
     const couponFind = await Coupon.findOne({ couponCode: couponCode });
-    console.log(couponFind,"couponFindjjjjjjjjjjjjjjjjjjjjjjjjj");
+    // console.log(couponFind,"couponFindjjjjjjjjjjjjjjjjjjjjjjjjj");
 
     const userCoupon = await User.findById({ _id: user_id });
 
@@ -2059,7 +2059,9 @@ const getWalletTransactions = async (userId) => {
 const loadWishList = async (req, res) => {
   try {
     const userId = req.session.user_id; // Adjust this line based on how you get the userId from the request
-
+    if (!userId){
+      res.render("page-login")
+   }
       const wishlist = await Wishlist.findOne({ user:userId });
       console.log(wishlist,"wishlistllllllllllllllllllll");
       const products = await Promise.all(wishlist.product.map(async(item)=>{
@@ -2071,7 +2073,7 @@ const loadWishList = async (req, res) => {
           return res.render('wishList', { wishlist: { products: [] } });
       }
 
-      res.render('wishList', { products });
+      res.render('wishList', { products ,logged:"user logged"});
   } catch (error) {
       console.error(error);
       res.status(500).render('page-404', { error: 'Internal Server Error' });
@@ -2081,6 +2083,9 @@ const loadWishList = async (req, res) => {
 const addToWishList = async (req, res) => {
   console.log("haiiiiiiiiiiiiiiiii88888");
   const userId = req.session.user_id;
+  if (!userId){
+    res.render("page-login")
+ }
 
   const productId = req.params.id;
 
@@ -2122,6 +2127,43 @@ const addToWishList = async (req, res) => {
       res.status(500).json({ error: true, message: 'Internal server error occurred' });
   }
 };
+
+
+const removeFromWishlist = async (req, res) => {
+  try {
+    const userId = req.session.user_id;
+  
+    const productId = req.params.id;
+
+    // Find the user's wishlist
+    const userWishlist = await Wishlist.findOne({ user: userId });
+
+    // If the user has a wishlist
+    if (userWishlist) {
+      // Ensure products is initialized and is an array
+      userWishlist.product = userWishlist.product || [];
+
+      // Remove the product from the wishlist's products array
+      userWishlist.product = userWishlist.product.filter(
+        (product) => product.item.toString() !== productId
+      );
+
+      // Save the updated wishlist
+      await userWishlist.save();
+
+      // Redirect to the wishlist page (adjust the route accordingly)
+      return res.redirect("/wishlist");
+    } else {
+      // User does not have a wishlist
+      return res.status(404).send("User does not have a wishlist");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
 
 
 
@@ -2176,4 +2218,6 @@ module.exports = {
   loadWallet,
   loadWishList,
   addToWishList,
+  removeFromWishlist,
+
 };
