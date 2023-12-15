@@ -329,11 +329,12 @@ const userRegister = async (req, res) => {
 
           const sPassword = await securePassword(req.body.password);
 
-          const userData = {
+          const userData = {  
               username: req.body.username,
               email: req.body.email,
               password: sPassword,
               myRefferalCode: randomReferralCode,
+              wallet:0 
           };
 
           console.log(userData, "userDatauserData||||||||||||||||||");
@@ -471,11 +472,12 @@ const loadverifyUserOTP = async (req, res) => {
 const verificationOtp = async (req, res) => {
   try {
     const enteredOTP = req.body.otp;
-
+    
     // Check if the entered OTP matches the one passed as a parameter
     if (enteredOTP === otp || enteredOTP === rotp) {
       // Ensure that userData is defined in req.session
       const userData = req.session.userData;
+      const user_id=req.session.user_id
 
       const user = new User({
         username: userData.username,
@@ -487,6 +489,14 @@ const verificationOtp = async (req, res) => {
       });
 
       await user.save();
+      console.log(user);
+      let walletData = {
+        userId:user._id,
+        balance:0,
+        transactions:[] 
+      }
+
+     await Wallet.insertMany([walletData])
 
       return res.render("success-login", { logged: "user logged   " });
     } else {
@@ -495,12 +505,9 @@ const verificationOtp = async (req, res) => {
     }
   } catch (error) {
     res.render("page-404")
-
-    console.log(error);
-    res.status(500).send("Internal Server Error");
   }
 };
-
+ 
 var rotp;
 const resendOTP = async (req, res) => {
   try {
@@ -1171,9 +1178,10 @@ const resetPassword = async (req, res) => {
 const loadAddToCart = async (req, res) => {
   try {
     let userId = req.session.user_id;
-    if (!userId){
-      res.render("page-login")
-   }
+
+  //   if (!userId){
+  //     res.render("page-login")
+  //  }
     const userdata = await User.findById(userId);
 
     // Check if the user is not logged in
@@ -2063,7 +2071,8 @@ const loadWishList = async (req, res) => {
       res.render("page-login")
    }
       const wishlist = await Wishlist.findOne({ user:userId });
-      console.log(wishlist,"wishlistllllllllllllllllllll");
+
+
       const products = await Promise.all(wishlist.product.map(async(item)=>{
         return productModel.findById(item.item)
       }))

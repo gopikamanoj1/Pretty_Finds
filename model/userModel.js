@@ -38,7 +38,9 @@ const userSchema = new mongoose.Schema({
         pincode: Number
     }],
     wallet: {
-        type: Number
+        type: Number,
+        // default:0
+        
     },
     
     myRefferalCode: {
