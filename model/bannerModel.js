@@ -8,7 +8,11 @@ const bannerSchema = new mongoose.Schema({
             required: true,
           },
         },
-      ]
+    ],
+    link: {
+        type: String, // You may want to use a more specific type if needed (e.g., URL type)
+        required: false, // Update as needed based on your requirements
+    },
     // Add any other fields you need for your banners
 });
 

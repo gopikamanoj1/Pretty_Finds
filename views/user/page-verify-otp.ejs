@@ -101,6 +101,9 @@
     </style>
     
     <div class="custom-form">
+        <% if(typeof message !== "undefined") { %>
+            <p id="msg" style="color: rgb(144, 4, 4)"><%= message %></p>
+        <% } %>
         <form action="/page-verify-otp" method="POST">
             <div class="form-group">
                 <label for="otp">Enter OTP:</label>
@@ -112,6 +115,14 @@
             </div>
         </form>
     </div>
+
+
+    <script>
+        setTimeout(() => {
+          document.getElementById("msg").style.display="none"
+          
+        }, 5000);
+      </script>
   
 
     <div id="otpMessage"></div> <!-- This is where you can display OTP verification status -->
@@ -119,6 +130,9 @@
     <p class="expired-message" style="display: none;">OTP has expired !!! Please Resend...</p>
     
     <script>
+
+
+
         // Function to start the countdown
         function startCountdown() {
             const countdownElement = document.getElementById("remainingTime");

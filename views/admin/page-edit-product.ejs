@@ -60,7 +60,7 @@
                     </a>
 
                 </li>
-                <li class="menu-item has-submenu">
+                <li >
                     <a class="menu-link" href="/pageOrders"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Orders</span>
                     </a>
@@ -78,23 +78,7 @@
                 </li>
 
             </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-settings-1">Setting sample 1</a>
-                        <a href="page-settings-2">Setting sample 2</a>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
-            </ul>
+           
             <br>
             <br>
         </nav>
@@ -102,71 +86,21 @@
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i
-                                class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
+               
             </div>
             <div class="col-nav">
                 <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
                         class="material-icons md-apps"></i> </button>
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
-                                class="material-icons md-cast"></i></a>
-                    </li>
+                   
+                   
+                   
                     <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
-                            aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png"
-                                    alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png"
-                                    alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png"
-                                    alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png"
-                                    alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
-                            aria-expanded="false"> <img class="img-xs rounded-circle"
-                                src="/admin-assets/imgs/people/avatar2.jpg" alt="User"></a>
+                    
                         <a class="dropdown-item text-danger" href="/logout"><i
                                 class="material-icons md-exit_to_app"></i>Logout</a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
-                                Profile</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
-                                Settings</a>
-                            <a class="dropdown-item" href="#"><i
-                                    class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
-                                center</a>
-                            <div class="dropdown-divider"></div>
-                        </div>
+                     
                     </li>
                 </ul>
             </div>
@@ -188,26 +122,26 @@
                                     <div class="form-group">
                                         <label>Product Name</label>
                                         <input type="text" class="form-control" name="name" value="<%= product.name %>"
-                                            required>
+                                            >
                                     </div>
                                     <div class="form-group">
                                         <label>Product Price</label>
                                         <input type="number" class="form-control" name="price"
-                                            value="<%= product.price %>" required>
+                                            value="<%= product.price %>" >
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="offerPercentage">discountPercentage</label>
+                                        <label >discountPercentage</label>
                                         <input type="number" class="form-control" name="discountPercentage"
-                                            value="<%= product.discountPercentage %>" min="0" max="100">
+                                            value="<%= product.discountPercentage %>">
                                     </div>
                                     <div class="form-group">
                                         <label>Product Description</label>
                                         <textarea class="form-control" name="description"
-                                            required><%= product.description %></textarea>
+                                            ><%= product.description %></textarea>
                                     </div>
                                     <div class="form-group dropdown mt-4">
                                         <label for="category">Product Category</label>
-                                        <select class="form-control" id="category" name="category" required>
+                                        <select class="form-control" id="category" name="category" >
                                             <% categories.forEach(function(category) { %>
                                                 <option value="<%= category.id %>" <% if (product.category && product.category.id.toString() === category.id.toString()) { %>selected<% } %>>
                                                     <%= category.name %>
@@ -221,7 +155,7 @@
                                     <div class="form-group">
                                         <label for="stock">Product Stock</label>
                                         <input type="number" class="form-control" name="stock"
-                                            value="<%= product.stock %>" required>
+                                            value="<%= product.stock %>" >
                                     </div>
                                     <div class="form-group">
                                         <label>Existing Product Images</label>
@@ -296,22 +230,22 @@
             var stock = document.editProductForm.stock.value;
             var image = document.editProductForm.image.value;
 
-            if (name === "" || price === "" || discountPercentage === "" || description === "" || category === "" || stock === "" || image === "") {
+            if (name === "" || price === "" || discountPercentage === "" || description === "" || category === "" || stock === "" ) {
                 showCustomAlert("Please fill in all fields.");
                 return false;
             }
 
-            if (price == 0) {
+            if (price <= 0) {
                 showCustomAlert("Invalid price. Please enter a valid numerical price.");
                 return false;
             }
 
-            if (discountPercentage == 0) {
+            if (discountPercentage < 0 || discountPercentage > 100) {
                 showCustomAlert("Invalid discount percentage. Please enter a valid numerical discount percentage.");
                 return false;
             }
 
-            if (stock == 0) {
+            if (stock < 0) {
                 showCustomAlert("Invalid stock. Please enter a valid numerical stock.");
                 return false;
             }

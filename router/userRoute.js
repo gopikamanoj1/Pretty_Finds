@@ -121,8 +121,8 @@ userRouter.get('/WishList',userControllers.loadWishList)
 userRouter.post("/addToWishList/:id",userControllers.addToWishList)
 //remove from wishlist
 userRouter.post('/removeFromWishlist/:id',userControllers.removeFromWishlist)
-
-
+//banner navigation 
+// userRouter.get('/bannerDetails/:id',userControllers.bannerNavigation)
 
 
 

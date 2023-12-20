@@ -79,23 +79,7 @@
                 </li>
 
             </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-settings-1">Setting sample 1</a>
-                        <a href="page-settings-2">Setting sample 2</a>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
-            </ul>
+           
             <br>
             <br>
         </nav>
@@ -103,71 +87,21 @@
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i
-                                class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
+               
             </div>
             <div class="col-nav">
                 <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
                         class="material-icons md-apps"></i> </button>
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
-                                class="material-icons md-cast"></i></a>
-                    </li>
+                   
+                   
+                   
                     <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
-                            aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="/admin-assets/imgs/theme/flag-us.png"
-                                    alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="/admin-assets/imgs/theme/flag-fr.png"
-                                    alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="/admin-assets/imgs/theme/flag-jp.png"
-                                    alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="/admin-assets/imgs/theme/flag-cn.png"
-                                    alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
-                            aria-expanded="false"> <img class="img-xs rounded-circle"
-                                src="/admin-assets/imgs/people/avatar2.jpg" alt="User"></a>
+                    
                         <a class="dropdown-item text-danger" href="/logout"><i
                                 class="material-icons md-exit_to_app"></i>Logout</a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
-                                Profile</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
-                                Settings</a>
-                            <a class="dropdown-item" href="#"><i
-                                    class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
-                                center</a>
-                            <div class="dropdown-divider"></div>
-                        </div>
+                     
                     </li>
                 </ul>
             </div>
@@ -175,17 +109,14 @@
         <section class="content-main">
             <div class="content-header">
                 <h3>Edit Category Name</h3>
-                <div>
-                    <a href="#" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Create
-                        report</a>
-                </div>
+               
             </div>
                      
 
             <div class="container">
                
             
-                <form action="/loadeditcategory/<%= category.id %>" method="POST">
+                <form class="custom-form" action="/loadeditcategory/<%= category.id %>" method="POST">
                     <div class="form-group">
                         <label for="name">Category Name</label>
                         <input type="text" class="form-control" id="name" name="name" value="<%= category.name %>" required>
@@ -197,7 +128,48 @@
                     <button type="submit" class="btn btn-primary">Save Name</button>
                 </form>
                 
+                
             </div>
+            <style>
+                /* Add this CSS to your existing stylesheet or in a new style tag in the head of your HTML */
+
+.custom-form {
+    max-width: 400px; /* Adjust the maximum width of the form */
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #007bff; /* Adjust the primary button color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Adjust the hover color */
+}
+
+            </style>
 
 
             <!-- <div class="pagination-area mt-30 mb-50">

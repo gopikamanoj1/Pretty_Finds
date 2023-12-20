@@ -56,12 +56,15 @@ const addBanners = async (req, res) => {
             try {
                 // Assuming you want to save multiple images, use req.files instead of req.file
                 const images = req.files.map(file => ({ url: file.filename }));
+                const bannerLink = req.body.bannerLink; // Extract link from the form
+
 
                 // Create a new banner instance
                 const newBanner = new Banners({
                     image: images,
-                    // Add any other fields you need for your banners
+                    link: bannerLink, // Include the link in the banner data
                 });
+                
 
                 // Save the banner to the database
                 await newBanner.save();

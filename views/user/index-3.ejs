@@ -49,6 +49,9 @@
                             </ul>
                         </div>
                     </div>
+
+
+                    
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
@@ -94,7 +97,7 @@
 
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                        <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
                     <div class="header-right">
 
@@ -129,7 +132,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative  main-nav">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                        <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
 
                     <div class="header-nav d-none d-lg-flex">
@@ -139,7 +142,7 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="/index">Home </i></a>
+                                    <li><a class="active" href="">Home </i></a>
 
                                     </li>
                                     <li>
@@ -204,7 +207,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="/index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                    <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -230,9 +233,9 @@
                                     <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i
                                             class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
-                                        <li><a href="#"><img src="/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                                        <li><a href="#"><img src="/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
+                                        <li><a href=""><img src="/imgs/theme/flag-fr.png" alt="">Français</a></li>
+                                        <li><a href=""><img src="/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
+                                        <li><a href=""><img src="/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
                                     </ul>
                                 </li>
                                 <% if (!locals.logged) { %>
@@ -253,17 +256,7 @@
                     </div>
                     <!-- mobile menu end -->
                 </div>
-                <!-- <div class="mobile-header-info-wrap mobile-header-border">
-                    <div class="single-mobile-header-info mt-30">
-                        <a href="page-contact"> Our location </a>
-                    </div>
-                    <div class="single-mobile-header-info">
-                        <a href="page-login-register">Log In / Sign Up </a>
-                    </div>
-                    <div class="single-mobile-header-info">
-                        <a href="#">(+01) - 2345 - 6789 </a>
-                    </div>
-                </div> -->
+
 
             </div>
         </div>
@@ -272,16 +265,23 @@
         <section class="home-slider position-relative pt-25 pb-20">
             <div class="container">
                 <!-- EJS template - index-3.ejs -->
+
+
                 <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
+                        
                         <% if (banners.length> 0) { %>
                             <% banners.forEach((banner, index)=> { %>
                                 <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                                    <div class="slider-img">
-                                        <img src="/uploads/<%= banner.image[0].url %>" alt="Banner Image"
-                                            style="width: 100%; height: auto;">
-                                    </div>
+                                    <a href="/allProducts"> <!-- Add a link to the details page -->
+                                        <div class="slider-img">
+                                            
+                                            <img src="/uploads/<%= banner.image[0].url %>" alt="Banner Image"
+                                                style="width: 100%; height: auto;">
+                                        </div>
+                                    </a>
                                 </div>
+
                                 <% }); %>
                                     <% } else { %>
                                         <p>No banners available.</p>
@@ -296,6 +296,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
                         setInterval(function () {
@@ -397,7 +398,7 @@
                                                 <% } %>
 
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="/singleProduct/<%= product.id %>">
+                                                        <a href="/singleProduct/<%= product._id %>">
                                                             <% if (product.image && product.image[0] &&
                                                                 product.image[0].url) { %>
                                                                 <img src="/uploads/<%= product.image[0].url %>"
@@ -407,24 +408,25 @@
                                                                     <% } %>
                                                         </a>
                                                     </div>
-                                                    <form action="/addToWishList/<%= product.id %>" method="post">
+                                                    <form action="/addToWishList/<%= product._id %>" method="post">
                                                         <div class="product-action-1">
-                                                      
-                                                        <button aria-label="Add To Wishlist" class="action-btn hover-up">
-                                                            
-                                                            <i class="fi-rs-heart"></i>
-                                                        </button>
+
+                                                            <button aria-label="Add To Wishlist"
+                                                                class="action-btn hover-up">
+
+                                                                <i class="fi-rs-heart"></i>
+                                                            </button>
 
 
-                                                    </div>
+                                                        </div>
                                                     </form>
-                                                   
+
                                         </div>
 
                                         <div class="product-content-wrap">
                                             <div class="product-category">
                                             </div>
-                                            <h2><a href="/singleProduct">
+                                            <h2><a href="/singleProduct/<%= product._id %>">
                                                     <%= product.name %>
                                                 </a></h2>
                                             <div class="rating-result" title="<%= product.rating %>">
@@ -557,90 +559,90 @@
 
     </main>
     <footer class="main">
-            <section class="newsletter p-30 text-white wow fadeIn animated">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7 mb-md-3 mb-lg-0">
-                            <div class="row align-items-center">
-                                <div class="col flex-horizontal-center">
-                                    <img class="icon-email" src="/imgs/theme/icons/icon-email.svg" alt="">
-                                    <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
-                                </div>
-                                <div class="col my-4 my-md-0 des">
-                                    <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first
-                                            shopping.</strong></h5>
-                                </div>
+        <section class="newsletter p-30 text-white wow fadeIn animated">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 mb-md-3 mb-lg-0">
+                        <div class="row align-items-center">
+                            <div class="col flex-horizontal-center">
+                                <img class="icon-email" src="/imgs/theme/icons/icon-email.svg" alt="">
+                                <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
                             </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <!-- Subscribe Form -->
-                         
-                            <!-- End Subscribe Form -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section-padding footer-mid">
-                <div class="container pt-15 pb-20">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="widget-about font-md mb-md-5 mb-lg-0">
-                                <div class="logo logo-width-1 wow fadeIn animated">
-                                    <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
-                                </div>
-                                <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
-                                <p class="wow fadeIn animated">
-                                </p>
-                                <p class="wow fadeIn animated">
-                                </p>
-                                <p class="wow fadeIn animated">
-                                </p>
-                                <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
-                                <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                    <a ><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                    <a ><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                    <a ><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                    <a ><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                    <a ><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3">
-                            <h5 class="widget-title wow fadeIn animated"></h5>
-                       
-                        </div>
-                        <div class="col-lg-2  col-md-3">
-                            <h5 class="widget-title wow fadeIn animated"></h5>
-                           
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="row">
-                                <div class="col-md-8 col-lg-12">
-                                  
-                                </div>
-                                <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
-                                    <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
-                                    <img class="wow fadeIn animated" src="/imgs/theme/payment-method.png" alt="">
-                                </div>
+                            <div class="col my-4 my-md-0 des">
+                                <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first
+                                        shopping.</strong></h5>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <div class="container pb-20 wow fadeIn animated">
-                <div class="row">
-                    <div class="col-12 mb-20">
-                        <div class="footer-bottom"></div>
-                    </div>
-                    <div class="col-lg-6">
-                      
-                    </div>
-                    <div class="col-lg-6">
-                       
+                    <div class="col-lg-5">
+                        <!-- Subscribe Form -->
+
+                        <!-- End Subscribe Form -->
                     </div>
                 </div>
             </div>
-        </footer>
+        </section>
+        <section class="section-padding footer-mid">
+            <div class="container pt-15 pb-20">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget-about font-md mb-md-5 mb-lg-0">
+                            <div class="logo logo-width-1 wow fadeIn animated">
+                                <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                            </div>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <p class="wow fadeIn animated">
+                            </p>
+                            <p class="wow fadeIn animated">
+                            </p>
+                            <p class="wow fadeIn animated">
+                            </p>
+                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
+                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                                <a><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                        <h5 class="widget-title wow fadeIn animated"></h5>
+
+                    </div>
+                    <div class="col-lg-2  col-md-3">
+                        <h5 class="widget-title wow fadeIn animated"></h5>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-md-8 col-lg-12">
+
+                            </div>
+                            <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
+                                <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
+                                <img class="wow fadeIn animated" src="/imgs/theme/payment-method.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container pb-20 wow fadeIn animated">
+            <div class="row">
+                <div class="col-12 mb-20">
+                    <div class="footer-bottom"></div>
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">

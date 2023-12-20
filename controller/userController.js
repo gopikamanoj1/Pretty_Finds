@@ -44,6 +44,15 @@ const landing = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+  
+
+// const bannerNavigation =async (req,res)=>{
+
+// }
+
+
+
+
 
 const login = async (req, res) => {
   try {
@@ -103,7 +112,7 @@ const verifyUser = async (req, res) => {
               message: "INVALID USERNAME OR PASSWORD!",
             });
           }
-        } 
+        }  
         else {
           return res.render("page-login", {
             message: "User Not Exist",
@@ -131,7 +140,7 @@ const verifyUser = async (req, res) => {
 const Swal = require("sweetalert2");
 const productModel = require("../model/productModel");
 
-var otp;
+
 
 // const userRegister = async (req, res) => {
 //     try {
@@ -262,7 +271,7 @@ var otp;
 //   };  
      
 
-
+var otp;
 const userRegister = async (req, res) => {
   try {
       const checkEmail = await User.findOne({ email: req.body.email });
@@ -294,7 +303,7 @@ const userRegister = async (req, res) => {
               }
           }
 
-          const otp = randomstring.generate({
+           otp = randomstring.generate({
               length: 6,
               charset: "numeric",
           });
@@ -472,6 +481,7 @@ const loadverifyUserOTP = async (req, res) => {
 const verificationOtp = async (req, res) => {
   try {
     const enteredOTP = req.body.otp;
+    console.log(enteredOTP,"enteredOTPenteredOTP");
     
     // Check if the entered OTP matches the one passed as a parameter
     if (enteredOTP === otp || enteredOTP === rotp) {
@@ -506,7 +516,7 @@ const verificationOtp = async (req, res) => {
   } catch (error) {
     res.render("page-404")
   }
-};
+};  
  
 var rotp;
 const resendOTP = async (req, res) => {
@@ -920,12 +930,17 @@ const addAddress = async (req, res) => {
 const loadMyProfile = async (req, res) => {
   try {
     const userId = req.session.user_id;
-
-    // Fetch user data
     const userData = await User.findById(userId);
+
+
+    if (!userId||userData.isBlocked===true){
+      return res.render("page-login")
+   }
+
+    
     console.log(userData,"userDatauserDatauserData");
 
-    // Fetch user orders
+   
     const userOrders = await Order.find({ user: userId });
 
     if (userData) {
@@ -1090,13 +1105,13 @@ const loadEnterEmail = async (req, res) => {
   }
 };
 
-var otp;
+var cotp;
 const loadEnterOtp = async (req, res) => {
   try {
     const email = req.body.email;
 
     // Generate a random OTP
-    otp = randomstring.generate({
+    cotp = randomstring.generate({
       length: 4, // Adjust the length as needed
       charset: "numeric", // Generate a numeric OTP
     });
@@ -1114,7 +1129,7 @@ const loadEnterOtp = async (req, res) => {
       from: "muhzinsidhiq333@gmail.com", // Your Gmail address
       to: email, // User's email
       subject: "OTP Verification",
-      text: `Your OTP code is: ${otp}`,
+      text: `Your OTP code is: ${cotp}`,
     };
 
     // Send the email with OTP
@@ -1138,11 +1153,11 @@ const loadForgottPassword = async (req, res) => {
     const enteredOTP = req.body.otp;
 
     // Check if the entered OTP matches the one generated
-    if (enteredOTP === otp || enteredOTP === rotp) {
+    if (enteredOTP === cotp || enteredOTP === rotp) {
       res.render("forgott-password");
     } else {
       res.render("enterOTP", { message: "please check the OTP" });
-    }
+    } 
   } catch (error) {
     res.render("page-404")
 
@@ -1178,49 +1193,56 @@ const resetPassword = async (req, res) => {
 const loadAddToCart = async (req, res) => {
   try {
     let userId = req.session.user_id;
-
-  //   if (!userId){
-  //     res.render("page-login")
-  //  }
     const userdata = await User.findById(userId);
 
+    if (!userId||userdata.isBlocked===true){
+      return res.render("page-login")
+   }
+  
     // Check if the user is not logged in
-    if (!userdata) {
-      // Redirect to the login page
-      return res.redirect("/page-login");
+    // if (!userdata) {
+    //   // Redirect to the login page
+    //   return res.redirect("/page-login");
+    // }
+
+    else{
+      let cart = await Cart.findOne({ user: userId }).populate(
+        "products.productId"
+      );
+      let products = cart?.products;
+      // console.log(products,"productssssssssssssss");
+    for (let i=0;i<products.length;i++){
+      // console.log(products[i].productId.discountPercentage,"(products[i].productId.discountPercentagggggggggggggggggggggggge");
+      if(products[i].productId.discountPercentage!==0){
+  
+        products[i].productId.price=calculateDiscountedPrice(products[i].productId.price,products[i].productId.discountPercentage)
+      }
+    }
+  
+      // Check if the cart is empty
+      const isCartEmpty = !products || products.length === 0;
+  
+      // Calculate the total cart amount
+      const totalAmount = calculateCartTotal(products).toFixed(2);
+      console.log(totalAmount,"totalAmountttttttttttttttttt");
+  
+      cart.total = totalAmount;
+      console.log( cart.total," cart.totalllllllllllllll");
+      await cart.save();
+      console.log(cart);
+      res.render("cart-page", {
+        products,
+        userdata,
+        cart,
+        isCartEmpty,
+        totalAmount,
+      });
     }
 
-    let cart = await Cart.findOne({ user: userId }).populate(
-      "products.productId"
-    );
-    let products = cart?.products;
-    // console.log(products,"productssssssssssssss");
-  for (let i=0;i<products.length;i++){
-    // console.log(products[i].productId.discountPercentage,"(products[i].productId.discountPercentagggggggggggggggggggggggge");
-    if(products[i].productId.discountPercentage!==0){
 
-      products[i].productId.price=calculateDiscountedPrice(products[i].productId.price,products[i].productId.discountPercentage)
-    }
-  }
 
-    // Check if the cart is empty
-    const isCartEmpty = !products || products.length === 0;
 
-    // Calculate the total cart amount
-    const totalAmount = calculateCartTotal(products).toFixed(2);
-    console.log(totalAmount,"totalAmountttttttttttttttttt");
 
-    cart.total = totalAmount;
-    console.log( cart.total," cart.totalllllllllllllll");
-    await cart.save();
-    console.log(cart);
-    res.render("cart-page", {
-      products,
-      userdata,
-      cart,
-      isCartEmpty,
-      totalAmount,
-    });
   } catch (error) {
     res.render("page-404")
 
@@ -1630,14 +1652,14 @@ const orderDetails = async (req, res) => {
     const userId = req.session.user_id;
     const orderId = req.params.id;
 
-    const order = await Order.findById(orderId).populate("user").populate({
-      path: "items.product",
-      select: "name price images",
-    });
+    const order = await Order.findById(orderId)
+      .populate({
+        path: 'items.product',
+        select: 'name image',
+      })
+      .exec();
 
     const user = await User.findById(userId);
-
-    console.log("User Address:", user.addresses); // Log the user address object
 
     if (order) {
       const products = order.items.map((item) => ({
@@ -1657,6 +1679,7 @@ const orderDetails = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
 
 const loadOrder = async (req, res) => {
   try {
@@ -2067,22 +2090,26 @@ const getWalletTransactions = async (userId) => {
 const loadWishList = async (req, res) => {
   try {
     const userId = req.session.user_id; // Adjust this line based on how you get the userId from the request
-    if (!userId){
+    const userdata = await User.findById(userId);
+
+    if (!userId||userdata.isBlocked===true){
       res.render("page-login")
    }
-      const wishlist = await Wishlist.findOne({ user:userId });
+   else{
+    const wishlist = await Wishlist.findOne({ user:userId });
+    const products = await Promise.all(wishlist.product.map(async(item)=>{
+      return productModel.findById(item.item)
+    }))
+    console.log(products);
+    if (!wishlist) {
+        // If the wishlist is empty, you can handle it accordingly
+        return res.render('wishList', { wishlist: { products: [] } });
+    }
 
+    res.render('wishList', { products ,logged:"user logged"});
+   }
+   
 
-      const products = await Promise.all(wishlist.product.map(async(item)=>{
-        return productModel.findById(item.item)
-      }))
-      console.log(products);
-      if (!wishlist) {
-          // If the wishlist is empty, you can handle it accordingly
-          return res.render('wishList', { wishlist: { products: [] } });
-      }
-
-      res.render('wishList', { products ,logged:"user logged"});
   } catch (error) {
       console.error(error);
       res.status(500).render('page-404', { error: 'Internal Server Error' });
@@ -2090,47 +2117,56 @@ const loadWishList = async (req, res) => {
 };
 
 const addToWishList = async (req, res) => {
-  console.log("haiiiiiiiiiiiiiiiii88888");
+  try {
+  const productId = req.params.id;
   const userId = req.session.user_id;
-  if (!userId){
-    res.render("page-login")
+  const userdata = await User.findById(userId);
+
+  if (!userId||userdata.isBlocked===true){
+    return res.render("page-login")
+ }else{
+  const product = await AdminProduct.findById(productId);
+  console.log(product,"product00000000000000");
+  const wishlist = await Wishlist.findOne({ user: userId });
+  console.log(wishlist,"wishlist9999999999");
+
+  if (!wishlist) {
+      // If the wishlist doesn't exist, create a new one
+      const newWishlist = new Wishlist({
+          user: userId,
+          product: [{ item: product._id, quantity: 1 }]
+      });
+      await newWishlist.save();
+
+      res.status(200).json({ error: false, message: 'Product added to wishlist' });
+  } else {
+      const productExistIndex = wishlist.product.findIndex((item) => item.item.equals(product._id));
+
+      if (productExistIndex !== -1) {
+          // Product already exists in the wishlist, increment quantity
+          await Wishlist.updateOne(
+              { user: userId, 'product.item': product._id },
+              { $inc: { 'product.$.quantity': 1 } }
+          );
+      } else {
+          // Product doesn't exist in the wishlist, add it
+          wishlist.product.push({ item: product._id, quantity: 1 });
+          await wishlist.save();
+      }
+
+      // res.status(200).json({ error: false, message: 'Product added to wishlist' });
+      res.redirect('/WishList')
+  }
+
  }
 
-  const productId = req.params.id;
 
-  try {
-      const product = await AdminProduct.findById(productId);
-      console.log(product,"product00000000000000");
-      const wishlist = await Wishlist.findOne({ user: userId });
-      console.log(wishlist,"wishlist9999999999");
+  
 
-      if (!wishlist) {
-          // If the wishlist doesn't exist, create a new one
-          const newWishlist = new Wishlist({
-              user: userId,
-              product: [{ item: product._id, quantity: 1 }]
-          });
-          await newWishlist.save();
 
-          res.status(200).json({ error: false, message: 'Product added to wishlist' });
-      } else {
-          const productExistIndex = wishlist.product.findIndex((item) => item.item.equals(product._id));
 
-          if (productExistIndex !== -1) {
-              // Product already exists in the wishlist, increment quantity
-              await Wishlist.updateOne(
-                  { user: userId, 'product.item': product._id },
-                  { $inc: { 'product.$.quantity': 1 } }
-              );
-          } else {
-              // Product doesn't exist in the wishlist, add it
-              wishlist.product.push({ item: product._id, quantity: 1 });
-              await wishlist.save();
-          }
 
-          // res.status(200).json({ error: false, message: 'Product added to wishlist' });
-          res.redirect('/WishList')
-      }
+
   } catch (error) {
       console.error(error);
       res.status(500).json({ error: true, message: 'Internal server error occurred' });

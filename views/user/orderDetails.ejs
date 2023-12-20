@@ -66,66 +66,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="detail-info">
-                                <h3 class="title-detail mt-30">Colorful Pattern Shirts HD450</h3>
-                                <div class="product-detail-rating">
-                                    <div class="pro-details-brand">
-                                        <span> Brands: <a href="shop-grid-right">Bootstrap</a></span>
-                                    </div>
-                                    <div class="product-rate-cover text-end">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width:90%">
-                                            </div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (25 reviews)</span>
-                                    </div>
-                                </div>
-                                <div class="clearfix product-price-cover">
-                                    <div class="product-price primary-color float-left">
-                                        <ins><span class="text-brand">$120.00</span></ins>
-                                        <ins><span class="old-price font-md ml-15">$200.00</span></ins>
-                                        <span class="save-price  font-md color3 ml-15">25% Off</span>
-                                    </div>
-                                </div>
-                                <div class="bt-1 border-color-1 mt-15 mb-15"></div>
-                                <div class="short-desc mb-30">
-                                    <p class="font-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam
-                                        rem officia, corrupti reiciendis minima nisi modi,!</p>
-                                </div>
-
-                                <div class="attr-detail attr-color mb-15">
-                                    <strong class="mr-10">Color</strong>
-
-                                </div>
-                                <div class="attr-detail attr-size">
-                                    <strong class="mr-10">Size</strong>
-
-                                </div>
-                                <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                <div class="detail-extralink">
-                                    <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span class="qty-val">1</span>
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                    <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                            href="/WishList"><i class="fi-rs-heart"></i></a>
-                                      
-                                    </div>
-                                </div>
-                                <ul class="product-meta font-xs color-grey mt-50">
-                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                    <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#"
-                                            rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
-                                    <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Detail Info -->
-                        </div>
+                     
                     </div>
                 </div>
             </div>
@@ -140,7 +81,6 @@
                         <div class="header-info">
                             <ul>
 
-                                <li><i class="fi-rs-marker"></i><a href="page-contact">Our location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -148,11 +88,7 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
-                                    <li>Get great devices up to 50% off <a href="shop-grid-right">View details</a>
-                                    </li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right">Shop
-                                            now</a></li>
+                                  
                                 </ul>
                             </div>
                         </div>
@@ -226,7 +162,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                        <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
 
@@ -526,31 +462,30 @@
                                         <div class="card-body">
                                             <h4 class="card-title">Product Details</h4>
                                             <!-- Check if products is defined before attempting to loop through it -->
-                                            <% if (products && products.length> 0) { %>
+                                            <% if (products && products.length > 0) { %>
                                                 <!-- Loop through products using forEach -->
-                                                <% products.forEach((product)=> { %>
+                                                <% products.forEach((product) => { %>
                                                     <div class="card mt-3 mb-3" style="background-color: #e4e6e5;">
                                                         <div class="card-body">
                                                             <div class="row">
-                                                                <div class="col-md-3">
-                                                                    <div class="container-fluid"
-                                                                        style="height: 100px; width: 100px;">
-                                                                        <% if (product.image && product.image[0] &&
-                                                                            product.image[0].url) { %>
-                                                                            <img src="/uploads/<%= product.image[0].url %>"
-                                                                                alt="<%= product.name %>"
-                                                                                class="img-fluid">
+
+                                                                <a href="/singleProduct/<%= product.productId._id %>">
+                                                                    <div class="col-md-3">
+                                                                        <div class="container-fluid" style="height: 100px; width: 100px;">
+                                                                            <% if (product.productId.image && product.productId.image.length > 0 && product.productId.image[0].url) { %>
+                                                                                <img src="/uploads/<%= product.productId.image[0].url %>" alt="<%= product.productId.name %>" class="img-fluid">
                                                                             <% } else { %>
-                                                                                <div class="text-center">
-                                                                                    <img src="/path/to/default/image.jpg"
-                                                                                        alt="No Image"
-                                                                                        class="img-fluid">
+                                                                                
                                                                                     <p>No Image</p>
-                                                                                </div>
-                                                                                <% } %>
+                                                                                
+                                                                            <% } %>
+                                                                        </div>
+                                                                        
                                                                     </div>
 
-                                                                </div>
+                                                                </a>
+
+                                                               
                                                                 <div class="col-md-3">
                                                                     <h5 class="card-title">
                                                                         <%= product.productId.name %>
@@ -569,13 +504,21 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <% }); %>
-                                                        <% } else { %>
-                                                            <p>No product data available.</p>
-                                                            <% } %>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <p>No product data available.</p>
+                                            <% } %>
+                                            
+
+
                                         </div>
+
+                                        
                                     </div>
                                 </div>
+
+
+
                             </div>
 
 
@@ -732,7 +675,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                                <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">

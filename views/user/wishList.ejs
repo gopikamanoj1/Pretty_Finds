@@ -79,7 +79,7 @@
 
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                        <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
                     <div class="header-right">
 
@@ -114,7 +114,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative  main-nav">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                        <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                     </div>
 
                     <div class="header-nav d-none d-lg-flex">
@@ -189,7 +189,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="/index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                    <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -267,6 +267,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+                        <h3 class="text-center"> Wishlist</h3>
+
                         <div class="table-responsive">
                             <!-- Add this code to your wishList.ejs file -->
                             <table class="table shopping-summery text-center">
@@ -337,9 +339,25 @@
                                             <td class="action" data-title="Remove">
                                                 <form id="removeForm_<%= item._id %>"
                                                     action="/removeFromWishlist/<%= item._id %>" method="POST">
-                                                    <button type="button" onclick="confirmDelete('<%= item._id %>')">
+                                                    <button type="button" class="delete-button" onclick="confirmDelete('<%= item._id %>')">
                                                         <i class="fi-rs-trash"></i>
                                                     </button>
+                                                    <style>
+                                                        /* Add this CSS to your existing stylesheet or in a new style tag in the head of your HTML */
+
+.delete-button {
+    background-color: #dc3545; /* Choose your desired background color */
+    color: #fff; /* Choose your desired text color */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* Choose a slightly darker shade for hover effect */
+}
+
+                                                    </style>
                                                 </form>
                                             </td>
 
@@ -409,7 +427,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index"><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
+                                <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">

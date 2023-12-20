@@ -83,23 +83,7 @@
                 </li>
 
             </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-settings-1">Setting sample 1</a>
-                        <a href="page-settings-2">Setting sample 2</a>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
-            </ul>
+            
             <br>
             <br>
         </nav>
@@ -107,58 +91,21 @@
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i
-                                class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
+               
             </div>
             <div class="col-nav">
                 <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
                         class="material-icons md-apps"></i> </button>
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
-                                class="material-icons md-cast"></i></a>
-                    </li>
+                   
+                   
+                   
                     <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
-                            aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="admin-assets/imgs/theme/flag-us.png"
-                                    alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="admin-assets/imgs/theme/flag-fr.png"
-                                    alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="admin-assets/imgs/theme/flag-jp.png"
-                                    alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="admin-assets/imgs/theme/flag-cn.png"
-                                    alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
-                            aria-expanded="false"> <img class="img-xs rounded-circle"
-                                src="/admin-assets/imgs/people/avatar2.jpg" alt="User"></a>
+                    
                         <a class="dropdown-item text-danger" href="/logout"><i
                                 class="material-icons md-exit_to_app"></i>Logout</a>
+
+                     
                     </li>
                 </ul>
             </div>
@@ -238,34 +185,47 @@
 
 
                         <!-- col// -->
-                        <div class="col-md-4">
-                            <article class="icontext align-items-start">
-                                <span class="icon icon-sm rounded-circle bg-primary-light">
-                                    <i class="text-primary material-icons md-local_shipping"></i>
-                                </span>
-                                <div class="text">
-                                    <h6 class="mb-1">Order info</h6>
-                                    <p class="mb-1">
-                                        Shipping: Fargo express <br> Pay method: card <br> Status: new
-                                    </p>
-                                    <a href="#">Download info</a>
-                                </div>
-                            </article>
-                        </div> <!-- col// -->
-                        <div class="col-md-4">
-                            <article class="icontext align-items-start">
-                                <span class="icon icon-sm rounded-circle bg-primary-light">
-                                    <i class="text-primary material-icons md-place"></i>
-                                </span>
-                                <div class="text">
-                                    <h6 class="mb-1">Deliver to</h6>
-                                    <p class="mb-1">
-                                        City: Tashkent, Uzbekistan <br>Block A, House 123, Floor 2 <br> Po Box 10000
-                                    </p>
-                                    <a href="#">View profile</a>
-                                </div>
-                            </article>
-                        </div> <!-- col// -->
+                      <!-- Assuming your ordersDetails.ejs file -->
+
+<!-- Order Info -->
+<div class="col-md-4">
+    <article class="icontext align-items-start">
+        <span class="icon icon-sm rounded-circle bg-primary-light">
+            <i class="text-primary material-icons md-local_shipping"></i>
+        </span>
+        <div class="text">
+            <h6 class="mb-1">Order info</h6>
+            <p class="mb-1">
+                Total Amount: <b><%= order.total %></b>  <br>
+               
+                Pay method: <%= order.paymentType %> <br>
+                Status: <%= order.status %>
+            </p>
+            <!-- <a href="#">Download info</a> -->
+        </div>
+    </article>
+</div>
+
+<!-- Deliver to -->
+<!-- <div class="col-md-4">
+    <article class="icontext align-items-start">
+        <span class="icon icon-sm rounded-circle bg-primary-light">
+            <i class="text-primary material-icons md-place"></i>
+        </span>
+        <div class="text">
+            <h6 class="mb-1">Deliver to</h6>
+            <p class="mb-1">
+                City: <%= order.addresses.city %>, <%= order.addresses.country %> <br>
+                Block <%= order.addresses.block %>, House <%= order.addresses.house %>, Floor <%= order.addresses.floor %> <br>
+                Po Box <%= order.addresses.poBox %>
+            </p>
+        </div>
+    </article>
+</div> -->
+
+                        
+                        
+                        <!-- col// -->
                     </div> <!-- row // -->
 
                     <div class="row">
