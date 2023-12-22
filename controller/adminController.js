@@ -1,5 +1,5 @@
 const Admin = require("../model/adminModel");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const Product=require("../model/productModel")
 const Order=require("../model/orderModel");
 const { log } = require("console");
@@ -149,7 +149,7 @@ const fetchDataGraph = async (req, res) => {
             };
             data.forEach(item => {
                 const month = new Date(`2023-${item._id}-01`).toLocaleString('default', { month: 'long' });
-                
+
                 allMonths[month] = item.ordersCount;
             });
             res.json(allMonths);

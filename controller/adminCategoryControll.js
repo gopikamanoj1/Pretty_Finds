@@ -1,5 +1,5 @@
 const AdminCategory = require("../model/categoryModel");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 
 const loadcategorypage = async (req, res) => {

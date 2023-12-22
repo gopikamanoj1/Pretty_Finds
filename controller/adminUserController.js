@@ -2,7 +2,7 @@ const userModel = require("../model/userModel");
 const adminModel = require("../model/adminModel");
 const OrderModel= require("../model/orderModel");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 
 const loadUserList = async (req, res) => {
