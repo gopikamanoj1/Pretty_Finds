@@ -68,6 +68,7 @@
 
     $('#MonthlyButton').on('click', function () {
         fetchData('/admin/fetchData/month', function (monthlyData) {
+            console.log(monthlyData);
             updateChart(monthlyData);
         });
     });

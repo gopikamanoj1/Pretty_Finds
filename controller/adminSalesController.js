@@ -6,8 +6,8 @@ const Order=require("../model/orderModel");
 
 const LoadSalesReport = async (req, res) => {
     try {
-        const orders = await Order.find().populate('user');
-
+        // Fetch only delivered orders
+        const orders = await Order.find({ status: 'Delivered' }).populate('user');
 
         res.render("salesReport", { orders: orders });
     } catch (error) {
@@ -15,6 +15,7 @@ const LoadSalesReport = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
+
 
 
 
@@ -135,16 +136,26 @@ const filterByStatus = async (req, res) => {
         // Fetch the status from the query parameters
         const enterStatus = req.query.status;
 
-        // Fetch orders from the database based on the provided status
-        const orders = await Order.find({ status: enterStatus }).populate('user');
+        // Check if a specific status is provided
+        if (enterStatus && enterStatus !== "") {
+            // Fetch orders from the database based on the provided status
+            const orders = await Order.find({ status: enterStatus }).populate('user');
 
-        // Render the salesReport template with filtered orders and the status variable
-        res.render('salesReport', { orders, status: enterStatus });
+            // Render the salesReport template with filtered orders and the status variable
+            res.render('page-orders-list', { orders, status: enterStatus });
+        } else {
+            // If no specific status is provided, fetch all orders
+            const allOrders = await Order.find().populate('user');
+
+            // Render the salesReport template with all orders
+            res.render('page-orders-list', { orders: allOrders, status: "All Status" });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 };
+
 
 
 

@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/index-3 by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:06 GMT -->
+
 <head>
     <meta charset="utf-8">
     <title>PRETTY FINDS</title>
@@ -14,115 +15,147 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/PRETTY FINDS LOGO.png">
     <!-- Template CSS -->
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
     <!-- Quick view -->
-    
-    <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+
+    <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">  
-                      
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
+            <div class="modal-content">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
-                    
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="detail-gallery">
-                                <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                                <!-- MAIN SLIDES -->
-                                <div class="product-image-slider">
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-2.jpg" alt="product image">
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-1.jpg" alt="product image">
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-3.jpg" alt="product image">
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-4.jpg" alt="product image">
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-5.jpg" alt="product image">
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-6.jpg" alt="product image">
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="/imgs/shop/product-16-7.jpg" alt="product image">
-                                    </figure>
-                                </div>
-                                <!-- THUMBNAILS -->
-                               
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="detail-gallery">
+                            <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                            <!-- MAIN SLIDES -->
+                            <div class="product-image-slider">
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-2.jpg" alt="product image">
+                                </figure>
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-1.jpg" alt="product image">
+                                </figure>
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-3.jpg" alt="product image">
+                                </figure>
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-4.jpg" alt="product image">
+                                </figure>
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-5.jpg" alt="product image">
+                                </figure>
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-6.jpg" alt="product image">
+                                </figure>
+                                <figure class="border-radius-10">
+                                    <img src="/imgs/shop/product-16-7.jpg" alt="product image">
+                                </figure>
                             </div>
-                            <!-- End Gallery -->
-                            <div class="social-icons single-share">
-                                
-                            </div>
+                            <!-- THUMBNAILS -->
+
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="detail-info">
-                                <h3 class="title-detail mt-30">Colorful Pattern Shirts HD450</h3>
-                                <div class="product-detail-rating">
-                                    <div class="pro-details-brand">
-                                        <span> Brands: <a href="shop-grid-right">Bootstrap</a></span>
-                                    </div>
-                                    <div class="product-rate-cover text-end">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width:90%">
+                        <!-- End Gallery -->
+                        <div class="social-icons single-share">
+
+                        </div>
+                    </div>
+                    <!-- 2222222222222222222222222222222222222222 -->
+                    <div class="row product-grid-3">
+
+                        <div class="tab-content wow fadeIn animated" id="myTabContent">
+                            <div class="tab-pane fade show active" id="tab-one" role="tabpanel"
+                                aria-labelledby="tab-one">
+                                <div class="row product-grid-4">
+                                    <% products.forEach(function(product) { %>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <div class="product-cart-wrap mb-30 ">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/singleProduct/<%= product.id %>">
+                                                            <% if (product.image && product.image[0] &&
+                                                                product.image[0].url) { %>
+                                                                <img src="/uploads/<%= product.image[0].url %>"
+                                                                    alt="<%= product.name %>">
+                                                                <% } else { %>
+                                                                    <!-- Provide an alternative content or message when there is no image -->
+                                                                    <% } %>
+                                                        </a>
+                                                    </div>
+
+                                                    <form action="/addToWishList/<%= product._id %>" method="post">
+                                                        <div class="product-action-1">
+
+                                                            <button aria-label="Add To Wishlist"
+                                                                class="action-btn hover-up">
+
+                                                                <i class="fi-rs-heart"></i>
+                                                            </button>
+
+
+                                                        </div>
+                                                    </form>
+
+
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <div class="product-category">
+                                                    </div>
+                                                    <h2><a href="/singleProduct">
+                                                            <%= product.name %>
+                                                        </a></h2>
+
+                                                    <div class="rating-result" title="<%= product.rating %>">
+                                                        <span>
+                                                            <span>
+                                                                <%= product.rating %>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span>$<%= product.discountedPrice %></span>
+                                                        <% if (product.discountPercentage && product.discountPercentage>
+                                                            0) { %>
+                                                            <span class="old-price">$<%= product.price %></span>
+
+                                                            <span class="discount">(<%= product.discountPercentage %>%
+                                                                    Off)</span>
+                                                            <% } %>
+                                                    </div>
+                                                    <% if (product.stock < 1) { %>
+                                                        <div class="out-of-stock-message">
+                                                            Out of Stock
+                                                        </div>
+                                                        <% } else { %>
+                                                            <form action="/addToCart/<%= product._id %>" method="post">
+                                                                <div class="product-action-1 show">
+                                                                    <button aria-label="Add To Cart"
+                                                                        class="action-btn hover-up"><i
+                                                                            class="fi-rs-shopping-bag-add"></i></button>
+                                                                </div>
+                                                            </form>
+                                                            <% } %>
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (25 reviews)</span>
-                                    </div>
+                                        <% }); %>
                                 </div>
-                                <div class="clearfix product-price-cover">
-                                    <div class="product-price primary-color float-left">
-                                        <ins><span class="text-brand">$120.00</span></ins>
-                                        <ins><span class="old-price font-md ml-15">$200.00</span></ins>
-                                        <span class="save-price  font-md color3 ml-15">25% Off</span>
-                                    </div>
-                                </div>
-                                <div class="bt-1 border-color-1 mt-15 mb-15"></div>
-                                <div class="short-desc mb-30">
-                                    <p class="font-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi,!</p>
-                                </div>
-                                
-                                <div class="attr-detail attr-color mb-15">
-                                    <strong class="mr-10">Color</strong>
-                                    
-                                </div>
-                                <div class="attr-detail attr-size">
-                                    <strong class="mr-10">Size</strong>
-                                  
-                                </div>
-                                <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                <div class="detail-extralink">
-                                    <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span class="qty-val">1</span>
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                    <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare"><i class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                </div>
-                                <ul class="product-meta font-xs color-grey mt-50">
-                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                    <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
-                                    <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span></li>
-                                </ul>
+                                <!--End product-grid-4-->
                             </div>
-                            <!-- Detail Info -->
+                            <!--En tab one (Featured)-->
+                            <!--En tab two (Popular)-->
+                            <!--En tab three (New added)-->
                         </div>
-                  
-                </div>        
-        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
     <header class="header-area header-style-3 header-height-2">
@@ -133,7 +166,7 @@
                         <div class="header-info">
                             <ul>
                                 <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a  href="page-contact">Our location</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="page-contact">Our location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -143,7 +176,8 @@
                                 <ul>
                                     <li>Get great devices up to 50% off <a href="shop-grid-right">View details</a></li>
                                     <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right">Shop now</a></li>
+                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right">Shop
+                                            now</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -152,7 +186,8 @@
                         <div class="header-info header-info-right">
                             <ul>
                                 <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
+                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i
+                                            class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
                                         <li><a href="#"><img src="/imgs/theme/flag-fr.png" alt="">Français</a></li>
                                         <li><a href="#"><img src="/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
@@ -160,10 +195,18 @@
                                     </ul>
                                 </li>
                                 <% if (!locals.logged) { %>
-                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a></li>
-                                    <li><a href="/myprofile">My Profile <i class="fi-rs-angle-down"></i></a>
-                                    
-                                <% }  %>
+                                    <li id="loginButton"><i class="fi-rs-user"></i><a href="/page-login">Log In</a></li>
+                                    <li id="signUpButton"><i class="fi-rs-user"></i><a href="/page-register">Sign Up</a>
+                                    </li>
+
+                                    <% } else { %>
+                                        <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a>
+                                        </li>
+                                        <li><a href="/myprofile">My Profile </i></a>
+
+                                        </li>
+
+                                        <% } %>
 
                             </ul>
                         </div>
@@ -188,7 +231,7 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a href="shop-wishlist">
+                                    <a href="/wishList">
                                         <img class="svgInject" alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
                                     </a>
                                 </div>
@@ -196,7 +239,7 @@
                                     <a class="mini-cart-icon" href="/cart">
                                         <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
                                     </a>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -212,25 +255,25 @@
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
-                           
+
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
                                     <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
-                                       
+
                                     </li>
                                     <li>
                                         <a href="/lipscareonly">LIPS CARE</a>
                                     </li>
                                     <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
-                                       
+
                                     </li>
-                                    <li ><a href="/bodycareonly">BODY CARE  <i class="fi-rs-angle-down"></i></a>
-                                    
+                                    <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+
                                     </li>
                                     <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
-                                        
+
                                     </li>
                                     <!-- <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                         
@@ -242,12 +285,12 @@
                             </nav>
                         </div>
                     </div>
-                   
+
                     <!-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> -->
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist">
+                                <a href="/wishList">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-heart.svg">
                                 </a>
                             </div>
@@ -255,7 +298,7 @@
                                 <a class="mini-cart-icon" href="/cart">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
                                 </a>
-                            
+
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -291,24 +334,24 @@
                     </form>
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border">
-                   
+
                     <!-- mobile menu start -->
                     <nav>
                         <ul>
                             <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
-                               
+
                             </li>
                             <li>
                                 <a href="/lipscareonly">LIPS CARE</a>
                             </li>
                             <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
-                               
+
                             </li>
-                            <li ><a href="/bodycareonly">BODY CARE  <i class="fi-rs-angle-down"></i></a>
-                            
+                            <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+
                             </li>
                             <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
-                                
+
                             </li>
                             <!-- <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                 
@@ -322,7 +365,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a  href="page-contact"> Our location </a>
+                        <a href="page-contact"> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="page-login-register">Log In / Sign Up </a>
@@ -355,7 +398,7 @@
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row">
-                  
+
                     <div class="col-lg-12">
                         <div class="shop-product-fillter">
                             <!-- <div class="totall-product">
@@ -369,25 +412,29 @@
                                         </div>
                                         <div class="sort-by-dropdown-wrap">
                                             <span>
-                                                <a class="{{ sortBy === 'featured' ? 'active' : '' }}" href="/products?sortBy=featured">Featured</a>
+                                                <a class="{{ sortBy === 'featured' ? 'active' : '' }}"
+                                                    href="/products?sortBy=featured">Featured</a>
                                                 <i class="fi-rs-angle-small-down"></i>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="{{ sortBy === 'lowToHigh' ? 'active' : '' }}" href="/allProducts?sortBy=lowToHigh">Price: Low to High</a></li>
-                                            <li><a class="{{ sortBy === 'highToLow' ? 'active' : '' }}" href="/allProducts?sortBy=highToLow">Price: High to Low</a></li>
+                                            <li><a class="{{ sortBy === 'lowToHigh' ? 'active' : '' }}"
+                                                    href="/allProducts?sortBy=lowToHigh">Price: Low to High</a></li>
+                                            <li><a class="{{ sortBy === 'highToLow' ? 'active' : '' }}"
+                                                    href="/allProducts?sortBy=highToLow">Price: High to Low</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="row product-grid-3">
-                          
+
                             <div class="tab-content wow fadeIn animated" id="myTabContent">
-                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel"
+                                    aria-labelledby="tab-one">
                                     <div class="row product-grid-4">
                                         <% products.forEach(function(product) { %>
                                             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -395,61 +442,73 @@
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
                                                             <a href="/singleProduct/<%= product.id %>">
-                                                                <% if (product.image && product.image[0] && product.image[0].url) { %>
-                                                                    <img src="/uploads/<%= product.image[0].url %>" alt="<%= product.name %>">
-                                                                <% } else { %>
-                                                                    <!-- Provide an alternative content or message when there is no image -->
-                                                                <% } %>
+                                                                <% if (product.image && product.image[0] &&
+                                                                    product.image[0].url) { %>
+                                                                    <img src="/uploads/<%= product.image[0].url %>"
+                                                                        alt="<%= product.name %>">
+                                                                    <% } else { %>
+                                                                        <!-- Provide an alternative content or message when there is no image -->
+                                                                        <% } %>
                                                             </a>
                                                         </div>
-                                                        
+
                                                         <form action="/addToWishList/<%= product._id %>" method="post">
                                                             <div class="product-action-1">
-                                                          
-                                                            <button aria-label="Add To Wishlist" class="action-btn hover-up">
-                                                                
-                                                                <i class="fi-rs-heart"></i>
-                                                            </button>
-    
-    
-                                                        </div>
-                                                        </form>               
-                                                        
-                                                        
+
+                                                                <button aria-label="Add To Wishlist"
+                                                                    class="action-btn hover-up">
+
+                                                                    <i class="fi-rs-heart"></i>
+                                                                </button>
+
+
+                                                            </div>
+                                                        </form>
+
+
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <div class="product-category">
                                                         </div>
-                                                        <h2><a href="/singleProduct"><%= product.name %></a></h2>
-                                                      
+                                                        <h2><a href="/singleProduct">
+                                                                <%= product.name %>
+                                                            </a></h2>
+
                                                         <div class="rating-result" title="<%= product.rating %>">
                                                             <span>
-                                                                <span><%= product.rating %></span>
+                                                                <span>
+                                                                    <%= product.rating %>
+                                                                </span>
                                                             </span>
                                                         </div>
                                                         <div class="product-price">
                                                             <span>$<%= product.discountedPrice %></span>
-                                                            <% if (product.discountPercentage && product.discountPercentage > 0) { %>
+                                                            <% if (product.discountPercentage &&
+                                                                product.discountPercentage> 0) { %>
                                                                 <span class="old-price">$<%= product.price %></span>
 
-                                                                <span class="discount">(<%= product.discountPercentage %>% Off)</span>
-                                                            <% } %>
+                                                                <span class="discount">(<%= product.discountPercentage
+                                                                        %>% Off)</span>
+                                                                <% } %>
                                                         </div>
                                                         <% if (product.stock < 1) { %>
                                                             <div class="out-of-stock-message">
                                                                 Out of Stock
                                                             </div>
-                                                        <% } else { %>
-                                                            <form action="/addToCart/<%= product._id %>" method="post">
-                                                                <div class="product-action-1 show">
-                                                                    <button aria-label="Add To Cart" class="action-btn hover-up" ><i class="fi-rs-shopping-bag-add"></i></button>
-                                                                </div>
-                                                            </form>
-                                                        <% } %>
+                                                            <% } else { %>
+                                                                <form action="/addToCart/<%= product._id %>"
+                                                                    method="post">
+                                                                    <div class="product-action-1 show">
+                                                                        <button aria-label="Add To Cart"
+                                                                            class="action-btn hover-up"><i
+                                                                                class="fi-rs-shopping-bag-add"></i></button>
+                                                                    </div>
+                                                                </form>
+                                                                <% } %>
                                                     </div>
                                                 </div>
                                             </div>
-                                        <% }); %>
+                                            <% }); %>
                                     </div>
                                     <!--End product-grid-4-->
                                 </div>
@@ -462,38 +521,48 @@
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-start">
-                        
-                                    <% if (currentPage > 1) { %>
+
+                                    <% if (currentPage> 1) { %>
                                         <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-                                    <% } %>
-                        
-                                    <% if (currentPage > 2) { %>
-                                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                                    <% } %>
-                        
-                                    <% for (let i = Math.max(1, currentPage - 1); i <= Math.min(currentPage + 1, totalPages); i++) { %>
-                                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
-                                            <a class="page-link" href="?page=<%= i %>"><%= i %></a>
-                                        </li>
-                                    <% } %>
-                        
-                                    <% if (currentPage < totalPages - 1) { %>
-                                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                                    <% } %>
-                        
-                                    <% if (currentPage < totalPages) { %>
-                                        <li class="page-item"><a class="page-link" href="?page=<%= totalPages %>"><%= totalPages %></a></li>
-                                    <% } %>
-                        
-                                    <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
-                                        <% if (currentPage < totalPages) { %>
-                                            <a class="page-link" href="?page=<%= currentPage + 1 %>"><i class="fi-rs-angle-double-small-right"></i></a>
                                         <% } %>
-                                    </li>
+
+                                            <% if (currentPage> 2) { %>
+                                                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                                                <% } %>
+
+                                                    <% for (let i=Math.max(1, currentPage - 1); i <=Math.min(currentPage
+                                                        + 1, totalPages); i++) { %>
+                                                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                                            <a class="page-link" href="?page=<%= i %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+
+                                                            <% if (currentPage < totalPages - 1) { %>
+                                                                <li class="page-item"><a class="page-link dot"
+                                                                        href="#">...</a></li>
+                                                                <% } %>
+
+                                                                    <% if (currentPage < totalPages) { %>
+                                                                        <li class="page-item"><a class="page-link"
+                                                                                href="?page=<%= totalPages %>">
+                                                                                <%= totalPages %>
+                                                                            </a></li>
+                                                                        <% } %>
+
+                                                                            <li
+                                                                                class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                                                                                <% if (currentPage < totalPages) { %>
+                                                                                    <a class="page-link"
+                                                                                        href="?page=<%= currentPage + 1 %>"><i
+                                                                                            class="fi-rs-angle-double-small-right"></i></a>
+                                                                                    <% } %>
+                                                                            </li>
                                 </ul>
                             </nav>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -517,7 +586,7 @@
                     </div>
                     <div class="col-lg-5">
                         <!-- Subscribe Form -->
-                     
+
                         <!-- End Subscribe Form -->
                     </div>
                 </div>
@@ -540,26 +609,26 @@
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a ><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <h5 class="widget-title wow fadeIn animated"></h5>
-                   
+
                     </div>
                     <div class="col-lg-2  col-md-3">
                         <h5 class="widget-title wow fadeIn animated"></h5>
-                       
+
                     </div>
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-md-8 col-lg-12">
-                              
+
                             </div>
                             <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                                 <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
@@ -576,10 +645,10 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-lg-6">
-                  
+
                 </div>
                 <div class="col-lg-6">
-                   
+
                 </div>
             </div>
         </div>
@@ -625,4 +694,5 @@
 
 
 <!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/shop-filter.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:44 GMT -->
+
 </html>

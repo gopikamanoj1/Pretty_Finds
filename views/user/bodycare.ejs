@@ -15,7 +15,7 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="/imgs/theme/PRETTY FINDS LOGO.png">
     <!-- Template CSS -->
     <link rel="stylesheet" href="/css/main.css">
 </head>
@@ -167,8 +167,16 @@
                                     </ul>
                                 </li>
                                 <% if (!locals.logged) { %>
-                                    <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a></li>
-                                    <li><a href="/myprofile">My Profile <i class="fi-rs-angle-down"></i></a>
+                                    <li id="loginButton"><i class="fi-rs-user"></i><a href="/page-login">Log In</a></li>
+                                    <li id="signUpButton"><i class="fi-rs-user"></i><a href="/page-register">Sign Up</a>
+                                    </li>
+
+                                    <% } else { %>
+                                        <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a>
+                                        </li>
+                                        <li><a href="/myprofile">My Profile </i></a>
+
+                                        </li>
 
                                         <% } %>
 

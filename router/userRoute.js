@@ -29,12 +29,12 @@ userRouter.get("/", userControllers.landing);
 userRouter.get("/page-login", userAuth.isLogout, userControllers.login);
 //getting register
 userRouter.get("/page-register", userAuth.isLogout, userControllers.register);
-
+ 
 //for user registering
 userRouter.post("/page-register", userControllers.userRegister);
 //for getting home page
-userRouter.get("/home", userAuth.isLogin, userControllers.loadhome);
-
+userRouter.get("/home", userAuth.tohome , userControllers.loadhome);
+  
 userRouter.post("/home", userControllers.verifyUser);
 // userRouter.get('/home',userControllers.loadhome);
 //user logout
@@ -57,15 +57,15 @@ userRouter.get("/haircareonly", userControllers.loadHairCare);
 //all Products
 userRouter.get("/allProducts", userControllers.loadAllProducts);
 //user profile
-userRouter.get("/myprofile", userControllers.loadMyProfile);
-userRouter.get("/editProfile", userControllers.loadEditProfile);
-userRouter.post("/editProfile", userControllers.editProfile);
+userRouter.get("/myprofile",  userAuth.isLogin, userControllers.loadMyProfile);
+userRouter.get("/editProfile",userAuth.isLogin, userControllers.loadEditProfile);
+userRouter.post("/editProfile", userAuth.isLogin,userControllers.editProfile);
 ///myaddress
 
-userRouter.get("/loadmyaddress", userControllers.loadmyAddress);
+userRouter.get("/loadmyaddress",userAuth.isLogin, userControllers.loadmyAddress);
 //add address
 
-userRouter.post("/myprofile", userControllers.addAddress);
+userRouter.post("/myprofile",userAuth.isLogin, userControllers.addAddress);
 //edit address
 //delete address
 userRouter.get("/deleteAddress/:id", userControllers.deleteAddress);
@@ -77,26 +77,26 @@ userRouter.post("/email-reset-otp", userControllers.loadEnterOtp);
 userRouter.post("/forgott-password", userControllers.loadForgottPassword);
 userRouter.post("/reset-password", userControllers.resetPassword);
 //load cart
-userRouter.get("/cart", userControllers.loadAddToCart);
+userRouter.get("/cart", userAuth.isLogin,userControllers.loadAddToCart);
 // add to cart
 //remove cartProduct
 userRouter.post("/removeProduct", userControllers.removeProduct);
 //checkout
-userRouter.get("/checkout-page", userControllers.loadCheckOut);
+userRouter.get("/checkout-page",userAuth.isLogin, userControllers.loadCheckOut);
 
 //confirm
-userRouter.post("/confirm-order", userControllers.loadConfirmOrder);
+userRouter.post("/confirm-order", userAuth.isLogin,userControllers.loadConfirmOrder);
 //update quntity
 userRouter.post("/increaseQuantity", userControllers.updateQuantitys);
 userRouter.post("/decreaseQuantity", userControllers.decrementQuantity);
 //search
 userRouter.get("/search", userControllers.searchProducts);
 //order details
-userRouter.get("/order-details", userControllers.loadOrder);
+userRouter.get("/order-details",userAuth.isLogin, userControllers.loadOrder);
 
-userRouter.post("/addToCart/:id", userControllers.AddToCart);
+userRouter.post("/addToCart/:id", userAuth.isLogin,userControllers.AddToCart);
 
-userRouter.get("/order-details/:id", userControllers.orderDetails);
+userRouter.get("/order-details/:id", userAuth.isLogin,userControllers.orderDetails);
 userRouter.get("/editAddress/:id", userControllers.loadEditAddress);
 userRouter.post("/editAddress/:id", userControllers.editAddress);
 //cancel order
@@ -110,15 +110,15 @@ userRouter.get("/razorpay", userControllers.loadRazorpay);
 
 userRouter.post("/verify-payment", userControllers.handleVerifyPayment);
 
-userRouter.get("/confirm-page", userControllers.loadConfirmPage);
+userRouter.get("/confirm-page", userAuth.isLogin,userControllers.loadConfirmPage);
 //coupens
 userRouter.post("/getCoupon", userControllers.applyCoupon);
 //wallet
-userRouter.get("/wallet", userControllers.loadWallet);
+userRouter.get("/wallet", userAuth.isLogin,userControllers.loadWallet);
 userRouter.get( "/check-return-status/:orderId", userControllers.checkStatusForReturn);
 //wishlist
-userRouter.get('/WishList',userControllers.loadWishList)
-userRouter.post("/addToWishList/:id",userControllers.addToWishList)
+userRouter.get('/WishList',userAuth.isLogin,userControllers.loadWishList)
+userRouter.post("/addToWishList/:id",userAuth.isLogin,userControllers.addToWishList)
 //remove from wishlist
 userRouter.post('/removeFromWishlist/:id',userControllers.removeFromWishlist)
 //banner navigation 

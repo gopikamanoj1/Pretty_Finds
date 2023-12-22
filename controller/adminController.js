@@ -68,8 +68,11 @@ const loadDashboard = async (req, res) => {
         // Fetch the total number of products
         const totalProducts = await Product.countDocuments();
 
-        // Calculate the total revenue by summing the total amount of all orders
+        // Calculate the total revenue by summing the total amount of delivered orders
         const totalRevenueResult = await Order.aggregate([
+            {
+                $match: { status: 'Delivered' } // Add this condition to filter delivered orders
+            },
             {
                 $group: {
                     _id: null,
@@ -90,6 +93,7 @@ const loadDashboard = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
 
 
 
@@ -141,14 +145,13 @@ const fetchDataGraph = async (req, res) => {
                 'September': 0,
                 'October': 0,
                 'November': 0,
-                'December': 0
+                'December': 0,
             };
-
             data.forEach(item => {
-                const month = new Date(`2023-${item._id + 1}-01`).toLocaleString('default', { month: 'long' });
+                const month = new Date(`2023-${item._id}-01`).toLocaleString('default', { month: 'long' });
+                
                 allMonths[month] = item.ordersCount;
             });
-
             res.json(allMonths);
         }
 

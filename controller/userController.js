@@ -420,7 +420,7 @@ const generateRandomReferralCode = () => {
 const loadhome = async (req, res) => {
   try {
     const userData = await User.findById({ _id: req.session.user_id });
-    const products = await AdminProduct.find();
+    const products = await AdminProduct.find().limit(8);
     const banners=await Banners.find()
 
 
@@ -454,7 +454,9 @@ const loadhome = async (req, res) => {
 const userLogout = async (req, res) => {
   try {
     req.session.destroy();
-    return res.redirect("/index-3");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+    return res.redirect("/page-login");
   } catch (error) {
     console.log(error.message);
   }
@@ -585,12 +587,28 @@ const loadSingleProductPage = async (req, res) => {
       discountedPrice,
       "discountedPrice----------------------------------"
     );
-
-    res.render("single-product-page", {
-      product,
-      discountedPrice,
-      discountPercentage,
-    });
+    const user_id=req.session.user_id
+    
+    // let logged
+    if(user_id){
+      res.render("single-product-page", {
+        logged:"user logged",
+        product,
+        discountedPrice,
+        discountPercentage,
+      });
+    }else{
+      res.render("single-product-page", {
+        product,
+        discountedPrice,
+        discountPercentage,
+      });
+    }
+    // res.render("single-product-page", {
+    //   product,
+    //   discountedPrice,
+    //   discountPercentage,
+    // });
   } catch (error) {
     res.render("page-404")
 
@@ -654,9 +672,18 @@ const categoryOffer=lipsCareCategory.offerPercentage
       ),
       discountPercentage: product.discountPercentage,
     }));
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    const user_id=req.session.user_id
+    
+    // let logged
+    if(user_id){
+      res.render("lipscare", { logged:"user logged",products: productsWithDiscount, sortBy: sortBy ,lipsCareCategory:lipsCareCategory});
+    }else{
+      res.render("lipscare", { products: productsWithDiscount, sortBy: sortBy ,lipsCareCategory:lipsCareCategory});
 
+    } 
     // Render the 'lipscare' EJS template and pass the products and sortBy as variables
-    res.render("lipscare", { products: productsWithDiscount, sortBy: sortBy ,lipsCareCategory:lipsCareCategory});
+    // res.render("lipscare", { logged:"user logged",products: productsWithDiscount, sortBy: sortBy ,lipsCareCategory:lipsCareCategory});
   } catch (error) {
     res.render("page-404")
 
@@ -711,9 +738,18 @@ const loadFaceCare = async (req, res) => {
       ),
       discountPercentage: product.discountPercentage,
     }));
+    const user_id=req.session.user_id
+    
+    // let logged
+    if(user_id){
+      res.render("facecare", {logged: "user logged   ", products: productsWithDiscount, sortBy: sortBy });
 
+    }else{
+      res.render("facecare", { products: productsWithDiscount, sortBy: sortBy });
+
+    }
     // Render the 'facecare' EJS template and pass the products as a variable
-    res.render("facecare", { products: productsWithDiscount, sortBy: sortBy });
+    // res.render("facecare", {logged: "user logged   ", products: productsWithDiscount, sortBy: sortBy });
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -762,8 +798,18 @@ const loadBodyCare = async (req, res) => {
         ),
         discountPercentage: product.discountPercentage,
       }));
+      const user_id=req.session.user_id
+    
+      // let logged
+      if(user_id){
+        res.render("bodycare", {logged: "user logged   ", products: productsWithDiscount, sortBy: sortBy });
+
+      }else{
+        res.render("bodycare", {products: productsWithDiscount, sortBy: sortBy });
+
+      }
     // Render the 'bodycare' EJS template and pass the products and sortBy as variables
-    res.render("bodycare", { products: productsWithDiscount, sortBy: sortBy });
+    // res.render("bodycare", {logged: "user logged   ", products: productsWithDiscount, sortBy: sortBy });
   } catch (error) {
     res.render("page-404")
 
@@ -816,8 +862,18 @@ const loadHairCare = async (req, res) => {
       ),
       discountPercentage: product.discountPercentage,
     }));
+    const user_id=req.session.user_id
+    
+    // let logged
+    if(user_id){
+      res.render("haircare", {logged: "user logged   ", products: productsWithDiscount, sortBy: sortBy });
+
+    }else{
+      res.render("haircare", { products: productsWithDiscount, sortBy: sortBy });
+
+    }
     // Render the 'haircare' EJS template and pass the products and sortBy as variables
-    res.render("haircare", { products: productsWithDiscount, sortBy: sortBy });
+    // res.render("haircare", {logged: "user logged   ", products: productsWithDiscount, sortBy: sortBy });
   } catch (error) {
     res.render("page-404")
 
@@ -871,14 +927,27 @@ const loadAllProducts = async (req, res) => {
         discountPercentage: product.discountPercentage,
       }));
     // Render the view with the paginated products and pagination information
+    const user_id=req.session.user_id
+    
+    // let logged
+    if(user_id){
+      return res.render("allProducts", {
+        logged: "user logged   ",
+        products:productsWithDiscount,
+        sortBy,
+        currentPage: page,
+        totalPages,
+      });
+    }else{
+      return res.render("allProducts", {
+        products:productsWithDiscount,
+        sortBy,
+        currentPage: page,
+        totalPages,
+      });
+    }
 
-
-    return res.render("allProducts", {
-      products:productsWithDiscount,
-      sortBy,
-      currentPage: page,
-      totalPages,
-    });
+   
   } catch (error) {
     res.render("page-404")
 
@@ -945,6 +1014,7 @@ const loadMyProfile = async (req, res) => {
 
     if (userData) {
       res.render("user-account", {
+        logged: "user logged   ",
         user: userData,
         addresses: userData.addresses,
         orders: userOrders,
@@ -1230,13 +1300,26 @@ const loadAddToCart = async (req, res) => {
       console.log( cart.total," cart.totalllllllllllllll");
       await cart.save();
       console.log(cart);
-      res.render("cart-page", {
+if(userId){
+  res.render("cart-page", {
+    logged:"user logged",
+    products,
+    userdata,
+    cart,
+    isCartEmpty,
+    totalAmount,
+  });
+}else{
+    res.render("cart-page", {
         products,
         userdata,
         cart,
         isCartEmpty,
         totalAmount,
       });
+
+}
+    
     }
 
 
@@ -1751,7 +1834,7 @@ const cancelOrder = async (req, res) => {
         const transaction = {
           date: new Date(),
           type: "recived",
-          from: `Order returned ${order._id}`,
+          from: `Order cancelled ${order._id}`,
           amount: order.total,
         };
         console.log(transaction);
@@ -1766,7 +1849,7 @@ const cancelOrder = async (req, res) => {
         const transaction = {
           date: new Date(),
           type: "recived",
-          from: `Order returned ${order._id}`,
+          from: `Order cancelled ${order._id}`,
           amount: order.total,
         };
         console.log(transaction, "traa....");
@@ -1865,7 +1948,7 @@ const returnOrder = async (req, res) => {
         const transaction = {
           date: new Date(),
           type: "recived",
-          from: `Order cancell ${order._id}`,
+          from: `Order returned ${order._id}`,
           amount: order.total,
         };
         console.log(transaction, "traa....");

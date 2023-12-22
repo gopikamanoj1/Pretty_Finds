@@ -20,10 +20,10 @@ const loadPageOrder = async (req, res) => {
     } catch (error) {
         console.log(error);
     } 
-};
-
-  
-
+}; 
+ 
+   
+ 
 const loadOrderDetails = async (req, res) => {
     try {
         const orderId = req.params.id;

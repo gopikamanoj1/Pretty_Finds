@@ -115,8 +115,22 @@
                 <div>
                     <h2 class="content-title card-title">Order List </h2>
                 </div>
-                <div>
-                    <input type="text" placeholder="Search order ID" class="form-control bg-white">
+                <div class="col-lg-3 col-6 col-md-3">
+                    <form method="get" class="d-flex flex-row" action="/filterByStatus">
+                        <!-- <input type="date" id="start" name="start_date" value="{% if start_date %}{{ start_date }}{% else %}2023-11-20{% endif %}" hidden="hidden" /> -->
+                        <!-- <input type="date" id="end" name="end_date" value="{% if end_date %}{{ end_date }}{% else %}{{ current_date }}{% endif %}" hidden="hidden"/> -->
+        
+                        <select class="form-select border border-dark" name="status">
+                            <option value="" >All Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancel">Cancel</option>
+                            <option value="Returned">Returned</option>
+                        </select>
+                        
+                        <button type="submit">Find</button>
+                    </form>
                 </div>
             </div>
             <div class="card mb-4">
@@ -152,6 +166,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
+                         
                                 <tr>
                                     <th>#</th>
                                     <th>#ID</th>
