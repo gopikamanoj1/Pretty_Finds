@@ -395,7 +395,7 @@
                         <div class="col-md-2">
                             <% if (order.status !== "Cancel" && order.status !== "Delivered" && order.status !== "Returned") { %>
                                 <a href="/cancelOrder/?id=<%= order._id %>" onclick="return confirmCancel('/cancelOrder/?id=<%= order._id %>')">
-                                    <button class="btn" id="cancelOrderButton">Cancel Order</button>
+                                    <!-- <button class="btn" id="cancelOrderButton">Cancel Order</button> -->
                                 </a>
                             <% } else if (order.status === "Cancel") { %>
                                 <p>Order Cancelled</p>
