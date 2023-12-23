@@ -13,7 +13,7 @@ const uuid = require("uuid");
 const Banners = require("../model/bannerModel");
 const Wishlist = require("../model/wishListModel");
 
-
+ 
 
 const Razorpay = require("razorpay");
 const { makeRazorpayPayment } = require("../utils/razorypay");
@@ -30,20 +30,30 @@ const securePassword = async (password) => {
     res.render("page-404")
     console.log(err.message);
   }
-};
+};      
 
 const landing = async (req, res) => {
   try {
-    const products = await AdminProduct.find().limit(8);
-    const banners=await Banners.find()
-    return res.render("index-3", { products: products ,banners:banners});
-  } catch (error) {
-    res.render("page-404")
+    // Find only products where isDeleted is false
+    const products = await AdminProduct.find({ isDeleted: false }).limit(8);
+    
+    // Fetch banners
+    const banners = await Banners.find();
 
-    console.log(error);   
+    const userId = req.session.user_id;
+
+    if (userId) {
+      return res.render("index-3", { logged: "user logged", products: products, banners: banners });
+    } else {
+      return res.render("index-3", { products: products, banners: banners });
+    }
+  } catch (error) {
+    console.log(error);
+    res.render("page-404");
     res.status(500).send("Internal Server Error");
   }
 };
+
   
 
 // const bannerNavigation =async (req,res)=>{
@@ -1411,6 +1421,7 @@ const loadCheckOut = async (req, res) => {
     const user = await User.findById({ _id: user_id });
     const wallet = await Wallet.find({ userId: user_id });
     const addresses = user.addresses;
+  
     // const products = await AdminProduct.find();
 
 
@@ -1430,6 +1441,8 @@ const loadCheckOut = async (req, res) => {
 
     // Assuming you have a Coupon model to fetch coupons
     const coupons = await Coupon.find(); // Fetch all coupons, adjust as needed
+    console.log('Coupons:', coupons); // Add this line for debugging
+
 
     // Assuming you have a Product model to fetch products 
 
@@ -1717,13 +1730,24 @@ const searchProducts = async (req, res) => {
     const products = await AdminProduct.find({
       name: { $regex: new RegExp(searchTerm, "i") },
     });
-
+    
     // Render the search results in the 'search-results' view
-    return res.render("search-results", {
-      products: products,
-      searchTerm: searchTerm,
-      logged: "user logged   ",
-    });
+    const userId=req.session.user_id
+    if(userId){
+      return res.render("search-results", {
+        products: products,
+        searchTerm: searchTerm,
+        logged: "user logged   ",
+      });
+
+    }else{   
+      return res.render("search-results", {
+        products: products,
+        searchTerm: searchTerm,
+        // logged: "user logged   ",
+      });
+    }
+   
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");

@@ -140,7 +140,7 @@
                         <div class="header-info">
                             <ul>
                                 <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a href="page-contact">Our location</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="">Our location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -346,7 +346,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a href="page-contact"> Our location </a>
+                        <a href=""> Our location </a>
                     </div>
 
                     <div class="single-mobile-header-info">
@@ -392,8 +392,7 @@
                                                             alt="<%= products[i].name %>">
                                                     </td>
                                                     <td class="product-des">
-                                                        <h5 class="product-name"><a
-                                                                href="shop-product-right.html">
+                                                        <a href="<%= '/singleProduct/' + products[i].productId._id %>">
                                                                 <%= products[i].productId.name %>
                                                             </a></h5>
                                                     </td>
@@ -403,7 +402,7 @@
 
                                                     <td class="text-center" data-title="Stock">
 
-                                                        <button
+                                                        <button class="btn"
                                                             id="decrement_<%= products[i].productId._id %>"
                                                             onclick="decrementQuantity('<%= products[i].productId._id %>')">-</button>
                                                         <% if (products[i].productId.stock <
@@ -418,7 +417,7 @@
                                                                     <%= products[i].quantity %>
                                                                 </span>
                                                                 <% } %>
-                                                                    <button
+                                                                    <button class="btn"
                                                                         id="increment_<%= products[i].productId._id %>"
                                                                         onclick="incrementQuantity('<%= products[i].productId._id %>')">+</button>
                                                     </td>

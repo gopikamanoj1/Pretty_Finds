@@ -148,7 +148,7 @@
                         <div class="header-info">
                             <ul>
                                 <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a href="page-contact">Our location</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="">Our location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -343,22 +343,22 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a href="page-contact"> Our location </a>
+                        <a href=""> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="page-login-register">Log In / Sign Up </a>
-                    </div>
+                    </div>  
                     <div class="single-mobile-header-info">
-                        <a href="#">(+01) - 2345 - 6789 </a>
+                        <a href="">(+01) - 2345 - 6789 </a>
                     </div>
                 </div>
                 <div class="mobile-social-icon">
                     <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                    <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                    <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                    <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                    <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                    <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                    <a href=""><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                    <a href=""><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                    <a href=""><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                    <a href=""><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                    <a href=""><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                 </div>
             </div>
         </div>
@@ -378,6 +378,48 @@
                 <div class="row">
                     <div class="col-lg-6 mb-sm-15">
                         <div class="row">
+
+                            
+                            <div class="col-lg-6 mb-sm-15">
+                                <div class="toggle_info">
+                                    <span><i class="fi-rs-user mr-10"></i> <a href="#loginform" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Show Coupons</a></span>
+                                </div>
+                                <div class="panel-collapse collapse login_form" id="loginform">
+                                    <div class="panel-body">
+                                        <form method="post">
+                                            
+
+                                            <div class="container">
+                                                <!-- Example Coupon Table -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Coupon Code</th>
+                                                                    <th scope="col">Valid until</th>
+                                                                    <!-- Add additional headers if needed -->
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% coupons.forEach(coupon => { %>
+                                                                    <tr>
+                                                                        <td><%= coupon.couponCode %></td>
+                                                                        <td><%= coupon.couponexpiry.toISOString().split('T')[0] %></td>
+                                                                        <!-- Add additional columns if needed -->
+                                                                    </tr>
+                                                                <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                          
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             
                            
                              
@@ -387,9 +429,7 @@
                         </div>
                         <div class="panel-collapse collapse login_form" id="loginform">
                             <div class="panel-body">
-                                <p class="mb-30 font-sm">If you have shopped with us before, please enter your details
-                                    below. If you are a new customer, please proceed to the Billing &amp; Shipping
-                                    section.</p>
+                             
 
                             </div>
                         </div>
@@ -397,6 +437,7 @@
 
                     <!-- Your HTML code -->
                     <div class="col-lg-6">
+                        
                         
                         <div class="toggle_info">
                             <span>
@@ -424,6 +465,7 @@
                                 </form>
                             </div>
                         </div>
+                        
                     </div>
 
 
@@ -502,7 +544,10 @@
                                     <label class="form-check-label" for="exampleRadios6" data-bs-toggle="collapse" data-target="#walletPayment" aria-controls="walletPayment">Wallet</label>
                                 </div>
                             </div>
+                            <!-- <button type="button" id="submit-button" class="btn btn-fill-out btn-block mt-30">Place Order</button> -->
                             <button type="button" id="submit-button" class="btn btn-fill-out btn-block mt-30">Place Order</button>
+                            
+
 
                         </form>
 
@@ -512,7 +557,6 @@
                     </div>
 
 
-<!-- Include SweetAlert CSS -->
 
 
 
@@ -554,7 +598,8 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     <i class="ti-check-box font-small text-muted mr-10"></i>
-                                                                                    <h5><a href="shop-product-full.html"><%= cart.products[i].productId?.name %></a></h5>
+                                                                                    <a href="<%= '/singleProduct/' + products[i].productId._id %>">
+                                                                                        <%= cart.products[i].productId?.name %></a></h5>
                                                                                     <span class="product-qty">x <%= cart.products[i].quantity %></span>
                                                                                 </td>
                                                                                 <td>
@@ -598,8 +643,8 @@
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
 
                         </div>
-
-                        <a href="/cart" class="btn btn-fill-out btn-block mt-30">Cancel Order</a>
+                        <br><br>
+                        <a href="/cart" class="btn1  btn-fill-out btn-block mt-30">Cancel Order</a>
 
 
                     </div>
@@ -626,10 +671,7 @@
                     </div>
                     <div class="col-lg-5">
                         <!-- Subscribe Form -->
-                        <form class="form-subcriber d-flex wow fadeIn animated">
-                            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
-                            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
-                        </form>
+
                         <!-- End Subscribe Form -->
                     </div>
                 </div>
@@ -641,60 +683,37 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="/imgs/theme/logo.svg" alt="logo"></a>
+                                <a href=""><img src="/imgs/theme/PRETTY FINDS LOGO.png" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a href="#"><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">About</h5>
-                        <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Support Center</a></li>
-                        </ul>
+                        <h5 class="widget-title wow fadeIn animated"></h5>
+
                     </div>
                     <div class="col-lg-2  col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">My Account</h5>
-                        <ul class="footer-list wow fadeIn animated">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Order</a></li>
-                        </ul>
+                        <h5 class="widget-title wow fadeIn animated"></h5>
+
                     </div>
                     <div class="col-lg-4">
-                        <h5 class="widget-title wow fadeIn animated">Install App</h5>
                         <div class="row">
                             <div class="col-md-8 col-lg-12">
-                                <p class="wow fadeIn animated">From App Store or Google Play</p>
-                                <div class="download-app wow fadeIn animated">
-                                    <a href="#" class="hover-up mb-sm-4 mb-lg-0"><img class="active"
-                                            src="/imgs/theme/app-store.jpg" alt=""></a>
-                                    <a href="#" class="hover-up"><img src="/imgs/theme/google-play.jpg" alt=""></a>
-                                </div>
+
                             </div>
                             <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                                 <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
@@ -711,14 +730,9 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-lg-6">
-                    <p class="float-md-left font-sm text-muted mb-0">&copy; 2021, <strong
-                            class="text-brand">Evara</strong> - HTML Ecommerce Template </p>
                 </div>
                 <div class="col-lg-6">
-                    <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        Designed by <a href="http://alithemes.com/" target="_blank">Alithemes.com</a>. All rights
-                        reserved
-                    </p>
+
                 </div>
             </div>
         </div>

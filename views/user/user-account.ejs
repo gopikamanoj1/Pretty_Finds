@@ -141,7 +141,7 @@
                         <div class="header-info">
                             <ul>
 
-                                <li><i class="fi-rs-marker"></i><a href="page-contact">Our location</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="">Our location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -299,7 +299,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a href="page-contact"> Our location </a>
+                        <a href=""> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="/page-login">Log out </a>
@@ -475,6 +475,99 @@
                                                                 </div>
                                                             </div>
                                                         </form>
+                                                        
+                                                        <!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', function (event) {
+            // Prevent the form from submitting
+            event.preventDefault();
+
+            // Remove existing error messages
+            clearErrorMessages();
+
+            // Validate the form fields
+            const name = document.getElementById('name').value;
+            const street = document.getElementById('street').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const pincode = document.getElementById('pincode').value;
+
+            if (!isValidName(name)) {
+                displayErrorMessage('name', 'Please enter a valid name.');
+                return;
+            }
+
+            if (!isValidStreet(street)) {
+                displayErrorMessage('street', 'Please enter a valid street.');
+                return;
+            }
+
+            if (!isValidCity(city)) {
+                displayErrorMessage('city', 'Please enter a valid city.');
+                return;
+            }
+
+            if (!isValidState(state)) {
+                displayErrorMessage('state', 'Please enter a valid state.');
+                return;
+            }
+
+            if (!isValidPincode(pincode)) {
+                displayErrorMessage('pincode', 'Please enter a valid pincode.');
+                return;
+            }
+
+            // If all validations pass, submit the form
+            form.submit();
+        });
+
+        function isValidName(name) {
+            // Your name validation logic
+            return name.trim() !== '';
+        }
+
+        function isValidStreet(street) {
+            // Your street validation logic
+            return street.trim() !== '';
+        }
+
+        function isValidCity(city) {
+            // Your city validation logic
+            return city.trim() !== '';
+        }
+
+        function isValidState(state) {
+            // Your state validation logic
+            return state.trim() !== '';
+        }
+
+        function isValidPincode(pincode) {
+            // Your pincode validation logic (e.g., check for numeric values)
+            return /^\d+$/.test(pincode);
+        }
+
+        function displayErrorMessage(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorMessage = document.createElement('p');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = message;
+            field.parentNode.appendChild(errorMessage);
+
+            // Automatically hide the error message after 5 seconds
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 5000);
+        }
+
+        function clearErrorMessages() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(message => message.remove());
+        }
+    });
+</script> -->
+
                                                         <p>
                                                             <%=(typeof message!=='undefined' )?message:""%>
                                                         </p>
