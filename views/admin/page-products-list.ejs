@@ -152,7 +152,7 @@
                                 <p>Stock: <%= product.stock %></p>
                             </div>
 
-                            <form action="/updateProductStatus/<%= product.id %>" method="POST" class="d-inline">
+                            <f orm action="/updateProductStatus/<%= product.id %>" method="POST" class="d-inline">
                                 <div class="form-check">
                                     <input type="radio" id="activate<%= index %>" name="status" value="activate" <% if (!product.isDeleted) { %> checked <% } %>>
                                     <label for="activate<%= index %>" class="form-check-label text-success">Activate</label>

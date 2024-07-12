@@ -96,7 +96,6 @@ const verifyUser = async (req, res) => {
     const userData = await User.findOne({ email: email });
     const banners=await Banners.find()
 
-
     if (userData) {
       const passwordMatch = await bcrypt.compare(password, userData.password); 
       console.log(password, userData.password);
@@ -520,7 +519,7 @@ const verificationOtp = async (req, res) => {
 
      await Wallet.insertMany([walletData])
 
-      return res.render("success-login", { logged: "user logged   " });
+      return res.render("success-login", { logged: "user logged " });
     } else {
       // Invalid OTP
       res.render("page-verify-otp", { message: "invalid OTP" });

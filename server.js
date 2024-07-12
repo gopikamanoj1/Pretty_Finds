@@ -1,15 +1,5 @@
 const mongoose = require('mongoose')
-// const connectDB = mongoose.connect("mongodb://127.0.0.1:27017/PRETTY_FINDS")
-//   .then(() => {
-//     console.log("connected");
-//   })
-//   .catch((err) => {
-
-//     console.log(err);
-
-//   })
-
-const connectDB = mongoose.connect("mongodb+srv://gopikamanoj008:NbNYDryNDbibREzp@pretty-finds-db.8flurl6.mongodb.net/?retryWrites=true&w=majority")
+const connectDB = mongoose.connect("mongodb://127.0.0.1:27017/PRETTY_FINDS")
   .then(() => {
     console.log("connected");
   })
@@ -19,6 +9,16 @@ const connectDB = mongoose.connect("mongodb+srv://gopikamanoj008:NbNYDryNDbibREz
 
   })
 
+// const connectDB = mongoose.connect("mongodb+srv://gopikamanoj008:NbNYDryNDbibREzp@pretty-finds-db.8flurl6.mongodb.net/?retryWrites=true&w=majority")
+//   .then(() => {
+//     console.log("connected");
+//   })
+//   .catch((err) => {
+
+//     console.log(err);
+
+//   })
+  
 require("dotenv").config()
 
 const express = require('express');
@@ -38,7 +38,7 @@ const adminRoute = require('./router/adminRoute')
 
 
 // Define a route for the root URL
-app.set("view engine", "ejs");
+app.set("view engine", "ejs");  
 app.set('views', [
   path.join(__dirname, 'views', 'admin'),
   path.join(__dirname, 'views', 'user'),
@@ -50,8 +50,11 @@ app.use(express.static(path.join(__dirname, 'public/admin')))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+
 app.use(express.static("public"))
+
 app.use(morgan("dev"))
+
 app.use('/', userRoute)
 app.use('/', adminRoute)
 

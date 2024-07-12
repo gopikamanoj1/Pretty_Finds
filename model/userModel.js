@@ -48,6 +48,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
         default:""
     },
+    
     refferalUsedBy:{
         type:Array
     }

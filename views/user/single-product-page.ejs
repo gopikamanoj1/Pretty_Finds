@@ -122,14 +122,15 @@
                                     <div class="product-extra-link2">
 
                                         <form id="addToCartForm" action="/addToCart/<%= product._id %>" method="post">
-                                            <button type="submit" class="button button-add-to-cart"><i ></i> Add to cart</button>
-                                        </form>                                
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                            href="/WishList"><i class="fi-rs-heart"></i></a>
-                                   
+                                            <button type="submit" class="button button-add-to-cart"><i></i> Add to
+                                                cart</button>
+                                        </form>
+                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="/WishList"><i
+                                                class="fi-rs-heart"></i></a>
+
                                     </div>
 
-                                    
+
                                 </div>
                                 <ul class="product-meta font-xs color-grey mt-50">
                                     <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
@@ -195,7 +196,7 @@
 
                                         </li>
 
-                                        <% } %>                            
+                                        <% } %>
                             </ul>
                         </div>
                     </div>
@@ -247,7 +248,7 @@
                                     <a class="mini-cart-icon" href="/cart">
                                         <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
                                     </a>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -265,7 +266,7 @@
                         <div class="main-categori-wrap d-none d-lg-block">
 
                         </div>
-                   
+
                     </div>
 
                     <!-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> -->
@@ -280,7 +281,7 @@
                                 <a class="mini-cart-icon" href="/cart">
                                     <img alt="Evara" src="/imgs/theme/icons/icon-cart.svg">
                                 </a>
-                            
+
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -321,19 +322,19 @@
                     <nav>
                         <ul>
                             <li><a class="active" href="/home">Home <i class="fi-rs-angle-down"></i></a>
-                               
+
                             </li>
                             <li>
                                 <a href="/lipscareonly">LIPS CARE</a>
                             </li>
                             <li><a href="/facecareonly">FACE CARE <i class="fi-rs-angle-down"></i></a>
-                               
+
                             </li>
-                            <li ><a href="/bodycareonly">BODY CARE  <i class="fi-rs-angle-down"></i></a>
-                            
+                            <li><a href="/bodycareonly">BODY CARE <i class="fi-rs-angle-down"></i></a>
+
                             </li>
                             <li><a href="/haircareonly">HAIR CARE <i class="fi-rs-angle-down"></i></a>
-                                
+
                             </li>
                             <!-- <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                 
@@ -353,10 +354,11 @@
                         <% if (!locals.logged) { %>
                             <li id="logoutButton"><i class="fi-rs-user"></i><a href="/index-3">Log Out</a></li>
                             <li><a href="/myprofile">My Profile <i class="fi-rs-angle-down"></i></a>
-                                    
+
                             </li>
 
-                            <% } %>                    </div>
+                            <% } %>
+                    </div>
                     <div class="single-mobile-header-info">
                         <a href="#">(+01) - 2345 - 6789 </a>
                     </div>
@@ -428,22 +430,25 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <% if (discountPercentage && discountPercentage > 0) { %>
+                                                <% if (discountPercentage && discountPercentage> 0) { %>
                                                     <!-- Display the discounted price -->
                                                     <ins><span class="text-brand">$<%= discountedPrice %></span></ins>
                                                     <!-- Display the original price with a strikethrough -->
-                                                    <del><span class="old-price font-md ml-15">$<%= product.price %></span></del>
+                                                    <del><span class="old-price font-md ml-15">$<%= product.price %>
+                                                                </span></del>
                                                     <!-- Calculate and display the discount percentage -->
-                                                    <span class="save-price font-md color3 ml-15"><%= product.discountPercentage %>% Off</span>
-                                                <% } else { %>
-                                                    <!-- Display the regular price if there is no offer or if the discount is zero -->
-                                                    <ins><span class="text-brand">$<%= product.price %></span></ins>
-                                                <% } %>
+                                                    <span class="save-price font-md color3 ml-15">
+                                                        <%= product.discountPercentage %>% Off
+                                                    </span>
+                                                    <% } else { %>
+                                                        <!-- Display the regular price if there is no offer or if the discount is zero -->
+                                                        <ins><span class="text-brand">$<%= product.price %></span></ins>
+                                                        <% } %>
                                             </div>
                                         </div>
-                                        
-                                        
-                                   
+
+
+
                                         <div class="bt-1 border-color-1 mt-15 mb-15"></div>
                                         <div class="short-desc mb-30">
                                             <p>
@@ -466,50 +471,59 @@
                                         <div class="attr-detail attr-size">
 
                                         </div>
-                                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                        <div class="detail-extralink">
-                                            
+                                      
+                                        <div class="detail-extralink  ">
+
                                             <div class="product-extra-link2">
 
-                                                <form id="addToCartForm" action="/addToCart/<%= product._id %>" method="post">
-                                                    <% if (product.stock > 0) { %>
-                                                      <button type="submit" class="button button-add-to-cart"><i ></i>Add to cart</button>
-                                                    <% } else { %>
-                                                      <button type="button" class="button button-add-to-cart text-danger" disabled><i ></i>Out of Stock</button>
-                                                    <% } %>
-                                                  </form>
-                                                   
-                                                <br>                              
-                                                  
-                                                        <form action="/addToWishList/<%= product._id %>" method="post">
-                                                            <div class="product-action-1">
-                                                          
-                                                            <button aria-label="Add To Wishlist" class="action-btn hover-up">
-                                                                
-                                                                <i class="fi-rs-heart"></i>
-                                                            </button>
-    
-    
-                                                        </div>
-                                                        </form> 
+                                                <form id="addToCartForm" action="/addToCart/<%= product._id %>"
+                                                    method="post">
+                                                    <% if (product.stock> 0) { %>
+                                                        <button type="submit"
+                                                            class="button button-add-to-cart"><i></i>Add to
+                                                            cart</button>
+                                                        <% } else { %>
+                                                            <button type="button"
+                                                                class="button button-add-to-cart text-danger"
+                                                                disabled><i></i>Out of Stock</button>
+                                                            <% } %>
+                                                </form>
 
-                                                    
-                                         
-                                                        <br>
-                                                        <br>
+                                                <br>
+
+                                                <form action="/addToWishList/<%= product._id %>" method="post">
+                                                    <div class="product-action-1">
+
+                                                        <button aria-label="Add To Wishlist" class="action-btn hover-up"
+                                                            style="background-color: #f44336; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center;">
+                                                            <i class="fi-rs-heart" style="margin-right: 5px;"></i> Add
+                                                            To Wishlist
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </form>
+
+
+
+                                                <br>
+                                                <br>
                                             </div>
                                         </div>
                                         <li>
                                             Availability:
-                                            <% if (product.stock > 0) { %>
-                                                <span class="in-stock text-success ml-5"><%= product.stock %> Items In Stock</span>
-                                            <% } else { %>
-                                                <span class="out-of-stock text-danger ml-5">Out of Stock</span>
-                                            <% } %>
+                                            <% if (product.stock> 0) { %>
+                                                <span class="in-stock text-success ml-5">
+                                                    <%= product.stock %> Items In Stock
+                                                </span>
+                                                <% } else { %>
+                                                    <span class="out-of-stock text-danger ml-5">Out of Stock</span>
+                                                    <% } %>
                                         </li>
-                                        
-                                        
-                                        
+
+
+
                                     </div>
                                     <!-- Detail Info -->
                                 </div>
@@ -518,7 +532,7 @@
 
 
 
-                            
+
 
                             <div class="row mt-60">
 
@@ -542,7 +556,7 @@
                                                         <a aria-label="Add To Wishlist"
                                                             class="action-btn small hover-up" href="/WishList"
                                                             tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                    
+
                                                     </div>
                                                     <div
                                                         class="product-badges product-badges-position product-badges-mrg">
@@ -570,7 +584,7 @@
                                                         <a aria-label="Add To Wishlist"
                                                             class="action-btn small hover-up" href="/WishList"
                                                             tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                      
+
                                                     </div>
                                                     <div
                                                         class="product-badges product-badges-position product-badges-mrg">
@@ -595,10 +609,9 @@
                                                                 data-bs-toggle="modal" data-bs-target="#quickViewModal
 "><i class="fi-rs-search"></i></a>
                                                             <a aria-label="Add To Wishlist"
-                                                                class="action-btn small hover-up"
-                                                                href="/WishList" tabindex="0"><i
-                                                                    class="fi-rs-heart"></i></a>
-                                                          
+                                                                class="action-btn small hover-up" href="/WishList"
+                                                                tabindex="0"><i class="fi-rs-heart"></i></a>
+
                                                         </div>
                                                         <div
                                                             class="product-badges product-badges-position product-badges-mrg">
@@ -624,10 +637,9 @@
                                                                 data-bs-toggle="modal" data-bs-target="#quickViewModal
 "><i class="fi-rs-search"></i></a>
                                                             <a aria-label="Add To Wishlist"
-                                                                class="action-btn small hover-up"
-                                                                href="/WishList" tabindex="0"><i
-                                                                    class="fi-rs-heart"></i></a>
-                                                           
+                                                                class="action-btn small hover-up" href="/WishList"
+                                                                tabindex="0"><i class="fi-rs-heart"></i></a>
+
                                                         </div>
                                                         <div
                                                             class="product-badges product-badges-position product-badges-mrg">
@@ -665,7 +677,7 @@
                     </div>
                     <div class="col-lg-5">
                         <!-- Subscribe Form -->
-                     
+
                         <!-- End Subscribe Form -->
                     </div>
                 </div>
@@ -688,26 +700,26 @@
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a ><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a ><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a><img src="/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <h5 class="widget-title wow fadeIn animated"></h5>
-                   
+
                     </div>
                     <div class="col-lg-2  col-md-3">
                         <h5 class="widget-title wow fadeIn animated"></h5>
-                       
+
                     </div>
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-md-8 col-lg-12">
-                              
+
                             </div>
                             <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                                 <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
@@ -724,10 +736,10 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-lg-6">
-                  
+
                 </div>
                 <div class="col-lg-6">
-                   
+
                 </div>
             </div>
         </div>
