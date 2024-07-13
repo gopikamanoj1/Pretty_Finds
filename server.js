@@ -1,15 +1,5 @@
 const mongoose = require('mongoose')
-const connectDB = mongoose.connect("mongodb://127.0.0.1:27017/PRETTY_FINDS")
-  .then(() => {
-    console.log("connected");
-  })
-  .catch((err) => {
-
-    console.log(err);
-
-  })
-
-// const connectDB = mongoose.connect("mongodb+srv://gopikamanoj008:NbNYDryNDbibREzp@pretty-finds-db.8flurl6.mongodb.net/?retryWrites=true&w=majority")
+// const connectDB = mongoose.connect("mongodb://127.0.0.1:27017/PRETTY_FINDS")
 //   .then(() => {
 //     console.log("connected");
 //   })
@@ -18,9 +8,14 @@ const connectDB = mongoose.connect("mongodb://127.0.0.1:27017/PRETTY_FINDS")
 //     console.log(err);
 
 //   })
+ const dbURI="mongodb+srv://gopikamanoj008:NbNYDryNDbibREzp@pretty-finds-db.8flurl6.mongodb.net/?retryWrites=true&w=majority"
+const connectDB =mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log('MongoDB connected successfully'))
+.catch((err) => console.error('MongoDB connection error:', err));
+
   
 require("dotenv").config()
-
+  
 const express = require('express');
 const http = require("http")
 const app = express();
