@@ -25,6 +25,8 @@ const randomstring = require('randomstring');
 const nodemailer = require("nodemailer");
 const multer = require('multer');
 const morgan = require("morgan")
+const axios=require("axios")
+const cron=require("node-cron");
 
 const server = http.createServer(app);
 
@@ -53,8 +55,16 @@ app.use(morgan("dev"))
 app.use('/', userRoute)
 app.use('/', adminRoute)
 
-// Start the server
-// const port = process.env.PORT || 3000;
+const SERVER =`https://pretty-finds.onrender.com`
+
+const start = () => {
+    cron.schedule('* * * * *', () => {
+      axios.get(SERVER)
+       .then(response => console.log('Health check successful', response))
+       .catch(error => console.error('Health check failed:', error));
+    });
+}
+start()
 const port = process.env.PORT || 3009
 server.listen(port, () => {
   console.log("Listening to the server on http://localhost:" + port);
